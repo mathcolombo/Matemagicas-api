@@ -17,37 +17,37 @@ Matemágicas é um jogo educativo online, projetado para tornar o aprendizado da
 
 ## Modelagem do banco de dados
 
-### Usuários
+### Users
 
 Armazena informações sobre os jogadores.
 
    - _id: ObjectId (identificador único do usuário)
-   - nome: String (nome do jogador)
-   - idade: Number (idade do jogador)
+   - name: String (nome do jogador)
+   - age: Number (idade do jogador)
    - email: String (endereço de e-mail do jogador)
-   - senha: String (senha criptografada do jogador)
-   - pontuacao_total: Number (pontuação acumulada pelo jogador)
-   - historico_jogos: Array de ObjectIds (referências aos jogos realizados pelo jogador)
+   - password: String (senha criptografada do jogador)
+   - total_score: Number (pontuação acumulada pelo jogador)
+   - game_history: Array de ObjectIds (referências aos jogos realizados pelo jogador)
 
-### Jogos
+### Games
 
 Armazena informações sobre cada partida realizada.
 
   - _id: ObjectId (identificador único do jogo)
-  - usuario_id: ObjectId (referência ao usuário que realizou o jogo)
-  - data: Date (data e hora da realização do jogo)
-  - pontuacao: Number (pontuação obtida no jogo)
-  - acertos: Number (número de questões respondidas corretamente)
-  - erros: Number (número de questões respondidas incorretamente)
-  - questoes: Array de ObjectIds (referências às questões do jogo)
+  - user_id: ObjectId (referência ao usuário que realizou o jogo)
+  - date: Date (data e hora da realização do jogo)
+  - score: Number (pontuação obtida no jogo)
+  - correct_answers: Number (número de questões respondidas corretamente)
+  - incorrect_answers: Number (número de questões respondidas incorretamente)
+  - questions: Array de ObjectIds (referências às questões do jogo)
 
-### Questões
+### Questions
 
 Armazena as perguntas e respostas do jogo.
 
   - _id: ObjectId (identificador único da questão)
-  - enunciado: String (texto da pergunta)
-  - alternativas: Array de Strings (opções de resposta)
-  - resposta_correta: Number (índice da alternativa correta)
-  - dificuldade: String ("fácil", "médio", "difícil")
-  - tema: String (tema da questão, ex: adição, subtração, etc)
+  - question_text: String (texto da pergunta)
+  - answer_options: Array de Strings (opções de resposta)
+  - correct_answer_index: Number (índice da alternativa correta)
+  - difficulty: String ("fácil", "médio", "difícil")
+  - topic: String (tema da questão, ex: adição, subtração, etc)
