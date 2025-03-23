@@ -1,3 +1,4 @@
+using Matemagicas.Api.Models.Enums;
 using Matemagicas.Api.Utils.Entities;
 
 namespace Matemagicas.Api.Models.Entities;
@@ -10,20 +11,23 @@ public class User
     public Email Email { get; protected set; }
     public Password Password { get; protected set; }
     public decimal TotalScore { get; protected set; }
-    public IEnumerable<int> GameHistory { get; protected set; }
+    public StatusEnum Status { get; protected set; }
+    public IEnumerable<int>? GameHistory { get; protected set; }
     
     public User(string name,
         int age,
         Email email,
         Password password,
         decimal totalScore,
-        IEnumerable<int> gameHistory)
+        StatusEnum status,
+        IEnumerable<int>? gameHistory)
     {
         SetName(name);
         SetAge(age);
         SetEmail(email);
         SetPassword(password);
         SetTotalScore(totalScore);
+        SetStatus(status);
         SetGameHistory(gameHistory);
     }
 
@@ -61,8 +65,13 @@ public class User
         TotalScore = totalScore;
     }
 
-    public void SetGameHistory(IEnumerable<int> gameHistory)
+    public void SetStatus(StatusEnum status)
     {
-        GameHistory = new List<int>(gameHistory);
+        Status = status;
+    }
+
+    public void SetGameHistory(IEnumerable<int>? gameHistory)
+    {
+        GameHistory = new List<int>(gameHistory ?? Array.Empty<int>());
     }
 }

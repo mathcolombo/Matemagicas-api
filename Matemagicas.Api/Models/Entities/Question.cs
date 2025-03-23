@@ -10,18 +10,21 @@ public class Question
     public int CorrectAnswerIndex { get; protected set; }
     public DifficultyEnum Difficulty { get; protected set; }
     public string Topic { get; protected set; }
+    public StatusEnum Status { get; protected set; }
     
     public Question(string questionText,
         IEnumerable<string> answerOptions,
         int correctAnswerIndex,
         DifficultyEnum difficulty,
-        string topic)
+        string topic,
+        StatusEnum status)
     {
         SetQuestionText(questionText);
         SetAnswerOptions(answerOptions);
         SetCorrectAnswerIndex(correctAnswerIndex);
         SetDifficulty(difficulty);
         SetTopic(topic);
+        SetStatus(status);
     }
 
     public void SetQuestionText(string questionText)
@@ -56,5 +59,10 @@ public class Question
             throw new FormatException("Topic invalid");
         
         Topic = topic;
+    }
+    
+    public void SetStatus(StatusEnum status)
+    {
+        Status = status;
     }
 }
