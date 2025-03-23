@@ -1,6 +1,3 @@
 namespace Matemagicas.Api.Dtos.Requests;
 
-public class UserLoginRequest
-{
-    
-}
+public record UserLoginRequest(string Email, string Password);

@@ -39,9 +39,9 @@ Armazena informações sobre os jogadores.
 
    - _id: ObjectId (identificador único do usuário)
    - name: String (nome do jogador)
-   - age: Number (idade do jogador)
+   - date_of_birth: Date (data de nascimento do jogador)
    - email: String (endereço de e-mail do jogador)
-   - password: String (senha criptografada do jogador)
+   - password: String (senha do jogador)
    - total_score: Number (pontuação acumulada pelo jogador)
    - status: Number (0 = Inactive ; 1 = Active)
    - game_history: Array de ObjectIds (referências aos jogos realizados pelo jogador)
@@ -67,5 +67,5 @@ Armazena as perguntas e respostas do jogo.
   - answer_options: Array de Strings (opções de resposta)
   - correct_answer_index: Number (índice da alternativa correta)
   - difficulty: Number (0 = Easy ; 1 = Medium ; 2 = Hard)
-  - topic: String (tema da questão, ex: adição, subtração, etc)
+  - topic: Number (Addition = 0 ; Subtraction = 1 ; Multiplication = 2 ; Division = 3)
   - status: Number (0 = Inactive ; 1 = Active)

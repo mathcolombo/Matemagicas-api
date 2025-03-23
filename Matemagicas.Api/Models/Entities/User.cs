@@ -7,23 +7,23 @@ public class User
 {
     public int Id { get; protected set; }
     public string Name { get; protected set; }
-    public int Age { get; protected set; }
+    public DateOnly DateOfBirth { get; protected set; }
     public Email Email { get; protected set; }
     public Password Password { get; protected set; }
-    public decimal TotalScore { get; protected set; }
+    public decimal? TotalScore { get; protected set; }
     public StatusEnum Status { get; protected set; }
     public IEnumerable<int>? GameHistory { get; protected set; }
     
     public User(string name,
-        int age,
-        Email email,
-        Password password,
-        decimal totalScore,
-        StatusEnum status,
-        IEnumerable<int>? gameHistory)
+                DateOnly dateOfBirth,
+                Email email,
+                Password password,
+                decimal? totalScore,
+                StatusEnum status,
+                IEnumerable<int>? gameHistory)
     {
         SetName(name);
-        SetAge(age);
+        SetDateOfBirth(dateOfBirth);
         SetEmail(email);
         SetPassword(password);
         SetTotalScore(totalScore);
@@ -39,12 +39,14 @@ public class User
         Name = name;
     }
 
-    public void SetAge(int age)
+    public void SetDateOfBirth(DateOnly dateOfBirth)
     {
-        if(age <= 5)
-            throw new FormatException("Age invalid");
+        int age = DateTime.Today.Year - dateOfBirth.Year;
         
-        Age = age;
+        if(age < 6)
+            throw new FormatException("Date of birth invalid");
+        
+        DateOfBirth = dateOfBirth;
     }
 
     public void SetEmail(Email email)
@@ -57,7 +59,7 @@ public class User
         Password = password;
     }
 
-    public void SetTotalScore(decimal totalScore)
+    public void SetTotalScore(decimal? totalScore)
     {
         if(totalScore < 0)
             throw new FormatException("Total score invalid");

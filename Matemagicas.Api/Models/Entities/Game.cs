@@ -6,18 +6,18 @@ public class Game
 {
     public int Id { get; protected set; }
     public int UserId { get; protected set; }
-    public DateTime Date { get; protected set; }
-    public decimal Score { get; protected set; }
-    public int CorrectAnswers { get; protected set; }
-    public int IncorrectAnswers { get; protected set; }
+    public DateTime? Date { get; protected set; }
+    public decimal? Score { get; protected set; }
+    public int? CorrectAnswers { get; protected set; }
+    public int? IncorrectAnswers { get; protected set; }
     public IEnumerable<int> Questions { get; protected set; }
     
     public Game(int userId,
-        DateTime date,
-        decimal score,
-        int correctAnswers,
-        int incorrectAnswers,
-        IEnumerable<int> questions)
+                DateTime? date,
+                decimal? score,
+                int? correctAnswers,
+                int? incorrectAnswers,
+                IEnumerable<int> questions)
     {
         SetUserId(userId);
         SetDate(date);
@@ -35,7 +35,7 @@ public class Game
         UserId = userId;
     }
 
-    public void SetDate(DateTime date)
+    public void SetDate(DateTime? date)
     {
         if(date == DateTime.MinValue)
             throw new FormatException("Date invalid");
@@ -43,7 +43,7 @@ public class Game
         Date = date;
     }
 
-    public void SetScore(decimal score)
+    public void SetScore(decimal? score)
     {
         if(score < 0)
             throw new FormatException("Score invalid");
@@ -51,7 +51,7 @@ public class Game
         Score = score;
     }
 
-    public void SetCorrectAnswers(int correctAnswers)
+    public void SetCorrectAnswers(int? correctAnswers)
     {
         if(correctAnswers < 0)
             throw new FormatException("CorrectAnswers invalid");
@@ -59,7 +59,7 @@ public class Game
         CorrectAnswers = correctAnswers;
     }
 
-    public void SetIncorrectAnswers(int incorrectAnswers)
+    public void SetIncorrectAnswers(int? incorrectAnswers)
     {
         if(incorrectAnswers < 0)
             throw new FormatException("IncorrectAnswers invalid");
