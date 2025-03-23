@@ -1,6 +1,0 @@
-@Matemagicas.Api_HostAddress = http://localhost:5169
-
-GET {{Matemagicas.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
