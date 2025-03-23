@@ -26,6 +26,9 @@ public class Question
 
     public void SetQuestionText(string questionText)
     {
+        if(string.IsNullOrWhiteSpace(questionText))
+            throw new FormatException("Question text invalid");
+            
         QuestionText = questionText;
     }
 
@@ -36,6 +39,9 @@ public class Question
 
     public void SetCorrectAnswerIndex(int correctAnswerIndex)
     {
+        if(correctAnswerIndex < 0)
+            throw new FormatException("CorrectAnswerIndex invalid");
+        
         CorrectAnswerIndex = correctAnswerIndex;
     }
 
@@ -46,6 +52,9 @@ public class Question
 
     public void SetTopic(string topic)
     {
+        if(string.IsNullOrWhiteSpace(topic))
+            throw new FormatException("Topic invalid");
+        
         Topic = topic;
     }
 }

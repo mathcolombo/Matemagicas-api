@@ -16,7 +16,7 @@ public class User
         int age,
         Email email,
         Password password,
-        int totalScore,
+        decimal totalScore,
         IEnumerable<int> gameHistory)
     {
         SetName(name);
@@ -29,11 +29,17 @@ public class User
 
     public void SetName(string name)
     {
+        if(string.IsNullOrWhiteSpace(name))
+            throw new FormatException("Name invalid");
+        
         Name = name;
     }
 
     public void SetAge(int age)
     {
+        if(age <= 5)
+            throw new FormatException("Age invalid");
+        
         Age = age;
     }
 
@@ -47,8 +53,11 @@ public class User
         Password = password;
     }
 
-    public void SetTotalScore(int totalScore)
+    public void SetTotalScore(decimal totalScore)
     {
+        if(totalScore < 0)
+            throw new FormatException("Total score invalid");
+        
         TotalScore = totalScore;
     }
 
