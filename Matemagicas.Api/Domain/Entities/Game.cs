@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Matemagicas.Api.Models.Entities;
+namespace Matemagicas.Api.Domain.Entities;
 
 public class Game
 {

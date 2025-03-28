@@ -1,6 +1,6 @@
-using Matemagicas.Api.Models.Enums;
+using Matemagicas.Api.Domain.Enums;
 
-namespace Matemagicas.Api.Models.Entities;
+namespace Matemagicas.Api.Domain.Entities;
 
 public class Question
 {
@@ -18,7 +18,7 @@ public class Question
                     DifficultyEnum difficulty,
                     TopicEnum topic,
                     StatusEnum status)
-                {
+    {
         SetQuestionText(questionText);
         SetAnswerOptions(answerOptions);
         SetCorrectAnswerIndex(correctAnswerIndex);

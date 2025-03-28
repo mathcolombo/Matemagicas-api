@@ -1,4 +1,4 @@
-namespace Matemagicas.Api.Models.Enums;
+namespace Matemagicas.Api.Domain.Enums;
 
 public enum StatusEnum
 {

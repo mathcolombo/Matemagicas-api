@@ -19,8 +19,6 @@ public class Password
 
     private bool IsValid(string password)
     {
-        if (string.IsNullOrEmpty(password) || !StaticParameters.PASSWORD_REGEX.IsMatch(password)) return false;
-
-        return true;
+        return !string.IsNullOrEmpty(password) && StaticParameters.PASSWORD_REGEX.IsMatch(password);
     }
 }

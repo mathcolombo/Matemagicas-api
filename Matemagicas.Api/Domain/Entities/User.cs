@@ -1,7 +1,7 @@
-using Matemagicas.Api.Models.Enums;
+using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Utils.Entities;
 
-namespace Matemagicas.Api.Models.Entities;
+namespace Matemagicas.Api.Domain.Entities;
 
 public class User
 {
