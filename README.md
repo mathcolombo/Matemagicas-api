@@ -69,3 +69,11 @@ Armazena as perguntas e respostas do jogo.
   - difficulty: Number (0 = Easy ; 1 = Medium ; 2 = Hard)
   - topic: Number (Addition = 0 ; Subtraction = 1 ; Multiplication = 2 ; Division = 3)
   - status: Number (0 = Inactive ; 1 = Active)
+
+### Roles
+
+Armazena os papéis atribuídos aos usuários não padrões.
+
+  - _id: ObjectId (identificador único da role)
+  - user_id: ObjectId (referência ao usuário que realizou o jogo)
+  - 
