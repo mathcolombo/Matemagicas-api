@@ -43,6 +43,7 @@ Armazena informações sobre os jogadores.
    - email: String (endereço de e-mail do jogador)
    - password: String (senha do jogador)
    - total_score: Number (pontuação acumulada pelo jogador)
+   - role_id: ObjectId (identificador único da role)
    - status: Number (0 = Inactive ; 1 = Active)
    - game_history: Array de ObjectIds (referências aos jogos realizados pelo jogador)
 
@@ -67,13 +68,5 @@ Armazena as perguntas e respostas do jogo.
   - answer_options: Array de Strings (opções de resposta)
   - correct_answer_index: Number (índice da alternativa correta)
   - difficulty: Number (0 = Easy ; 1 = Medium ; 2 = Hard)
-  - topic: Number (Addition = 0 ; Subtraction = 1 ; Multiplication = 2 ; Division = 3)
+  - topic: Number (0 = Addition; 1 = Subtraction; 2 = Multiplication; 3 = Division)
   - status: Number (0 = Inactive ; 1 = Active)
-
-### Roles
-
-Armazena os papéis atribuídos aos usuários não padrões.
-
-  - _id: ObjectId (identificador único da role)
-  - user_id: ObjectId (referência ao usuário que realizou o jogo)
-  - 

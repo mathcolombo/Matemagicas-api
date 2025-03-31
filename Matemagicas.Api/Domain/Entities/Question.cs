@@ -11,6 +11,10 @@ public class Question
     public DifficultyEnum Difficulty { get; protected set; }
     public TopicEnum Topic { get; protected set; }
     public StatusEnum Status { get; protected set; }
+
+    public Question()
+    {
+    }
     
     public Question(string questionText,
                     IEnumerable<string> answerOptions,
@@ -42,7 +46,7 @@ public class Question
 
     public void SetCorrectAnswerIndex(int correctAnswerIndex)
     {
-        if(correctAnswerIndex < 0)
+        if(correctAnswerIndex is < 0 or > 3)
             throw new FormatException("CorrectAnswerIndex invalid");
         
         CorrectAnswerIndex = correctAnswerIndex;

@@ -11,8 +11,13 @@ public class User
     public Email Email { get; protected set; }
     public Password Password { get; protected set; }
     public decimal? TotalScore { get; protected set; }
+    public RoleEnum Role { get; protected set; }
     public StatusEnum Status { get; protected set; }
     public IEnumerable<int>? GameHistory { get; protected set; }
+
+    public User()
+    {
+    }
     
     public User(string name,
                 DateOnly dateOfBirth,
@@ -27,6 +32,7 @@ public class User
         SetEmail(email);
         SetPassword(password);
         SetTotalScore(totalScore);
+        SetRole(RoleEnum.Player);
         SetStatus(status);
         SetGameHistory(gameHistory);
     }
@@ -65,6 +71,11 @@ public class User
             throw new FormatException("Total score invalid");
         
         TotalScore = totalScore;
+    }
+
+    public void SetRole(RoleEnum role)
+    {
+        Role = role;
     }
 
     public void SetStatus(StatusEnum status)

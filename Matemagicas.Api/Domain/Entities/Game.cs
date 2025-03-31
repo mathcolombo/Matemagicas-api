@@ -11,15 +11,25 @@ public class Game
     public int? CorrectAnswers { get; protected set; }
     public int? IncorrectAnswers { get; protected set; }
     public IEnumerable<int> Questions { get; protected set; }
+
+    #region Navigations
+
+    public User User { get; set; }
+
+    #endregion
+
+    public Game()
+    {
+    }
     
-    public Game(int userId,
+    public Game(User user,
                 DateTime? date,
                 decimal? score,
                 int? correctAnswers,
                 int? incorrectAnswers,
                 IEnumerable<int> questions)
     {
-        SetUserId(userId);
+        SetUser(user);
         SetDate(date);
         SetScore(score);
         SetCorrectAnswers(correctAnswers);
@@ -27,12 +37,10 @@ public class Game
         SetQuestions(questions);
     }
 
-    public void SetUserId(int userId)
+    public void SetUser(User user)
     {
-        if (userId <= 0)
-            throw new FormatException("UserId invalid");
-        
-        UserId = userId;
+        UserId = user.Id;
+        User = user;
     }
 
     public void SetDate(DateTime? date)
