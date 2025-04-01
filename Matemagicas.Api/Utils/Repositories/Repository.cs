@@ -1,4 +1,4 @@
-using Matemagicas.Api.Domain.Context;
+using Matemagicas.Api.Context;
 using Matemagicas.Api.Utils.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

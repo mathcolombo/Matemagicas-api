@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Matemagicas.Api.Domain.Entities;
+namespace Matemagicas.Api.Entities;
 
 public class Game
 {
@@ -14,7 +14,7 @@ public class Game
 
     #region Navigations
 
-    public User User { get; set; }
+    public User User { get; protected set; }
 
     #endregion
 

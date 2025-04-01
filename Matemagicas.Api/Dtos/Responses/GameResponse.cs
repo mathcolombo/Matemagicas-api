@@ -1,4 +1,4 @@
-using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Entities;
 
 namespace Matemagicas.Api.Dtos.Responses;
 

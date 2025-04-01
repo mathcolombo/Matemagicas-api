@@ -14,4 +14,20 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Domain\Services\Commands\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Domain\Services\Commands\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Domain\Services\Commands\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Domain\Services\Commands\**" />
+    </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
-using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Matemagicas.Api.Domain.Context;
+namespace Matemagicas.Api.Context;
 
 public class MatemagicasDbContext(DbContextOptions<MatemagicasDbContext> options) : DbContext(options)
 {

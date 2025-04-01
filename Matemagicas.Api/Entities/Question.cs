@@ -1,10 +1,11 @@
-using Matemagicas.Api.Domain.Enums;
+using Matemagicas.Api.Enums;
 
-namespace Matemagicas.Api.Domain.Entities;
+namespace Matemagicas.Api.Entities;
 
 public class Question
 {
     public int Id { get; protected set; }
+    public int UserId { get; protected set; }
     public string QuestionText { get; protected set; }
     public IEnumerable<string> AnswerOptions { get; protected set; }
     public int CorrectAnswerIndex { get; protected set; }
@@ -12,17 +13,25 @@ public class Question
     public TopicEnum Topic { get; protected set; }
     public StatusEnum Status { get; protected set; }
 
+    #region Navigations
+
+    public User User { get; protected set; }
+
+    #endregion
+    
     public Question()
     {
     }
     
-    public Question(string questionText,
+    public Question(User user,
+                    string questionText,
                     IEnumerable<string> answerOptions,
                     int correctAnswerIndex,
                     DifficultyEnum difficulty,
                     TopicEnum topic,
                     StatusEnum status)
     {
+        SetUser(user);
         SetQuestionText(questionText);
         SetAnswerOptions(answerOptions);
         SetCorrectAnswerIndex(correctAnswerIndex);
@@ -31,6 +40,12 @@ public class Question
         SetStatus(status);
     }
 
+    public void SetUser(User user)
+    {
+        UserId = user.Id;
+        User = user;
+    }
+    
     public void SetQuestionText(string questionText)
     {
         if(string.IsNullOrWhiteSpace(questionText))

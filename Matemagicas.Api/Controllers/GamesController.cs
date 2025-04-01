@@ -1,6 +1,7 @@
-using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Services.Interfaces;
 using Matemagicas.Api.Dtos.Requests;
 using Matemagicas.Api.Dtos.Responses;
+using Matemagicas.Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers;

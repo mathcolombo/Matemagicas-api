@@ -1,7 +1,7 @@
-using Matemagicas.Api.Domain.Repositories;
-using Matemagicas.Api.Domain.Repositories.Interfaces;
-using Matemagicas.Api.Domain.Services;
-using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Services;
+using Matemagicas.Api.Repositories;
+using Matemagicas.Api.Repositories.Interfaces;
+using Matemagicas.Api.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

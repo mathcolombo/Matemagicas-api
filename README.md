@@ -64,6 +64,7 @@ Armazena informações sobre cada partida realizada.
 Armazena as perguntas e respostas do jogo.
 
   - _id: ObjectId (identificador único da questão)
+  - user_id: ObjectId (referência ao usuário que criou a questão)
   - question_text: String (texto da pergunta)
   - answer_options: Array de Strings (opções de resposta)
   - correct_answer_index: Number (índice da alternativa correta)
