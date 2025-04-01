@@ -1,3 +1,4 @@
+using AutoMapper;
 using Matemagicas.Api.Services.Interfaces;
 using Matemagicas.Api.Dtos.Requests;
 using Matemagicas.Api.Dtos.Responses;
@@ -8,9 +9,17 @@ namespace Matemagicas.Api.Controllers;
 
 [ApiController]
 [Route("api/users")]
-public class UsersController(IUsersService usersService) : Controller
+public class UsersController : Controller
 {
-   private readonly IUsersService _usersService = usersService;
+   private readonly IUsersService _usersService;
+   private readonly IMapper _mapper;
+
+   public UsersController(IUsersService usersService,
+                        IMapper mapper)
+   {
+      _usersService = usersService;
+      _mapper = mapper;
+   }
 
    /// <summary>
    /// Register a new user
@@ -21,7 +30,8 @@ public class UsersController(IUsersService usersService) : Controller
    public ActionResult<UserResponse> Register([FromBody] UserRegisterRequest request)
    {
       User user = _usersService.Register(request);
-      return Ok();
+      UserResponse response = _mapper.Map<UserResponse>(user);
+      return Ok(response);
    }
    
    /// <summary>
@@ -30,9 +40,12 @@ public class UsersController(IUsersService usersService) : Controller
    /// <param name="request"></param>
    /// <returns>UserResponse</returns>
    [HttpPost]
+   [Route("login")]
    public ActionResult<UserResponse> Login([FromBody] UserLoginRequest request)
    {
-      return Ok();
+      User user = _usersService.Login(request);
+      UserResponse response = _mapper.Map<UserResponse>(user);
+      return Ok(response);
    }
    
    /// <summary>
@@ -53,7 +66,9 @@ public class UsersController(IUsersService usersService) : Controller
    [HttpGet("{id:int}")]
    public ActionResult<UserResponse> GetById(int id)
    {
-      return Ok();
+      User user = _usersService.GetById(id);
+      UserResponse response = _mapper.Map<UserResponse>(user);
+      return Ok(response);
    }
    
    /// <summary>
@@ -65,17 +80,34 @@ public class UsersController(IUsersService usersService) : Controller
    [HttpPut("{id:int}")]
    public ActionResult<UserResponse> Update(int id, [FromBody] UserUpdateRequest request)
    {
-      return Ok();
+      User user = _usersService.Update(id, request);
+      UserResponse response = _mapper.Map<UserResponse>(user);
+      return Ok(response);
    }   
    
    /// <summary>
-   /// Logically delete a question
+   /// Delete a user
+   /// </summary>
+   /// <param name="id"></param>
+   /// <returns>UserResponse</returns>
+   [HttpPut("{id:int}/inactivate")]
+   public ActionResult<UserResponse> Inactivate(int id)
+   {
+      User user = _usersService.Inactivate(id);
+      UserResponse response = _mapper.Map<UserResponse>(user);
+      return Ok(response);
+   }
+   
+   /// <summary>
+   /// Delete a user
    /// </summary>
    /// <param name="id"></param>
    /// <returns>UserResponse</returns>
    [HttpDelete("{id:int}")]
    public ActionResult<UserResponse> Delete(int id)
    {
-      return Ok();
+      User user = _usersService.Delete(id);
+      UserResponse response = _mapper.Map<UserResponse>(user);
+      return Ok(response);
    }
 }

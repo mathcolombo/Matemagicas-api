@@ -31,8 +31,4 @@
       <None Remove="Domain\Services\Commands\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Dtos\Profiles\" />
-    </ItemGroup>
-
 </Project>

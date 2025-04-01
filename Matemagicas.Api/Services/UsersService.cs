@@ -62,7 +62,7 @@ public class UsersService : IUsersService
         return _usersRepository.Update(user);
     }
 
-    public User Inactive(int id)
+    public User Inactivate(int id)
     {
         User user = GetById(id);
         user.SetStatus(StatusEnum.Inactive);

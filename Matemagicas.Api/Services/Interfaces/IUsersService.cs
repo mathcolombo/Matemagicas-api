@@ -9,6 +9,6 @@ public interface IUsersService
     User Login(UserLoginRequest userLoginRequest);
     User GetById(int id);
     User Update(int id, UserUpdateRequest userUpdateRequest);
-    User Inactive(int id);
+    User Inactivate(int id);
     User Delete(int id);
 }
