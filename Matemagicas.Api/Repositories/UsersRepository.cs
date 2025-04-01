@@ -10,4 +10,6 @@ public class UsersRepository : Repository<User>, IUsersRepository
     public UsersRepository(MatemagicasDbContext context) : base(context)
     {
     }
+    
+    public bool EmailExists(string email) => Query().Any(u => u.Email.Value.Equals(email));
 }

@@ -8,5 +8,7 @@ public interface IUsersService
     User Register(UserRegisterRequest userRegisterRequest);
     User Login(UserLoginRequest userLoginRequest);
     User GetById(int id);
-    User Update(UserUpdateRequest userUpdateRequest);
+    User Update(int id, UserUpdateRequest userUpdateRequest);
+    User Inactive(int id);
+    User Delete(int id);
 }

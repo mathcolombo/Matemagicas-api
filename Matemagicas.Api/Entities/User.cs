@@ -22,24 +22,22 @@ public class User
     public User(string name,
                 DateOnly dateOfBirth,
                 Email email,
-                Password password,
-                decimal? totalScore,
-                StatusEnum status,
-                IEnumerable<int>? gameHistory)
+                Password password)
     {
         SetName(name);
         SetDateOfBirth(dateOfBirth);
         SetEmail(email);
         SetPassword(password);
-        SetTotalScore(totalScore);
         SetRole(RoleEnum.Player);
-        SetStatus(status);
-        SetGameHistory(gameHistory);
+        SetStatus(StatusEnum.Active);
     }
 
     public void SetName(string name)
     {
         if(string.IsNullOrWhiteSpace(name))
+            throw new FormatException("Name invalid");
+        
+        if(name.Length > 100)
             throw new FormatException("Name invalid");
         
         Name = name;
@@ -65,7 +63,7 @@ public class User
         Password = password;
     }
 
-    public void SetTotalScore(decimal? totalScore)
+    public void SetTotalScore(decimal totalScore)
     {
         if(totalScore < 0)
             throw new FormatException("Total score invalid");
@@ -83,8 +81,8 @@ public class User
         Status = status;
     }
 
-    public void SetGameHistory(IEnumerable<int>? gameHistory)
+    public void SetGameHistory(IEnumerable<int> gameHistory)
     {
-        GameHistory = new List<int>(gameHistory ?? Array.Empty<int>());
+        GameHistory = new List<int>(gameHistory);
     }
 }

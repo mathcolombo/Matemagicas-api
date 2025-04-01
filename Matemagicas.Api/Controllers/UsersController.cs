@@ -1,7 +1,7 @@
-using Matemagicas.Api.Context;
 using Matemagicas.Api.Services.Interfaces;
 using Matemagicas.Api.Dtos.Requests;
 using Matemagicas.Api.Dtos.Responses;
+using Matemagicas.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers;
@@ -20,6 +20,7 @@ public class UsersController(IUsersService usersService) : Controller
    [HttpPost]
    public ActionResult<UserResponse> Register([FromBody] UserRegisterRequest request)
    {
+      User user = _usersService.Register(request);
       return Ok();
    }
    
