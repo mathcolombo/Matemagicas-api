@@ -86,7 +86,7 @@ public class UsersController : Controller
    }   
    
    /// <summary>
-   /// Delete a user
+   /// Inactive a user
    /// </summary>
    /// <param name="id"></param>
    /// <returns>UserResponse</returns>

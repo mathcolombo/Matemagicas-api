@@ -28,8 +28,7 @@ public class Question
                     IEnumerable<string> answerOptions,
                     int correctAnswerIndex,
                     DifficultyEnum difficulty,
-                    TopicEnum topic,
-                    StatusEnum status)
+                    TopicEnum topic)
     {
         SetUser(user);
         SetQuestionText(questionText);
@@ -37,7 +36,7 @@ public class Question
         SetCorrectAnswerIndex(correctAnswerIndex);
         SetDifficulty(difficulty);
         SetTopic(topic);
-        SetStatus(status);
+        SetStatus(StatusEnum.Active);
     }
 
     public void SetUser(User user)

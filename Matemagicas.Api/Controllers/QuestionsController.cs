@@ -1,15 +1,25 @@
+using AutoMapper;
 using Matemagicas.Api.Services.Interfaces;
 using Matemagicas.Api.Dtos.Requests;
 using Matemagicas.Api.Dtos.Responses;
+using Matemagicas.Api.Entities;
+using Matemagicas.Api.Services.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers;
 
 [ApiController]
 [Route("api/questions")]
-public class QuestionsController(IQuestionsService questionsService) : Controller
+public class QuestionsController : Controller
 {
-    private readonly IQuestionsService _questionsService = questionsService;
+    private readonly IQuestionsService _questionsService;
+    private readonly IMapper _mapper;
+
+    public QuestionsController(IQuestionsService questionsService, IMapper mapper)
+    {
+        _questionsService = questionsService;
+        _mapper = mapper;
+    }
 
     /// <summary>
     /// Create a question
@@ -19,7 +29,10 @@ public class QuestionsController(IQuestionsService questionsService) : Controlle
     [HttpPost]
     public ActionResult<QuestionResponse> Create([FromBody] QuestionCreateRequest request)
     {
-        return Ok();
+        var command = _mapper.Map<QuestionCreateCommand>(request);
+        Question question = _questionsService.Create(command);
+        var response = _mapper.Map<QuestionResponse>(question);
+        return Ok(response);
     }
     
     /// <summary>
@@ -40,7 +53,9 @@ public class QuestionsController(IQuestionsService questionsService) : Controlle
     [HttpGet("{id:int}")]
     public ActionResult<QuestionResponse> GetById(int id)
     {
-        return Ok();
+        Question question = _questionsService.GetById(id);
+        var response = _mapper.Map<QuestionResponse>(question);
+        return Ok(response);
     }
     
     /// <summary>
@@ -52,7 +67,10 @@ public class QuestionsController(IQuestionsService questionsService) : Controlle
     [HttpPut("{id:int}")]
     public ActionResult<QuestionResponse> Update(int id, [FromBody] QuestionCreateRequest request)
     {
-        return Ok();
+        var command = _mapper.Map<QuestionUpdateCommand>(request);
+        Question question = _questionsService.Update(id, command);
+        var response = _mapper.Map<QuestionResponse>(question);
+        return Ok(response);
     }    
     
     /// <summary>
@@ -61,8 +79,10 @@ public class QuestionsController(IQuestionsService questionsService) : Controlle
     /// <param name="id"></param>
     /// <returns>QuestionResponse</returns>
     [HttpDelete("{id:int}")]
-    public ActionResult<QuestionResponse> Delete(int id)
+    public ActionResult<QuestionResponse> Inactive(int id)
     {
-        return Ok();
+        Question question = _questionsService.Inactive(id);
+        var response = _mapper.Map<QuestionResponse>(question);
+        return Ok(response);
     }
 }
