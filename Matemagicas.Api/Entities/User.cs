@@ -14,6 +14,7 @@ public class User
     public RoleEnum Role { get; protected set; }
     public StatusEnum Status { get; protected set; }
     public IEnumerable<int>? GameHistory { get; protected set; }
+    
 
     public User()
     {

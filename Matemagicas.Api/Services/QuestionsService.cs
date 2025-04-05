@@ -23,7 +23,7 @@ public class QuestionsService : IQuestionsService
     {
         User user = _usersService.GetById(command.UserId);
 
-        return new Question(user,
+        return new Question(command.UserId,
                     command.QuestionText,
                     command.AnswersOptions,
                     command.CorrectAnswerIndex,

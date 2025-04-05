@@ -23,14 +23,14 @@ public class Question
     {
     }
     
-    public Question(User user,
+    public Question(int userId,
                     string questionText,
                     IEnumerable<string> answerOptions,
                     int correctAnswerIndex,
                     DifficultyEnum difficulty,
                     TopicEnum topic)
     {
-        SetUser(user);
+        SetUser(userId);
         SetQuestionText(questionText);
         SetAnswerOptions(answerOptions);
         SetCorrectAnswerIndex(correctAnswerIndex);
@@ -39,10 +39,9 @@ public class Question
         SetStatus(StatusEnum.Active);
     }
 
-    public void SetUser(User user)
+    public void SetUser(int userId)
     {
-        UserId = user.Id;
-        User = user;
+        UserId = userId;
     }
     
     public void SetQuestionText(string questionText)

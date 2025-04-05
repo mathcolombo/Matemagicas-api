@@ -1,4 +1,5 @@
 using System.Data;
+using Matemagicas.Api.Enums;
 
 namespace Matemagicas.Api.Entities;
 
@@ -10,11 +11,13 @@ public class Game
     public decimal? Score { get; protected set; }
     public int? CorrectAnswers { get; protected set; }
     public int? IncorrectAnswers { get; protected set; }
-    public IEnumerable<int> Questions { get; protected set; }
+    public IEnumerable<int> QuestionsIds { get; protected set; }
+    public IEnumerable<TopicEnum> Topics { get; protected set; }
 
     #region Navigations
 
     public User User { get; protected set; }
+    public IEnumerable<Question> Questions { get; protected set; }
 
     #endregion
 
@@ -22,25 +25,16 @@ public class Game
     {
     }
     
-    public Game(User user,
-                DateTime? date,
-                decimal? score,
-                int? correctAnswers,
-                int? incorrectAnswers,
-                IEnumerable<int> questions)
+    public Game(int userId,
+                IEnumerable<int> questionsIds)
     {
-        SetUser(user);
-        SetDate(date);
-        SetScore(score);
-        SetCorrectAnswers(correctAnswers);
-        SetIncorrectAnswers(incorrectAnswers);
-        SetQuestions(questions);
+        SetUser(userId);
+        SetQuestions(questionsIds);
     }
 
-    public void SetUser(User user)
+    public void SetUser(int userId)
     {
-        UserId = user.Id;
-        User = user;
+        UserId = userId;
     }
 
     public void SetDate(DateTime? date)
@@ -75,8 +69,8 @@ public class Game
         IncorrectAnswers = incorrectAnswers;
     }
 
-    public void SetQuestions(IEnumerable<int> questions)
+    public void SetQuestions(IEnumerable<int> questionsIds)
     {
-        Questions = new List<int>(questions);
+        QuestionsIds = new List<int>(questionsIds);
     }
 }

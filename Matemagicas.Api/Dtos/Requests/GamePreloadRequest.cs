@@ -1,3 +1,3 @@
 namespace Matemagicas.Api.Dtos.Requests;
 
-public record GamePreloadRequest(int UserId, int[] Topics, int Difficulty);
+public record GamePreloadRequest(int UserId, IEnumerable<int> Topics, int Difficulty);
