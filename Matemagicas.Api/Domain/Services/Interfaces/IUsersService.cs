@@ -1,14 +1,14 @@
-using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Services.Commands;
 
 namespace Matemagicas.Api.Domain.Services.Interfaces;
 
 public interface IUsersService
 {
-    User Register(UserRegisterRequest userRegisterRequest);
-    User Login(UserLoginRequest userLoginRequest);
+    User Register(UserRegisterCommand command);
+    User Login(UserLoginCommand command);
     User GetById(int id);
-    User Update(int id, UserUpdateRequest userUpdateRequest);
+    User Update(int id, UserUpdateCommand command);
     User Inactivate(int id);
     User Delete(int id);
 }

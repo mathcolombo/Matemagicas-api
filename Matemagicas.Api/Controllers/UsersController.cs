@@ -2,6 +2,7 @@ using AutoMapper;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,7 +30,10 @@ public class UsersController : Controller
    [HttpPost]
    public ActionResult<UserResponse> Register([FromBody] UserRegisterRequest request)
    {
-      User user = _usersService.Register(request);
+      var command = _mapper.Map<UserRegisterCommand>(request);
+      
+      User user = _usersService.Register(command);
+      
       UserResponse response = _mapper.Map<UserResponse>(user);
       return Ok(response);
    }
@@ -43,7 +47,10 @@ public class UsersController : Controller
    [Route("login")]
    public ActionResult<UserResponse> Login([FromBody] UserLoginRequest request)
    {
-      User user = _usersService.Login(request);
+      var command = _mapper.Map<UserLoginCommand>(request);
+      
+      User user = _usersService.Login(command);
+      
       UserResponse response = _mapper.Map<UserResponse>(user);
       return Ok(response);
    }
@@ -67,6 +74,7 @@ public class UsersController : Controller
    public ActionResult<UserResponse> GetById(int id)
    {
       User user = _usersService.GetById(id);
+      
       UserResponse response = _mapper.Map<UserResponse>(user);
       return Ok(response);
    }
@@ -80,7 +88,10 @@ public class UsersController : Controller
    [HttpPut("{id:int}")]
    public ActionResult<UserResponse> Update(int id, [FromBody] UserUpdateRequest request)
    {
-      User user = _usersService.Update(id, request);
+      var command = _mapper.Map<UserUpdateCommand>(request);
+      
+      User user = _usersService.Update(id, command);
+      
       UserResponse response = _mapper.Map<UserResponse>(user);
       return Ok(response);
    }   
@@ -94,6 +105,7 @@ public class UsersController : Controller
    public ActionResult<UserResponse> Inactivate(int id)
    {
       User user = _usersService.Inactivate(id);
+      
       UserResponse response = _mapper.Map<UserResponse>(user);
       return Ok(response);
    }
@@ -107,6 +119,7 @@ public class UsersController : Controller
    public ActionResult<UserResponse> Delete(int id)
    {
       User user = _usersService.Delete(id);
+      
       UserResponse response = _mapper.Map<UserResponse>(user);
       return Ok(response);
    }

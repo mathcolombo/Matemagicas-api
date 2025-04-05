@@ -30,7 +30,9 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> Create([FromBody] QuestionCreateRequest request)
     {
         var command = _mapper.Map<QuestionCreateCommand>(request);
+        
         Question question = _questionsService.Create(command);
+        
         var response = _mapper.Map<QuestionResponse>(question);
         return Ok(response);
     }
@@ -54,6 +56,7 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> GetById(int id)
     {
         Question question = _questionsService.GetById(id);
+        
         var response = _mapper.Map<QuestionResponse>(question);
         return Ok(response);
     }
@@ -68,7 +71,9 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> Update(int id, [FromBody] QuestionCreateRequest request)
     {
         var command = _mapper.Map<QuestionUpdateCommand>(request);
+        
         Question question = _questionsService.Update(id, command);
+        
         var response = _mapper.Map<QuestionResponse>(question);
         return Ok(response);
     }    
@@ -82,6 +87,7 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> Inactive(int id)
     {
         Question question = _questionsService.Inactive(id);
+        
         var response = _mapper.Map<QuestionResponse>(question);
         return Ok(response);
     }

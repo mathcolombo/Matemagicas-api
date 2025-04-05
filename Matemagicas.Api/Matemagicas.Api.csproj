@@ -21,6 +21,9 @@
       <Compile Include="Domain\Services\Commands\GameSaveCommand.cs" />
       <Compile Include="Domain\Services\Commands\QuestionCreateCommand.cs" />
       <Compile Include="Domain\Services\Commands\QuestionUpdateCommand.cs" />
+      <Compile Include="Domain\Services\Commands\UserLoginCommand.cs" />
+      <Compile Include="Domain\Services\Commands\UserRegisterCommand.cs" />
+      <Compile Include="Domain\Services\Commands\UserUpdateCommand.cs" />
     </ItemGroup>
 
     <ItemGroup>
