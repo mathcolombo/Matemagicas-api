@@ -1,8 +1,8 @@
-using Matemagicas.Api.Dtos.Profiles;
-using Matemagicas.Api.Services;
-using Matemagicas.Api.Repositories;
-using Matemagicas.Api.Repositories.Interfaces;
-using Matemagicas.Api.Services.Interfaces;
+using Matemagicas.Api.DataTransfer.Profiles;
+using Matemagicas.Api.Domain.Services;
+using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Infrastructure.Repositories;
+using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

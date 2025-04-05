@@ -17,6 +17,10 @@
 
     <ItemGroup>
       <Compile Remove="Domain\Services\Commands\**" />
+      <Compile Include="Domain\Services\Commands\GamePreloadCommand.cs" />
+      <Compile Include="Domain\Services\Commands\GameSaveCommand.cs" />
+      <Compile Include="Domain\Services\Commands\QuestionCreateCommand.cs" />
+      <Compile Include="Domain\Services\Commands\QuestionUpdateCommand.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,6 +33,11 @@
 
     <ItemGroup>
       <None Remove="Domain\Services\Commands\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain\" />
+      <Folder Include="Infrastructure\Utils\" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 using AutoMapper;
-using Matemagicas.Api.Services.Interfaces;
-using Matemagicas.Api.Dtos.Requests;
-using Matemagicas.Api.Dtos.Responses;
-using Matemagicas.Api.Entities;
-using Matemagicas.Api.Services.Commands;
+using Matemagicas.Api.DataTransfer.Requests;
+using Matemagicas.Api.DataTransfer.Responses;
+using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers;
