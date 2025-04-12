@@ -1,9 +1,12 @@
 namespace Matemagicas.Api.DataTransfer.Responses;
 
-public record QuestionResponse(int Id,
-                            string QuestionText,
-                            IEnumerable<string> AnswerOptions,
-                            int CorrectAnswerIndex,
-                            int Difficulty,
-                            int Topic,
-                            int Status);
+public record QuestionResponse
+{
+    public int Id { get; init; }
+    public string QuestionText { get; init; }
+    public IEnumerable<string> AnswerOptions { get; init; }
+    public int CorrectAnswerIndex { get; init; }
+    public int Difficulty { get; init; }
+    public int Topic { get; init; }
+    public int Status { get; init; }
+}
