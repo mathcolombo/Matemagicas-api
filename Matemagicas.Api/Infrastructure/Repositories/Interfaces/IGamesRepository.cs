@@ -5,5 +5,4 @@ namespace Matemagicas.Api.Infrastructure.Repositories.Interfaces;
 
 public interface IGamesRepository : IRepository<Game>
 {
-    
 }

@@ -13,6 +13,6 @@ public static class GameExtension
         Score = game.Score,
         CorrectAnswers = game.CorrectAnswers,
         IncorrectAnswers = game.IncorrectAnswers,
-        Questions = game.Questions.MapToQuestionResponse(),
+        QuestionsIds = game.QuestionsIds,
     };
 }

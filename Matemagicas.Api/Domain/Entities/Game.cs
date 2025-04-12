@@ -25,10 +25,12 @@ public class Game
     }
     
     public Game(int userId,
-                IEnumerable<int> questionsIds)
+                IEnumerable<int> questionsIds,
+                IEnumerable<TopicEnum> topics)
     {
         SetUser(userId);
         SetQuestions(questionsIds);
+        SetTopics(topics);
     }
 
     public void SetUser(int userId)
@@ -71,5 +73,10 @@ public class Game
     public void SetQuestions(IEnumerable<int> questionsIds)
     {
         QuestionsIds = new List<int>(questionsIds);
+    }
+    
+    public void SetTopics(IEnumerable<TopicEnum> topics)
+    {
+        Topics = new List<TopicEnum>(topics);
     }
 }

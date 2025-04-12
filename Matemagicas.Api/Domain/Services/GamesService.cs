@@ -1,6 +1,8 @@
+using AutoMapper;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
 
 namespace Matemagicas.Api.Domain.Services;
@@ -9,36 +11,48 @@ public class GamesService : IGamesService
 {
     private readonly IGamesRepository _gamesRepository;
     private readonly IUsersService _usersService;
+    private readonly IQuestionsService _questionsService;
 
-    public GamesService(IGamesRepository gamesRepository, IUsersService usersService)
+    public GamesService(IGamesRepository gamesRepository,
+                        IUsersService usersService,
+                        IQuestionsService questionsService)
     {
         _gamesRepository = gamesRepository;
         _usersService = usersService;
+        _questionsService = questionsService;
     }
 
-    public Game Instantiate(GamePreloadCommand command, IEnumerable<int> questions)
+    public Game Instantiate(GamePreloadCommand command, IEnumerable<int> questionsIds)
     {
-        User user = _usersService.GetById(command.UserId);
-        return new Game(command.UserId, questions);
+        _usersService.GetById(command.UserId);
+        
+        return new Game(command.UserId, questionsIds, command.Topics);
     }
     
     public Game Preload(GamePreloadCommand command)
     {
-        throw new NotImplementedException();
+        IEnumerable<int> questionsIds = _questionsService.GetByTopicsAndDifficulty(command.Topics, command.Difficulty, StaticParameters.AMOUNT_OF_QUESTIONS_DEFAULT);
+        return Instantiate(command, questionsIds);
     }
 
     public Game Save(int id, GameSaveCommand command)
     {
-        throw new NotImplementedException();
+        Game game = GetById(id);
+        
+        game.SetDate(DateTime.Now);
+        game.SetScore(command.Score);
+        game.SetCorrectAnswers(command.CorrectAnswers);
+        game.SetIncorrectAnswers(command.IncorrectAnswer);
+        
+        return _gamesRepository.Update(game);
     }
 
-    public Game GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
+    public Game GetById(int id) => _gamesRepository.GetById(id) ?? throw new NullReferenceException("Game não encontrado!");
 
     public Game Delete(int id)
     {
-        throw new NotImplementedException();
+        Game game = GetById(id);
+        _gamesRepository.Delete(game);
+        return game;
     }
 }

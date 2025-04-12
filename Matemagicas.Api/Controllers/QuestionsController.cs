@@ -1,4 +1,5 @@
 using AutoMapper;
+using Matemagicas.Api.DataTransfer.Extensions;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
@@ -33,7 +34,7 @@ public class QuestionsController : Controller
         
         Question question = _questionsService.Create(command);
         
-        var response = _mapper.Map<QuestionResponse>(question);
+        var response = question.MapToQuestionResponse();
         return Ok(response);
     }
     
@@ -56,8 +57,8 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> GetById(int id)
     {
         Question question = _questionsService.GetById(id);
-        
-        var response = _mapper.Map<QuestionResponse>(question);
+
+        var response = question.MapToQuestionResponse();
         return Ok(response);
     }
     
@@ -74,7 +75,7 @@ public class QuestionsController : Controller
         
         Question question = _questionsService.Update(id, command);
         
-        var response = _mapper.Map<QuestionResponse>(question);
+        var response = question.MapToQuestionResponse();
         return Ok(response);
     }    
     
@@ -88,7 +89,7 @@ public class QuestionsController : Controller
     {
         Question question = _questionsService.Inactive(id);
         
-        var response = _mapper.Map<QuestionResponse>(question);
+        var response = question.MapToQuestionResponse();
         return Ok(response);
     }
 }

@@ -18,7 +18,7 @@ public class UsersService : IUsersService
     
     private User Instantiate(UserRegisterCommand command)
     {
-        if (_usersRepository.EmailExists(command.Email)) throw new Exception($"Email {command.Email} já está sendo usado!");
+        EmailExists(command.Email);
         
         var email = new Email(command.Email);
         var password = new Password(command.Password);
@@ -27,6 +27,11 @@ public class UsersService : IUsersService
                         command.DateOfBirth,
                         email,
                         password);
+    }
+
+    private void EmailExists(string email)
+    {
+        if (_usersRepository.EmailExists(email)) throw new Exception($"Email {email} já está sendo usado!");
     }
     
     public User Register(UserRegisterCommand command)

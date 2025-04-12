@@ -8,5 +8,5 @@ public record GameResponse
     public decimal? Score { get; init; }
     public int? CorrectAnswers { get; init; }
     public int? IncorrectAnswers { get; init; }
-    public IEnumerable<QuestionResponse> Questions { get; init; }
+    public IEnumerable<int> QuestionsIds { get; init; }
 }

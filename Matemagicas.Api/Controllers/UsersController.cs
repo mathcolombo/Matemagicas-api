@@ -1,4 +1,5 @@
 using AutoMapper;
+using Matemagicas.Api.DataTransfer.Extensions;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
@@ -33,8 +34,8 @@ public class UsersController : Controller
       var command = _mapper.Map<UserRegisterCommand>(request);
       
       User user = _usersService.Register(command);
-      
-      UserResponse response = _mapper.Map<UserResponse>(user);
+
+      UserResponse response = user.MapToUserResponse();
       return Ok(response);
    }
    
@@ -51,7 +52,7 @@ public class UsersController : Controller
       
       User user = _usersService.Login(command);
       
-      UserResponse response = _mapper.Map<UserResponse>(user);
+      UserResponse response = user.MapToUserResponse();
       return Ok(response);
    }
    
@@ -75,7 +76,7 @@ public class UsersController : Controller
    {
       User user = _usersService.GetById(id);
       
-      UserResponse response = _mapper.Map<UserResponse>(user);
+      UserResponse response = user.MapToUserResponse();
       return Ok(response);
    }
    
@@ -92,7 +93,7 @@ public class UsersController : Controller
       
       User user = _usersService.Update(id, command);
       
-      UserResponse response = _mapper.Map<UserResponse>(user);
+      UserResponse response = user.MapToUserResponse();
       return Ok(response);
    }   
    
@@ -106,7 +107,7 @@ public class UsersController : Controller
    {
       User user = _usersService.Inactivate(id);
       
-      UserResponse response = _mapper.Map<UserResponse>(user);
+      UserResponse response = user.MapToUserResponse();
       return Ok(response);
    }
    
@@ -120,7 +121,7 @@ public class UsersController : Controller
    {
       User user = _usersService.Delete(id);
       
-      UserResponse response = _mapper.Map<UserResponse>(user);
+      UserResponse response = user.MapToUserResponse();
       return Ok(response);
    }
 }

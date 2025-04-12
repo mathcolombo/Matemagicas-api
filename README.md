@@ -42,10 +42,10 @@ Armazena informações sobre os jogadores.
    - date_of_birth: Date (data de nascimento do jogador)
    - email: String (endereço de e-mail do jogador)
    - password: String (senha do jogador)
-   - total_score: Number (pontuação acumulada pelo jogador)
-   - role_id: ObjectId (identificador único da role)
+   - total_score: Number? (pontuação acumulada pelo jogador)
+   - role: Number (0 = Player ; 1 = Administrator)
    - status: Number (0 = Inactive ; 1 = Active)
-   - game_history: Array de ObjectIds (referências aos jogos realizados pelo jogador)
+   - game_history: Array de ObjectIds? (referências aos jogos realizados pelo jogador)
 
 ### Games
 
@@ -58,6 +58,7 @@ Armazena informações sobre cada partida realizada.
   - correct_answers: Number (número de questões respondidas corretamente)
   - incorrect_answers: Number (número de questões respondidas incorretamente)
   - questions: Array de ObjectIds (referências às questões do jogo)
+  - topics: Array de number (tópicos presentes no game)
 
 ### Questions
 
