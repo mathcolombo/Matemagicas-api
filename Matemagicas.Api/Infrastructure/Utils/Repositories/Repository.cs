@@ -1,6 +1,7 @@
 using Matemagicas.Api.Infrastructure.Context;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Infrastructure.Utils.Repositories;
 
@@ -21,7 +22,7 @@ public class Repository<T> : IRepository<T> where T : class
         return entity;
     }
 
-    public T? GetById(int id) => _dbSet.Find(id);
+    public T? GetById(ObjectId id) => _dbSet.Find(id);
 
     public T Update(T entity)
     {

@@ -1,5 +1,6 @@
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Commands;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Domain.Services.Interfaces;
 
@@ -7,8 +8,8 @@ public interface IUsersService
 {
     User Register(UserRegisterCommand command);
     User Login(UserLoginCommand command);
-    User GetById(int id);
-    User Update(int id, UserUpdateCommand command);
-    User Inactivate(int id);
-    User Delete(int id);
+    User GetById(ObjectId id);
+    User Update(ObjectId id, UserUpdateCommand command);
+    User Inactivate(ObjectId id);
+    User Delete(ObjectId id);
 }

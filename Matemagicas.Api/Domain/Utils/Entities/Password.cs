@@ -4,6 +4,10 @@ public class Password
 {
     public string Value { get; protected set; }
 
+    public Password()
+    {
+    }
+    
     public Password(string password)
     {
         SetPassword(password);

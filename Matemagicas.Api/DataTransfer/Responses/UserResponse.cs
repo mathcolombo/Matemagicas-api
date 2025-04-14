@@ -1,8 +1,10 @@
+using MongoDB.Bson;
+
 namespace Matemagicas.Api.DataTransfer.Responses;
 
 public record UserResponse
 {
-    public int Id { get; init; }
+    public ObjectId Id { get; init; }
     public string Name { get; init; }
     public DateOnly DateOfBirth { get; init; }
     public string Email { get; init; }

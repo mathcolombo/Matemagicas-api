@@ -1,7 +1,7 @@
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 
-namespace Matemagicas.Api.DataTransfer.Extensions;
+namespace Matemagicas.Api.Domain.Extensions;
 
 public static class UserExtension
 {
@@ -13,7 +13,7 @@ public static class UserExtension
         Email = user.Email.Value,
         Password = user.Password.Value,
         TotalScore = user.TotalScore,
-        Status = int.Parse(user.Status.ToString()),
+        Status = (int)user.Status,
         GameHistory = user.GameHistory
     };
 }

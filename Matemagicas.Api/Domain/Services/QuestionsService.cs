@@ -3,6 +3,7 @@ using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Domain.Services;
 
@@ -36,9 +37,9 @@ public class QuestionsService : IQuestionsService
         return _questionsRepository.Create(question);
     }
 
-    public Question GetById(int id) => _questionsRepository.GetById(id) ?? throw new NullReferenceException("Questão não encontrada!");
+    public Question GetById(ObjectId id) => _questionsRepository.GetById(id) ?? throw new NullReferenceException("Questão não encontrada!");
 
-    public Question Update(int id, QuestionUpdateCommand command)
+    public Question Update(ObjectId id, QuestionUpdateCommand command)
     {
         Question question = GetById(id);
         
@@ -51,11 +52,11 @@ public class QuestionsService : IQuestionsService
         return _questionsRepository.Update(question);
     }
 
-    public Question Inactive(int id)
+    public Question Inactive(ObjectId id)
     {
         Question question = GetById(id);
         return _questionsRepository.Update(question);
     }
 
-    public IEnumerable<int> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount) => _questionsRepository.GetByTopicsAndDifficulty(topics, difficulty, amount);
+    public IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount) => _questionsRepository.GetByTopicsAndDifficulty(topics, difficulty, amount);
 }

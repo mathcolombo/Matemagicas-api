@@ -1,11 +1,15 @@
 using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Utils.Entities;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Matemagicas.Api.Domain.Entities;
 
 public class User
 {
-    public int Id { get; protected set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public ObjectId Id { get; protected set; }
     public string Name { get; protected set; }
     public DateOnly DateOfBirth { get; protected set; }
     public Email Email { get; protected set; }

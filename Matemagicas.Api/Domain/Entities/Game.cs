@@ -1,16 +1,20 @@
 using Matemagicas.Api.Domain.Enums;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Matemagicas.Api.Domain.Entities;
 
 public class Game
 {
-    public int Id { get; protected set; }
-    public int UserId { get; protected set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public ObjectId Id { get; protected set; }
+    public ObjectId UserId { get; protected set; }
     public DateTime? Date { get; protected set; }
     public decimal? Score { get; protected set; }
     public int? CorrectAnswers { get; protected set; }
     public int? IncorrectAnswers { get; protected set; }
-    public IEnumerable<int> QuestionsIds { get; protected set; }
+    public IEnumerable<ObjectId> QuestionsIds { get; protected set; }
     public IEnumerable<TopicEnum> Topics { get; protected set; }
 
     #region Navigations
@@ -24,8 +28,8 @@ public class Game
     {
     }
     
-    public Game(int userId,
-                IEnumerable<int> questionsIds,
+    public Game(ObjectId userId,
+                IEnumerable<ObjectId> questionsIds,
                 IEnumerable<TopicEnum> topics)
     {
         SetUser(userId);
@@ -33,7 +37,7 @@ public class Game
         SetTopics(topics);
     }
 
-    public void SetUser(int userId)
+    public void SetUser(ObjectId userId)
     {
         UserId = userId;
     }
@@ -70,9 +74,9 @@ public class Game
         IncorrectAnswers = incorrectAnswers;
     }
 
-    public void SetQuestions(IEnumerable<int> questionsIds)
+    public void SetQuestions(IEnumerable<ObjectId> questionsIds)
     {
-        QuestionsIds = new List<int>(questionsIds);
+        QuestionsIds = new List<ObjectId>(questionsIds);
     }
     
     public void SetTopics(IEnumerable<TopicEnum> topics)

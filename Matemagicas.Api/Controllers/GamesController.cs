@@ -1,11 +1,13 @@
 using AutoMapper;
-using Matemagicas.Api.DataTransfer.Extensions;
+
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Extensions;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Controllers;
 
@@ -53,10 +55,11 @@ public class GamesController : Controller
     /// </summary>
     /// <param name="id"></param>
     /// <returns>GameResponse</returns>
-    [HttpGet("{id:int}")]
-    public ActionResult<IEnumerable<GameResponse>> GetById(int id)
+    [HttpGet("{id}")]
+    public ActionResult<IEnumerable<GameResponse>> GetById(string id)
     {
-        Game game = _gamesService.GetById(id);
+        var objectId = ObjectId.Parse(id);
+        Game game = _gamesService.GetById(objectId);
         
         var response = game.MapToGameResponse();
         return Ok(response);
@@ -68,12 +71,13 @@ public class GamesController : Controller
     /// <param name="id"></param>
     /// <param name="request"></param>
     /// <returns>GameResponse</returns>
-    [HttpPut("{id:int}")]
-    public ActionResult<GameResponse> Save(int id, [FromBody] GameSaveRequest request)
+    [HttpPut("{id}")]
+    public ActionResult<GameResponse> Save(string id, [FromBody] GameSaveRequest request)
     {
+        var objectId = ObjectId.Parse(id);
         var command = _mapper.Map<GameSaveCommand>(request);
         
-        Game game = _gamesService.Save(id, command);
+        Game game = _gamesService.Save(objectId, command);
         
         var response = game.MapToGameResponse();
         return Ok(response);

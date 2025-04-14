@@ -1,11 +1,12 @@
 using AutoMapper;
-using Matemagicas.Api.DataTransfer.Extensions;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Extensions;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Controllers;
 
@@ -53,10 +54,11 @@ public class QuestionsController : Controller
     /// </summary>
     /// <param name="id"></param>
     /// <returns>QuestionResponse</returns>
-    [HttpGet("{id:int}")]
-    public ActionResult<QuestionResponse> GetById(int id)
+    [HttpGet("{id}")]
+    public ActionResult<QuestionResponse> GetById(string id)
     {
-        Question question = _questionsService.GetById(id);
+        var objectId = ObjectId.Parse(id);
+        Question question = _questionsService.GetById(objectId);
 
         var response = question.MapToQuestionResponse();
         return Ok(response);
@@ -68,12 +70,13 @@ public class QuestionsController : Controller
     /// <param name="id"></param>
     /// <param name="request"></param>
     /// <returns>QuestionResponse</returns>
-    [HttpPut("{id:int}")]
-    public ActionResult<QuestionResponse> Update(int id, [FromBody] QuestionCreateRequest request)
+    [HttpPut("{id}")]
+    public ActionResult<QuestionResponse> Update(string id, [FromBody] QuestionCreateRequest request)
     {
+        var objectId = ObjectId.Parse(id);
         var command = _mapper.Map<QuestionUpdateCommand>(request);
         
-        Question question = _questionsService.Update(id, command);
+        Question question = _questionsService.Update(objectId, command);
         
         var response = question.MapToQuestionResponse();
         return Ok(response);
@@ -84,10 +87,11 @@ public class QuestionsController : Controller
     /// </summary>
     /// <param name="id"></param>
     /// <returns>QuestionResponse</returns>
-    [HttpDelete("{id:int}")]
-    public ActionResult<QuestionResponse> Inactive(int id)
+    [HttpDelete("{id}")]
+    public ActionResult<QuestionResponse> Inactive(string id)
     {
-        Question question = _questionsService.Inactive(id);
+        var objectId = ObjectId.Parse(id);
+        Question question = _questionsService.Inactive(objectId);
         
         var response = question.MapToQuestionResponse();
         return Ok(response);

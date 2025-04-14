@@ -4,6 +4,7 @@ using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Domain.Services;
 
@@ -22,7 +23,7 @@ public class GamesService : IGamesService
         _questionsService = questionsService;
     }
 
-    public Game Instantiate(GamePreloadCommand command, IEnumerable<int> questionsIds)
+    public Game Instantiate(GamePreloadCommand command, IEnumerable<ObjectId> questionsIds)
     {
         _usersService.GetById(command.UserId);
         
@@ -31,11 +32,11 @@ public class GamesService : IGamesService
     
     public Game Preload(GamePreloadCommand command)
     {
-        IEnumerable<int> questionsIds = _questionsService.GetByTopicsAndDifficulty(command.Topics, command.Difficulty, StaticParameters.AMOUNT_OF_QUESTIONS_DEFAULT);
+        IEnumerable<ObjectId> questionsIds = _questionsService.GetByTopicsAndDifficulty(command.Topics, command.Difficulty, StaticParameters.AMOUNT_OF_QUESTIONS_DEFAULT);
         return Instantiate(command, questionsIds);
     }
 
-    public Game Save(int id, GameSaveCommand command)
+    public Game Save(ObjectId id, GameSaveCommand command)
     {
         Game game = GetById(id);
         
@@ -47,9 +48,9 @@ public class GamesService : IGamesService
         return _gamesRepository.Update(game);
     }
 
-    public Game GetById(int id) => _gamesRepository.GetById(id) ?? throw new NullReferenceException("Game não encontrado!");
+    public Game GetById(ObjectId id) => _gamesRepository.GetById(id) ?? throw new NullReferenceException("Game não encontrado!");
 
-    public Game Delete(int id)
+    public Game Delete(ObjectId id)
     {
         Game game = GetById(id);
         _gamesRepository.Delete(game);

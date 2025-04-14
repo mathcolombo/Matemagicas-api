@@ -1,11 +1,15 @@
 using Matemagicas.Api.Domain.Enums;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Matemagicas.Api.Domain.Entities;
 
 public class Question
 {
-    public int Id { get; protected set; }
-    public int UserId { get; protected set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public ObjectId Id { get; protected set; }
+    public ObjectId UserId { get; protected set; }
     public string QuestionText { get; protected set; }
     public IEnumerable<string> AnswerOptions { get; protected set; }
     public int CorrectAnswerIndex { get; protected set; }
@@ -23,7 +27,7 @@ public class Question
     {
     }
     
-    public Question(int userId,
+    public Question(ObjectId userId,
                     string questionText,
                     IEnumerable<string> answerOptions,
                     int correctAnswerIndex,
@@ -39,7 +43,7 @@ public class Question
         SetStatus(StatusEnum.Active);
     }
 
-    public void SetUser(int userId)
+    public void SetUser(ObjectId userId)
     {
         UserId = userId;
     }

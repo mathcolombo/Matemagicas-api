@@ -1,7 +1,7 @@
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 
-namespace Matemagicas.Api.DataTransfer.Extensions;
+namespace Matemagicas.Api.Domain.Extensions;
 
 public static class QuestionExtension
 {
@@ -11,9 +11,9 @@ public static class QuestionExtension
         QuestionText = question.QuestionText,
         AnswerOptions = question.AnswerOptions,
         CorrectAnswerIndex = question.CorrectAnswerIndex,
-        Difficulty = int.Parse(question.Difficulty.ToString()),
-        Topic = int.Parse(question.Topic.ToString()),
-        Status = int.Parse(question.Status.ToString())
+        Difficulty = (int)question.Difficulty,
+        Topic = (int)question.Topic,
+        Status = (int)question.Status
     };
     
     public static IEnumerable<QuestionResponse> MapToQuestionResponse(this IEnumerable<Question> questions) => 

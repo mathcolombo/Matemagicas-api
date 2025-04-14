@@ -7,6 +7,10 @@ public class Email
 {
     public string Value { get; protected set; }
 
+    public Email()
+    {
+    }
+    
     public Email(string email)
     {
         SetValue(email);

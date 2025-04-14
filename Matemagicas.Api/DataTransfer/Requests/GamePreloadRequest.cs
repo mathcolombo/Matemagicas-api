@@ -1,3 +1,5 @@
+using MongoDB.Bson;
+
 namespace Matemagicas.Api.DataTransfer.Requests;
 
-public record GamePreloadRequest(int UserId, IEnumerable<int> Topics, int Difficulty);
+public record GamePreloadRequest(ObjectId UserId, IEnumerable<int> Topics, int Difficulty);

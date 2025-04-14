@@ -1,8 +1,10 @@
+using MongoDB.Bson;
+
 namespace Matemagicas.Api.DataTransfer.Responses;
 
 public record QuestionResponse
 {
-    public int Id { get; init; }
+    public ObjectId Id { get; init; }
     public string QuestionText { get; init; }
     public IEnumerable<string> AnswerOptions { get; init; }
     public int CorrectAnswerIndex { get; init; }

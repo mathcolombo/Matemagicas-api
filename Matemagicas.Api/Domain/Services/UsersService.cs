@@ -4,6 +4,7 @@ using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Domain.Services;
 
@@ -51,9 +52,9 @@ public class UsersService : IUsersService
         return user;
     }
 
-    public User GetById(int id) => _usersRepository.GetById(id) ?? throw new NullReferenceException("Usuário não encontrado!");
+    public User GetById(ObjectId id) => _usersRepository.GetById(id) ?? throw new NullReferenceException("Usuário não encontrado!");
 
-    public User Update(int id, UserUpdateCommand command)
+    public User Update(ObjectId id, UserUpdateCommand command)
     {
         User user = GetById(id);
         var email = new Email(command.Email);
@@ -67,14 +68,14 @@ public class UsersService : IUsersService
         return _usersRepository.Update(user);
     }
 
-    public User Inactivate(int id)
+    public User Inactivate(ObjectId id)
     {
         User user = GetById(id);
         user.SetStatus(StatusEnum.Inactive);
         return _usersRepository.Update(user);
     }
     
-    public User Delete(int id)
+    public User Delete(ObjectId id)
     {
         User user = GetById(id);
         _usersRepository.Delete(user);

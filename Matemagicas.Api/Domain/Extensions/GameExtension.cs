@@ -1,7 +1,7 @@
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 
-namespace Matemagicas.Api.DataTransfer.Extensions;
+namespace Matemagicas.Api.Domain.Extensions;
 
 public static class GameExtension
 {

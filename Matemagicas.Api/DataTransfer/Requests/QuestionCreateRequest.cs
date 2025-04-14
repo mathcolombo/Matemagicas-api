@@ -1,6 +1,8 @@
+using MongoDB.Bson;
+
 namespace Matemagicas.Api.DataTransfer.Requests;
 
-public record QuestionCreateRequest(int UserId,
+public record QuestionCreateRequest(ObjectId UserId,
                                     string QuestionText,
                                     IEnumerable<string> AnswersOptions,
                                     int CorrectAnswerIndex,

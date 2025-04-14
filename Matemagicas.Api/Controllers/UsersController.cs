@@ -1,11 +1,13 @@
 using AutoMapper;
-using Matemagicas.Api.DataTransfer.Extensions;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Extensions;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Controllers;
 
@@ -15,12 +17,15 @@ public class UsersController : Controller
 {
    private readonly IUsersService _usersService;
    private readonly IMapper _mapper;
+   private readonly IUnitOfWork _unitOfWork;
 
    public UsersController(IUsersService usersService,
-                        IMapper mapper)
+                        IMapper mapper,
+                        IUnitOfWork unitOfWork)
    {
       _usersService = usersService;
       _mapper = mapper;
+      _unitOfWork = unitOfWork;
    }
 
    /// <summary>
@@ -34,9 +39,11 @@ public class UsersController : Controller
       var command = _mapper.Map<UserRegisterCommand>(request);
       
       User user = _usersService.Register(command);
-
+      _unitOfWork.SaveChanges();
+      
       UserResponse response = user.MapToUserResponse();
       return Ok(response);
+      
    }
    
    /// <summary>
@@ -71,10 +78,11 @@ public class UsersController : Controller
    /// </summary>
    /// <param name="id"></param>
    /// <returns>UserResponse</returns>
-   [HttpGet("{id:int}")]
-   public ActionResult<UserResponse> GetById(int id)
+   [HttpGet("{id}")]
+   public ActionResult<UserResponse> GetById(string id)
    {
-      User user = _usersService.GetById(id);
+      var objectId = ObjectId.Parse(id);
+      User user = _usersService.GetById(objectId);
       
       UserResponse response = user.MapToUserResponse();
       return Ok(response);
@@ -86,12 +94,13 @@ public class UsersController : Controller
    /// <param name="id"></param>
    /// <param name="request"></param>
    /// <returns>UserResponse</returns>
-   [HttpPut("{id:int}")]
-   public ActionResult<UserResponse> Update(int id, [FromBody] UserUpdateRequest request)
+   [HttpPut("{id}")]
+   public ActionResult<UserResponse> Update(string id, [FromBody] UserUpdateRequest request)
    {
+      var objectId = ObjectId.Parse(id);
       var command = _mapper.Map<UserUpdateCommand>(request);
       
-      User user = _usersService.Update(id, command);
+      User user = _usersService.Update(objectId, command);
       
       UserResponse response = user.MapToUserResponse();
       return Ok(response);
@@ -102,10 +111,11 @@ public class UsersController : Controller
    /// </summary>
    /// <param name="id"></param>
    /// <returns>UserResponse</returns>
-   [HttpPut("{id:int}/inactivate")]
-   public ActionResult<UserResponse> Inactivate(int id)
+   [HttpPut("{id}/inactivate")]
+   public ActionResult<UserResponse> Inactivate(string id)
    {
-      User user = _usersService.Inactivate(id);
+      var objectId = ObjectId.Parse(id);
+      User user = _usersService.Inactivate(objectId);
       
       UserResponse response = user.MapToUserResponse();
       return Ok(response);
@@ -116,10 +126,11 @@ public class UsersController : Controller
    /// </summary>
    /// <param name="id"></param>
    /// <returns>UserResponse</returns>
-   [HttpDelete("{id:int}")]
-   public ActionResult<UserResponse> Delete(int id)
+   [HttpDelete("{id}")]
+   public ActionResult<UserResponse> Delete(string id)
    {
-      User user = _usersService.Delete(id);
+      var objectId = ObjectId.Parse(id);
+      User user = _usersService.Delete(objectId);
       
       UserResponse response = user.MapToUserResponse();
       return Ok(response);
