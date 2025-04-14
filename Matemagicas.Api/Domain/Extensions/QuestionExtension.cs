@@ -8,6 +8,7 @@ public static class QuestionExtension
     public static QuestionResponse MapToQuestionResponse(this Question question) => new QuestionResponse
     {
         Id = question.Id,
+        UserId = question.UserId,
         QuestionText = question.QuestionText,
         AnswerOptions = question.AnswerOptions,
         CorrectAnswerIndex = question.CorrectAnswerIndex,

@@ -6,6 +6,7 @@ using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Extensions;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -17,11 +18,15 @@ public class GamesController : Controller
 {
     private readonly IGamesService _gamesService;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GamesController(IGamesService gamesService, IMapper mapper)
+    public GamesController(IGamesService gamesService,
+                        IMapper mapper,
+                        IUnitOfWork unitOfWork)
     {
         _gamesService = gamesService;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
     /// <summary>
@@ -35,6 +40,7 @@ public class GamesController : Controller
         var command = _mapper.Map<GamePreloadCommand>(request);
         
         Game game = _gamesService.Preload(command);
+        _unitOfWork.SaveChanges();
 
         var response = game.MapToGameResponse();
         return Ok(response);
@@ -59,6 +65,7 @@ public class GamesController : Controller
     public ActionResult<IEnumerable<GameResponse>> GetById(string id)
     {
         var objectId = ObjectId.Parse(id);
+        
         Game game = _gamesService.GetById(objectId);
         
         var response = game.MapToGameResponse();
@@ -78,6 +85,7 @@ public class GamesController : Controller
         var command = _mapper.Map<GameSaveCommand>(request);
         
         Game game = _gamesService.Save(objectId, command);
+        _unitOfWork.SaveChanges();
         
         var response = game.MapToGameResponse();
         return Ok(response);

@@ -2,8 +2,8 @@ namespace Matemagicas.Api.Domain.Enums;
 
 public enum TopicEnum
 {
-    Addition = 0,
-    Subtraction = 1,
-    Multiplication = 2,
-    Division = 3
+    Addition = 1,
+    Subtraction = 2,
+    Multiplication = 3,
+    Division = 4
 }

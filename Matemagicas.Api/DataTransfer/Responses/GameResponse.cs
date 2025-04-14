@@ -11,4 +11,5 @@ public record GameResponse
     public int? CorrectAnswers { get; init; }
     public int? IncorrectAnswers { get; init; }
     public IEnumerable<ObjectId> QuestionsIds { get; init; }
+    public IEnumerable<int> Topics { get; init; }
 }

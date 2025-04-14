@@ -1,5 +1,6 @@
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Enums;
 
 namespace Matemagicas.Api.Domain.Extensions;
 
@@ -14,5 +15,6 @@ public static class GameExtension
         CorrectAnswers = game.CorrectAnswers,
         IncorrectAnswers = game.IncorrectAnswers,
         QuestionsIds = game.QuestionsIds,
+        Topics = game.Topics.Select(t => (int)t)
     };
 }

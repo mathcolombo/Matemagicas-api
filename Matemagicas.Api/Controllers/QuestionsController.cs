@@ -5,6 +5,7 @@ using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Extensions;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -16,11 +17,15 @@ public class QuestionsController : Controller
 {
     private readonly IQuestionsService _questionsService;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public QuestionsController(IQuestionsService questionsService, IMapper mapper)
+    public QuestionsController(IQuestionsService questionsService, 
+                            IMapper mapper,
+                            IUnitOfWork unitOfWork)
     {
         _questionsService = questionsService;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
     /// <summary>
@@ -34,6 +39,7 @@ public class QuestionsController : Controller
         var command = _mapper.Map<QuestionCreateCommand>(request);
         
         Question question = _questionsService.Create(command);
+        _unitOfWork.SaveChanges();
         
         var response = question.MapToQuestionResponse();
         return Ok(response);
@@ -58,6 +64,7 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> GetById(string id)
     {
         var objectId = ObjectId.Parse(id);
+        
         Question question = _questionsService.GetById(objectId);
 
         var response = question.MapToQuestionResponse();
@@ -77,6 +84,7 @@ public class QuestionsController : Controller
         var command = _mapper.Map<QuestionUpdateCommand>(request);
         
         Question question = _questionsService.Update(objectId, command);
+        _unitOfWork.SaveChanges();
         
         var response = question.MapToQuestionResponse();
         return Ok(response);
@@ -91,7 +99,9 @@ public class QuestionsController : Controller
     public ActionResult<QuestionResponse> Inactive(string id)
     {
         var objectId = ObjectId.Parse(id);
+        
         Question question = _questionsService.Inactive(objectId);
+        _unitOfWork.SaveChanges();
         
         var response = question.MapToQuestionResponse();
         return Ok(response);

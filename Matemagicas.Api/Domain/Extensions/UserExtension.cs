@@ -13,6 +13,7 @@ public static class UserExtension
         Email = user.Email.Value,
         Password = user.Password.Value,
         TotalScore = user.TotalScore,
+        Role = (int)user.Role,
         Status = (int)user.Status,
         GameHistory = user.GameHistory
     };

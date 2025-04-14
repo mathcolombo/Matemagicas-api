@@ -84,7 +84,7 @@ public class UsersController : Controller
       var objectId = ObjectId.Parse(id);
       User user = _usersService.GetById(objectId);
       
-      UserResponse response = user.MapToUserResponse();
+      var response = user.MapToUserResponse();
       return Ok(response);
    }
    
@@ -101,8 +101,9 @@ public class UsersController : Controller
       var command = _mapper.Map<UserUpdateCommand>(request);
       
       User user = _usersService.Update(objectId, command);
+      _unitOfWork.SaveChanges();
       
-      UserResponse response = user.MapToUserResponse();
+      var response = user.MapToUserResponse();
       return Ok(response);
    }   
    
@@ -115,9 +116,11 @@ public class UsersController : Controller
    public ActionResult<UserResponse> Inactivate(string id)
    {
       var objectId = ObjectId.Parse(id);
-      User user = _usersService.Inactivate(objectId);
       
-      UserResponse response = user.MapToUserResponse();
+      User user = _usersService.Inactivate(objectId);
+      _unitOfWork.SaveChanges();
+      
+      var response = user.MapToUserResponse();
       return Ok(response);
    }
    
@@ -130,9 +133,11 @@ public class UsersController : Controller
    public ActionResult<UserResponse> Delete(string id)
    {
       var objectId = ObjectId.Parse(id);
-      User user = _usersService.Delete(objectId);
       
-      UserResponse response = user.MapToUserResponse();
+      User user = _usersService.Delete(objectId);
+      _unitOfWork.SaveChanges();
+      
+      var response = user.MapToUserResponse();
       return Ok(response);
    }
 }
