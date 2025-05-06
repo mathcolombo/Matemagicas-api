@@ -1,4 +1,3 @@
-using AutoMapper;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
@@ -43,7 +42,7 @@ public class GamesService : IGamesService
         game.SetDate(DateTime.Now);
         game.SetScore(command.Score);
         game.SetCorrectAnswers(command.CorrectAnswers);
-        game.SetIncorrectAnswers(command.IncorrectAnswer);
+        game.SetIncorrectAnswers(command.IncorrectAnswers);
         
         return _gamesRepository.Update(game);
     }

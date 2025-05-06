@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="14.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
         <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
         <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.2.3" />
@@ -25,18 +24,22 @@
       <Compile Include="Domain\Services\Commands\UserLoginCommand.cs" />
       <Compile Include="Domain\Services\Commands\UserRegisterCommand.cs" />
       <Compile Include="Domain\Services\Commands\UserUpdateCommand.cs" />
+      <Compile Remove="DataTransfer\Profiles\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="Domain\Services\Commands\**" />
+      <EmbeddedResource Remove="DataTransfer\Profiles\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="Domain\Services\Commands\**" />
+      <Content Remove="DataTransfer\Profiles\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Domain\Services\Commands\**" />
+      <None Remove="DataTransfer\Profiles\**" />
     </ItemGroup>
 
     <ItemGroup>

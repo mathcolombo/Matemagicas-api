@@ -1,9 +1,7 @@
-using AutoMapper;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Extensions;
-using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +14,12 @@ namespace Matemagicas.Api.Controllers;
 public class QuestionsController : Controller
 {
     private readonly IQuestionsService _questionsService;
-    private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
     public QuestionsController(IQuestionsService questionsService, 
-                            IMapper mapper,
                             IUnitOfWork unitOfWork)
     {
         _questionsService = questionsService;
-        _mapper = mapper;
         _unitOfWork = unitOfWork;
     }
 
@@ -36,7 +31,7 @@ public class QuestionsController : Controller
     [HttpPost]
     public ActionResult<QuestionResponse> Create([FromBody] QuestionCreateRequest request)
     {
-        var command = _mapper.Map<QuestionCreateCommand>(request);
+        var command = request.MapToQuestionCreateCommand();
         
         Question question = _questionsService.Create(command);
         _unitOfWork.SaveChanges();
@@ -78,10 +73,10 @@ public class QuestionsController : Controller
     /// <param name="request"></param>
     /// <returns>QuestionResponse</returns>
     [HttpPut("{id}")]
-    public ActionResult<QuestionResponse> Update(string id, [FromBody] QuestionCreateRequest request)
+    public ActionResult<QuestionResponse> Update(string id, [FromBody] QuestionUpdateRequest request)
     {
         var objectId = ObjectId.Parse(id);
-        var command = _mapper.Map<QuestionUpdateCommand>(request);
+        var command = request.MapToQuestionUpdateCommand();
         
         Question question = _questionsService.Update(objectId, command);
         _unitOfWork.SaveChanges();

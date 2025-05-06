@@ -1,10 +1,7 @@
-using AutoMapper;
-
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Extensions;
-using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -17,15 +14,12 @@ namespace Matemagicas.Api.Controllers;
 public class GamesController : Controller
 {
     private readonly IGamesService _gamesService;
-    private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
     public GamesController(IGamesService gamesService,
-                        IMapper mapper,
                         IUnitOfWork unitOfWork)
     {
         _gamesService = gamesService;
-        _mapper = mapper;
         _unitOfWork = unitOfWork;
     }
 
@@ -37,7 +31,7 @@ public class GamesController : Controller
     [HttpPost]
     public ActionResult<GameResponse> Preload([FromBody] GamePreloadRequest request)
     {
-        var command = _mapper.Map<GamePreloadCommand>(request);
+        var command = request.MapToGamePreloadCommand();
         
         Game game = _gamesService.Preload(command);
         _unitOfWork.SaveChanges();
@@ -82,7 +76,7 @@ public class GamesController : Controller
     public ActionResult<GameResponse> Save(string id, [FromBody] GameSaveRequest request)
     {
         var objectId = ObjectId.Parse(id);
-        var command = _mapper.Map<GameSaveCommand>(request);
+        var command = request.MapToGameSaveCommand();
         
         Game game = _gamesService.Save(objectId, command);
         _unitOfWork.SaveChanges();

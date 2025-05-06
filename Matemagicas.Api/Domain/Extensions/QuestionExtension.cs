@@ -1,22 +1,47 @@
+using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Enums;
+using Matemagicas.Api.Domain.Services.Commands;
 
 namespace Matemagicas.Api.Domain.Extensions;
 
 public static class QuestionExtension
 {
-    public static QuestionResponse MapToQuestionResponse(this Question question) => new QuestionResponse
-    {
-        Id = question.Id,
-        UserId = question.UserId,
-        QuestionText = question.QuestionText,
-        AnswerOptions = question.AnswerOptions,
-        CorrectAnswerIndex = question.CorrectAnswerIndex,
-        Difficulty = (int)question.Difficulty,
-        Topic = (int)question.Topic,
-        Status = (int)question.Status
-    };
+    public static QuestionResponse MapToQuestionResponse(this Question question) =>
+        new QuestionResponse
+        {
+            Id = question.Id,
+            UserId = question.UserId,
+            QuestionText = question.QuestionText,
+            AnswerOptions = question.AnswerOptions,
+            CorrectAnswerIndex = question.CorrectAnswerIndex,
+            Difficulty = (int)question.Difficulty,
+            Topic = (int)question.Topic,
+            Status = (int)question.Status
+        };
     
     public static IEnumerable<QuestionResponse> MapToQuestionResponse(this IEnumerable<Question> questions) => 
         questions.Select(question => question.MapToQuestionResponse());
+
+    public static QuestionCreateCommand MapToQuestionCreateCommand(this QuestionCreateRequest request) =>
+        new QuestionCreateCommand()
+        {
+            UserId = request.UserId,
+            QuestionText = request.QuestionText,
+            AnswersOptions = request.AnswersOptions,
+            CorrectAnswerIndex = request.CorrectAnswerIndex,
+            Difficulty = (DifficultyEnum)request.Difficulty,
+            Topic = (TopicEnum)request.Topic,
+        };
+    
+    public static QuestionUpdateCommand MapToQuestionUpdateCommand(this QuestionUpdateRequest request) =>
+        new QuestionUpdateCommand()
+        {
+            QuestionText = request.QuestionText,
+            AnswersOptions = request.AnswersOptions,
+            CorrectAnswerIndex = request.CorrectAnswerIndex,
+            Difficulty = (DifficultyEnum)request.Difficulty,
+            Topic = (TopicEnum)request.Topic,
+        };
 }

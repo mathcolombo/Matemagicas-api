@@ -15,7 +15,7 @@ public class QuestionsRepository : Repository<Question>, IQuestionsRepository
     }
     
     public IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount) => Query()
-        .Where(q => topics.Contains(q.Topic) && q.Difficulty.Equals(difficulty))
+        .Where(q => topics.Contains(q.Topic) && q.Difficulty.Equals(difficulty) && q.Status == StatusEnum.Active)
         .Take(amount)
         .Select(q => q.Id);
 }

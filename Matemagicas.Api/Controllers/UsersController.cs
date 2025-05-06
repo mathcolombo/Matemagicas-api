@@ -1,9 +1,7 @@
-using AutoMapper;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Extensions;
-using Matemagicas.Api.Domain.Services.Commands;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +14,12 @@ namespace Matemagicas.Api.Controllers;
 public class UsersController : Controller
 {
    private readonly IUsersService _usersService;
-   private readonly IMapper _mapper;
    private readonly IUnitOfWork _unitOfWork;
 
    public UsersController(IUsersService usersService,
-                        IMapper mapper,
                         IUnitOfWork unitOfWork)
    {
       _usersService = usersService;
-      _mapper = mapper;
       _unitOfWork = unitOfWork;
    }
 
@@ -36,7 +31,7 @@ public class UsersController : Controller
    [HttpPost]
    public ActionResult<UserResponse> Register([FromBody] UserRegisterRequest request)
    {
-      var command = _mapper.Map<UserRegisterCommand>(request);
+      var command = request.MapToUserRegisterCommand();
       
       User user = _usersService.Register(command);
       _unitOfWork.SaveChanges();
@@ -55,7 +50,7 @@ public class UsersController : Controller
    [Route("login")]
    public ActionResult<UserResponse> Login([FromBody] UserLoginRequest request)
    {
-      var command = _mapper.Map<UserLoginCommand>(request);
+      var command = request.MapToUserLoginCommand();
       
       User user = _usersService.Login(command);
       
@@ -98,7 +93,7 @@ public class UsersController : Controller
    public ActionResult<UserResponse> Update(string id, [FromBody] UserUpdateRequest request)
    {
       var objectId = ObjectId.Parse(id);
-      var command = _mapper.Map<UserUpdateCommand>(request);
+      var command = request.MapToUserUpdateCommand();
       
       User user = _usersService.Update(objectId, command);
       _unitOfWork.SaveChanges();

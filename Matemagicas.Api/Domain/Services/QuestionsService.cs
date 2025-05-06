@@ -55,6 +55,7 @@ public class QuestionsService : IQuestionsService
     public Question Inactive(ObjectId id)
     {
         Question question = GetById(id);
+        question.SetStatus(StatusEnum.Inactive);
         return _questionsRepository.Update(question);
     }
 
