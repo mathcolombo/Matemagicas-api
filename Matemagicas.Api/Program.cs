@@ -1,3 +1,4 @@
+using System.Reflection;
 using Matemagicas.Api.Domain.Services;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Context;
@@ -6,16 +7,24 @@ using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
 using Matemagicas.Api.Infrastructure.Utils.Repositories;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Matemagicas-api", Version = "v1" });
+    
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
     
 builder.Services.AddDbContext<MatemagicasDbContext>(options =>
 {
-    options.UseMongoDB("mongodb://localhost:27017/", "matemagicasdb");
+    options.UseMongoDB(builder.Configuration.GetConnectionString("MongoDB")!, "matemagicas");
 });
 
 #region Injeção de dependência - Repositories

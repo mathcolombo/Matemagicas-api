@@ -4,7 +4,7 @@ namespace Matemagicas.Api.DataTransfer.Responses;
 
 public record UserResponse
 {
-    public ObjectId Id { get; init; }
+    public string Id { get; init; }
     public string Name { get; init; }
     public DateOnly DateOfBirth { get; init; }
     public string Email { get; init; }

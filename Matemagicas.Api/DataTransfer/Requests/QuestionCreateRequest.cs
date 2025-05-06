@@ -2,7 +2,7 @@ using MongoDB.Bson;
 
 namespace Matemagicas.Api.DataTransfer.Requests;
 
-public record QuestionCreateRequest(ObjectId UserId,
+public record QuestionCreateRequest(string UserId,
                                     string QuestionText,
                                     IEnumerable<string> AnswersOptions,
                                     int CorrectAnswerIndex,

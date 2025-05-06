@@ -32,7 +32,8 @@ public class GamesService : IGamesService
     public Game Preload(GamePreloadCommand command)
     {
         IEnumerable<ObjectId> questionsIds = _questionsService.GetByTopicsAndDifficulty(command.Topics, command.Difficulty, StaticParameters.AMOUNT_OF_QUESTIONS_DEFAULT);
-        return Instantiate(command, questionsIds);
+        Game game = Instantiate(command, questionsIds);
+        return _gamesRepository.Create(game);
     }
 
     public Game Save(ObjectId id, GameSaveCommand command)
@@ -43,6 +44,8 @@ public class GamesService : IGamesService
         game.SetScore(command.Score);
         game.SetCorrectAnswers(command.CorrectAnswers);
         game.SetIncorrectAnswers(command.IncorrectAnswers);
+        
+        _usersService.UpdatePlayerScore(game.Id, command.Score);
         
         return _gamesRepository.Update(game);
     }

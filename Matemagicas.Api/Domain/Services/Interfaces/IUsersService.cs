@@ -12,4 +12,5 @@ public interface IUsersService
     User Update(ObjectId id, UserUpdateCommand command);
     User Inactivate(ObjectId id);
     User Delete(ObjectId id);
+    void UpdatePlayerScore(ObjectId id, decimal score);
 }

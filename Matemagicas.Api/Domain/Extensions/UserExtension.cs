@@ -10,7 +10,7 @@ public static class UserExtension
     public static UserResponse MapToUserResponse(this User user) =>
         new UserResponse
         {
-            Id = user.Id,
+            Id = user.Id.ToString(),
             Name = user.Name,
             DateOfBirth = user.DateOfBirth,
             Email = user.Email.Value,

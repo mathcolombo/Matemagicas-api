@@ -81,4 +81,10 @@ public class UsersService : IUsersService
         _usersRepository.Delete(user);
         return user;
     }
+
+    public void UpdatePlayerScore(ObjectId id, decimal score)
+    {
+        User user = GetById(id);
+        user.SetTotalScore(user.TotalScore + score ?? score);
+    }
 }

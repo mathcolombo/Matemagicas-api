@@ -3,6 +3,7 @@ using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
+using MongoDB.Bson;
 
 namespace Matemagicas.Api.Domain.Extensions;
 
@@ -11,8 +12,8 @@ public static class QuestionExtension
     public static QuestionResponse MapToQuestionResponse(this Question question) =>
         new QuestionResponse
         {
-            Id = question.Id,
-            UserId = question.UserId,
+            Id = question.Id.ToString(),
+            UserId = question.UserId.ToString(),
             QuestionText = question.QuestionText,
             AnswerOptions = question.AnswerOptions,
             CorrectAnswerIndex = question.CorrectAnswerIndex,
@@ -27,7 +28,7 @@ public static class QuestionExtension
     public static QuestionCreateCommand MapToQuestionCreateCommand(this QuestionCreateRequest request) =>
         new QuestionCreateCommand()
         {
-            UserId = request.UserId,
+            UserId = ObjectId.Parse(request.UserId),
             QuestionText = request.QuestionText,
             AnswersOptions = request.AnswersOptions,
             CorrectAnswerIndex = request.CorrectAnswerIndex,
