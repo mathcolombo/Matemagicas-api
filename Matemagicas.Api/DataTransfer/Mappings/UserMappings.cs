@@ -3,9 +3,8 @@ using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Commands;
 
-namespace Matemagicas.Api.Domain.Extensions;
-
-public static class UserExtension
+namespace Matemagicas.Api.DataTransfer.Mappings;
+public static class UserMappings
 {
     public static UserResponse MapToUserResponse(this User user) =>
         new UserResponse

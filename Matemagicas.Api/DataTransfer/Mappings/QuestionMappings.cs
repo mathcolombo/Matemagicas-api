@@ -5,9 +5,9 @@ using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
 using MongoDB.Bson;
 
-namespace Matemagicas.Api.Domain.Extensions;
+namespace Matemagicas.Api.DataTransfer.Mappings;
 
-public static class QuestionExtension
+public static class QuestionMappings
 {
     public static QuestionResponse MapToQuestionResponse(this Question question) =>
         new QuestionResponse

@@ -1,7 +1,7 @@
+using Matemagicas.Api.DataTransfer.Mappings;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
-using Matemagicas.Api.Domain.Extensions;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
