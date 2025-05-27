@@ -1,6 +1,7 @@
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Filters;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
@@ -51,6 +52,8 @@ public class UsersService : IUsersService
         
         return user;
     }
+    
+    public IQueryable<User> Get(UserPagedFilter filter) => _usersRepository.Get(filter);
 
     public User GetById(ObjectId id) => _usersRepository.GetById(id) ?? throw new NullReferenceException("Usuário não encontrado!");
 

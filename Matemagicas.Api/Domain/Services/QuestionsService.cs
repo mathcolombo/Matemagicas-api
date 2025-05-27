@@ -1,6 +1,7 @@
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Filters;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
 using MongoDB.Bson;
@@ -36,6 +37,8 @@ public class QuestionsService : IQuestionsService
         Question question = Instantiate(command);
         return _questionsRepository.Create(question);
     }
+    
+    public IQueryable<Question> Get(QuestionPagedFilter filter) => _questionsRepository.Get(filter);
 
     public Question GetById(ObjectId id) => _questionsRepository.GetById(id) ?? throw new NullReferenceException("Questão não encontrada!");
 

@@ -1,7 +1,9 @@
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
+using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Filters;
 
 namespace Matemagicas.Api.DataTransfer.Mappings;
 public static class UserMappings
@@ -43,5 +45,15 @@ public static class UserMappings
             DateOfBirth = request.DateOfBirth,
             Email = request.Email,
             Password = request.Password,
+        };
+
+    public static UserPagedFilter MapToUserPagedFilter(this UserPagedRequest request) =>
+        new UserPagedFilter()
+        {
+            Name = request.Name,
+            DateOfBirth = request.DateOfBirth,
+            TotalScore = request.TotalScore,
+            Role = request.Role is null ? null : (RoleEnum)request.Role,
+            Status = request.Status is null ? null : (StatusEnum)request.Status,
         };
 }

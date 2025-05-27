@@ -1,8 +1,10 @@
 using Matemagicas.Api.DataTransfer.Mappings;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
+using Matemagicas.Api.DataTransfer.Utils.Mappings;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -43,11 +45,19 @@ public class QuestionsController : Controller
     /// <summary>
     /// List all questions
     /// </summary>
-    /// <returns>QuestionResponse</returns>
+    /// <param name="request"></param>
+    /// <param name="pageNumber"></param>
+    /// <param name="pageSize"></param>
+    /// <returns>PagedResult</returns>
     [HttpGet]
-    public ActionResult<QuestionResponse> GetAll()
+    public ActionResult<PagedResult<QuestionResponse>> Get([FromQuery] QuestionsPagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
     {
-        return Ok();
+        var filter = request.MapToGamePagedFilter();
+        
+        IQueryable<Question> questions = _questionsService.Get(filter);
+        var response = questions.MapToPagedResult(q => q.MapToQuestionResponse(), pageNumber, pageSize);
+        
+        return Ok(response);
     }
     
     /// <summary>

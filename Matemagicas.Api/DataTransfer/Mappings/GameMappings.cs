@@ -1,8 +1,12 @@
+using System.Runtime.CompilerServices;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
+using Matemagicas.Api.DataTransfer.Utils.Mappings;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Filters;
+using Matemagicas.Api.Domain.Utils.Entities;
 using MongoDB.Bson;
 
 namespace Matemagicas.Api.DataTransfer.Mappings;
@@ -36,5 +40,17 @@ public static class GameMappings
             Score = request.Score,
             CorrectAnswers = request.CorrectAnswers,
             IncorrectAnswers = request.IncorrectAnswers,
+        };
+
+    public static GamePagedFilter MapToGamePagedFilter(this GamePagedRequest request) =>
+        new GamePagedFilter()
+        {
+            UserId = request.UserId is null ? null : ObjectId.Parse(request.UserId),
+            Date = request.Date,
+            Score = request.Score,
+            CorrectAnswers = request.CorrectAnswers,
+            IncorrectAnswers = request.IncorrectAnswers,
+            QuestionsIds = request.QuestionsIds?.Select(ObjectId.Parse),
+            Topics = request.Topics?.Select(t => (TopicEnum)t),
         };
 }

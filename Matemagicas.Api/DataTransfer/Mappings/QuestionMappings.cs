@@ -3,6 +3,7 @@ using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Enums;
 using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Filters;
 using MongoDB.Bson;
 
 namespace Matemagicas.Api.DataTransfer.Mappings;
@@ -44,5 +45,15 @@ public static class QuestionMappings
             CorrectAnswerIndex = request.CorrectAnswerIndex,
             Difficulty = (DifficultyEnum)request.Difficulty,
             Topic = (TopicEnum)request.Topic,
+        };
+
+    public static QuestionPagedFilter MapToGamePagedFilter(this QuestionsPagedRequest request) =>
+        new QuestionPagedFilter()
+        {
+            UserId = request.UserId is null ? null : ObjectId.Parse(request.UserId),
+            QuestionText = request.QuestionText,
+            Difficulty = request.Difficulty is null ? null : (DifficultyEnum)request.Difficulty,
+            Topic = request.Topic is null ? null : (TopicEnum)request.Topic,
+            Status = request.Status is null ? null : (StatusEnum)request.Status
         };
 }

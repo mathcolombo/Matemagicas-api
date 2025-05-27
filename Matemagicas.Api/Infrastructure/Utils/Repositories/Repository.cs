@@ -1,3 +1,4 @@
+using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Context;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ public class Repository<T> : IRepository<T> where T : class
         _dbSet.Add(entity);
         return entity;
     }
-
+    
     public T? GetById(ObjectId id) => _dbSet.Find(id);
 
     public T Update(T entity)
@@ -35,5 +36,5 @@ public class Repository<T> : IRepository<T> where T : class
         _dbSet.Remove(entity);
     }
     
-    public IQueryable<T> Query() => _dbSet.AsQueryable();
+    public IQueryable<T> Query() => _dbSet.AsNoTracking();
 }

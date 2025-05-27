@@ -1,10 +1,13 @@
 using Matemagicas.Api.DataTransfer.Mappings;
 using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
+using Matemagicas.Api.DataTransfer.Utils.Mappings;
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Interfaces;
+using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Bson;
 
 namespace Matemagicas.Api.Controllers;
@@ -43,11 +46,19 @@ public class GamesController : Controller
     /// <summary>
     /// List all games
     /// </summary>
-    /// <returns>GameResponse</returns>
+    /// <param name="request"></param>
+    /// <param name="pageNumber"></param>
+    /// <param name="pageSize"></param>
+    /// <returns>PagedResult</returns>
     [HttpGet]
-    public ActionResult<IEnumerable<GameResponse>> GetAll()
+    public ActionResult<PagedResult<GameResponse>> Get([FromQuery] GamePagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
     {
-        return Ok();
+        var filter = request.MapToGamePagedFilter();
+        
+        IQueryable<Game> games = _gamesService.Get(filter);
+        var response = games.MapToPagedResult(q => q.MapToGameResponse(), pageNumber, pageSize);
+        
+        return Ok(response);
     }
     
     /// <summary>

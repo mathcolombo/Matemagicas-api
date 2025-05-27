@@ -1,5 +1,6 @@
 using Matemagicas.Api.Domain.Entities;
 using Matemagicas.Api.Domain.Services.Commands;
+using Matemagicas.Api.Domain.Services.Filters;
 using Matemagicas.Api.Domain.Services.Interfaces;
 using Matemagicas.Api.Domain.Utils.Entities;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
@@ -49,6 +50,8 @@ public class GamesService : IGamesService
         
         return _gamesRepository.Update(game);
     }
+    
+    public IQueryable<Game> Get(GamePagedFilter filter) => _gamesRepository.Get(filter);
 
     public Game GetById(ObjectId id) => _gamesRepository.GetById(id) ?? throw new NullReferenceException("Game não encontrado!");
 
