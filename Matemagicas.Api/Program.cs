@@ -43,7 +43,23 @@ builder.Services.AddScoped<IUsersService, UsersService>();
 
 #endregion
 
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins,
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+
+});
+
 var app = builder.Build();
+
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseSwagger();
 app.UseSwaggerUI();
