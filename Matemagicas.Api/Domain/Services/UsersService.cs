@@ -20,7 +20,7 @@ public class UsersService : IUsersService
     
     private User Instantiate(UserRegisterCommand command)
     {
-        EmailExists(command.Email);
+        ValidateEmailExists(command.Email);
         
         var email = new Email(command.Email);
         var password = new Password(command.Password);
@@ -31,7 +31,7 @@ public class UsersService : IUsersService
                         password);
     }
 
-    private void EmailExists(string email)
+    private void ValidateEmailExists(string email)
     {
         if (_usersRepository.EmailExists(email)) throw new Exception($"Email {email} já está sendo usado!");
     }
@@ -44,7 +44,7 @@ public class UsersService : IUsersService
 
     public User Login(UserLoginCommand command)
     {
-        User? user = _usersRepository.Query().FirstOrDefault(u => u.Email.Equals(command.Email));
+        User? user = _usersRepository.Query().FirstOrDefault(u => u.Email.Value.Equals(command.Email));
         
         if(user is null) throw new Exception("Login inválido, verifique o email informado!");
         
