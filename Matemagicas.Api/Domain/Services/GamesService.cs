@@ -46,7 +46,7 @@ public class GamesService : IGamesService
         game.SetCorrectAnswers(command.CorrectAnswers);
         game.SetIncorrectAnswers(command.IncorrectAnswers);
         
-        _usersService.UpdatePlayerScore(game.Id, command.Score);
+        _usersService.UpdatePlayerScore(game.UserId, command.Score);
         
         return _gamesRepository.Update(game);
     }
