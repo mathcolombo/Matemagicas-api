@@ -5,6 +5,7 @@
 Matemágicas é mais que um jogo. É uma plataforma educacional gamificada que usa a matemática para impulsionar o aprendizado. 📚
 
 Nosso objetivo é transformar o desafio da matemática em uma aventura divertida, dando a alunos, professores e administradores as ferramentas certas para conquistar cada etapa.
+
 | Perfil de Usuário	| Funções Principais |
 |---|---|
 | 👩‍🎓 Aluno	| Joga partidas personalizadas, acompanha seu progresso e se diverte. |
