@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DnsClient" Version="1.8.0" />
+      <PackageReference Include="MongoDB.Driver" Version="3.4.2" />
+      <PackageReference Include="MongoDB.EntityFrameworkCore" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Classes\" />
+      <Folder Include="Games\" />
+      <Folder Include="Questions\" />
+      <Folder Include="Schools\" />
+      <Folder Include="Users\" />
+    </ItemGroup>
+
+</Project>

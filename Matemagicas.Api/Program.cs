@@ -6,7 +6,7 @@ using Matemagicas.Api.Infrastructure.Repositories;
 using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
 using Matemagicas.Api.Infrastructure.Utils.Repositories;
 using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Matemagicas.Infrastructure.Configs.Connections;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,10 +22,7 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
     
-builder.Services.AddDbContext<MatemagicasDbContext>(options =>
-{
-    options.UseMongoDB(builder.Configuration.GetConnectionString("MongoDB")!, "matemagicas");
-});
+builder.Services.AddConnection(builder.Configuration.GetConnectionString("MongoDbConnection"), "matemagicas");
 
 #region Injeção de dependência - Repositories
 
@@ -43,7 +40,7 @@ builder.Services.AddScoped<IUsersService, UsersService>();
 
 #endregion
 
-var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
 {

@@ -2,6 +2,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Api", "Matemagicas.Api\Matemagicas.Api.csproj", "{35E89574-645E-4E4E-AE1C-105DFC2C10C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Application", "Matemagicas.Application\Matemagicas.Application.csproj", "{520B407A-6163-4FBC-BD75-8E9CBBB86678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Domain", "Matemagicas.Domain\Matemagicas.Domain.csproj", "{365234DF-B145-4D7F-8A16-116F7B6FF4FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Infrastructure", "Matemagicas.Infrastructure\Matemagicas.Infrastructure.csproj", "{A6905FF3-E630-445B-BB6D-B85052041AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Ioc", "Matemagicas.Ioc\Matemagicas.Ioc.csproj", "{C91D239A-5700-4307-B5FE-9BD443A485EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9686C54A-C2EB-4569-80EC-AD63CEBEF198}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{61943F9D-672E-4897-A06A-CE953D4CDB91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +24,28 @@ Global
 		{35E89574-645E-4E4E-AE1C-105DFC2C10C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35E89574-645E-4E4E-AE1C-105DFC2C10C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35E89574-645E-4E4E-AE1C-105DFC2C10C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{520B407A-6163-4FBC-BD75-8E9CBBB86678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520B407A-6163-4FBC-BD75-8E9CBBB86678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520B407A-6163-4FBC-BD75-8E9CBBB86678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520B407A-6163-4FBC-BD75-8E9CBBB86678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365234DF-B145-4D7F-8A16-116F7B6FF4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365234DF-B145-4D7F-8A16-116F7B6FF4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365234DF-B145-4D7F-8A16-116F7B6FF4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365234DF-B145-4D7F-8A16-116F7B6FF4FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6905FF3-E630-445B-BB6D-B85052041AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6905FF3-E630-445B-BB6D-B85052041AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6905FF3-E630-445B-BB6D-B85052041AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6905FF3-E630-445B-BB6D-B85052041AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91D239A-5700-4307-B5FE-9BD443A485EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C91D239A-5700-4307-B5FE-9BD443A485EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C91D239A-5700-4307-B5FE-9BD443A485EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C91D239A-5700-4307-B5FE-9BD443A485EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35E89574-645E-4E4E-AE1C-105DFC2C10C7} = {61943F9D-672E-4897-A06A-CE953D4CDB91}
+		{520B407A-6163-4FBC-BD75-8E9CBBB86678} = {61943F9D-672E-4897-A06A-CE953D4CDB91}
+		{365234DF-B145-4D7F-8A16-116F7B6FF4FB} = {61943F9D-672E-4897-A06A-CE953D4CDB91}
+		{A6905FF3-E630-445B-BB6D-B85052041AE1} = {61943F9D-672E-4897-A06A-CE953D4CDB91}
+		{C91D239A-5700-4307-B5FE-9BD443A485EB} = {61943F9D-672E-4897-A06A-CE953D4CDB91}
 	EndGlobalSection
 EndGlobal
