@@ -1,13 +1,12 @@
-using Matemagicas.Api.DataTransfer.Mappings;
-using Matemagicas.Api.DataTransfer.Requests;
 using Matemagicas.Api.DataTransfer.Responses;
-using Matemagicas.Api.DataTransfer.Utils.Mappings;
-using Matemagicas.Api.Domain.Entities;
-using Matemagicas.Api.Domain.Services.Interfaces;
-using Matemagicas.Api.Domain.Utils.Entities;
-using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Application.Games.DataTransfer.Mappings;
+using Matemagicas.Application.Games.DataTransfer.Requests;
+using Matemagicas.Application.Utils.Mappings;
+using Matemagicas.Application.Utils.ValueObjects;
+using Matemagicas.Domain.Games.Entities;
+using Matemagicas.Domain.Games.Services.Interfaces;
+using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Bson;
 
 namespace Matemagicas.Api.Controllers;
@@ -43,23 +42,23 @@ public class GamesController : Controller
         return Ok(response);
     }
 
-    /// <summary>
-    /// List all games
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="pageNumber"></param>
-    /// <param name="pageSize"></param>
-    /// <returns>PagedResult</returns>
-    [HttpGet]
-    public ActionResult<PagedResult<GameResponse>> Get([FromQuery] GamePagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
-    {
-        var filter = request.MapToGamePagedFilter();
-        
-        IQueryable<Game> games = _gamesService.Get(filter);
-        var response = games.MapToPagedResult(q => q.MapToGameResponse(), pageNumber, pageSize);
-        
-        return Ok(response);
-    }
+    // /// <summary>
+    // /// List all games
+    // /// </summary>
+    // /// <param name="request"></param>
+    // /// <param name="pageNumber"></param>
+    // /// <param name="pageSize"></param>
+    // /// <returns>PagedResult</returns>
+    // [HttpGet]
+    // public ActionResult<PagedResult<GameResponse>> Get([FromQuery] GamePagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    // {
+    //     var filter = request.MapToGamePagedFilter();
+    //     
+    //     IQueryable<Game> games = _gamesService.Get(filter);
+    //     var response = games.MapToPagedResult(q => q.MapToGameResponse(), pageNumber, pageSize);
+    //     
+    //     return Ok(response);
+    // }
     
     /// <summary>
     /// Retrieves a game based on its id

@@ -8,6 +8,12 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.4" />
+      <PackageReference Include="Scrutor" Version="6.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
+      <ProjectReference Include="..\Matemagicas.Infrastructure\Matemagicas.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

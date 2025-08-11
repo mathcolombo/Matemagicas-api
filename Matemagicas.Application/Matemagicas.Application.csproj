@@ -7,12 +7,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\" />
-      <Folder Include="Games\" />
-      <Folder Include="Questions\" />
-      <Folder Include="Schools\" />
-      <Folder Include="Users\" />
-      <Folder Include="Utils\" />
+      <Folder Include="Classes\DataTransfer\Mappings\" />
+      <Folder Include="Classes\DataTransfer\Requests\" />
+      <Folder Include="Classes\DataTransfer\Responses\" />
+      <Folder Include="Classes\Services\Interfaces\" />
+      <Folder Include="Games\Services\Interfaces\" />
+      <Folder Include="Questions\Services\Interfaces\" />
+      <Folder Include="Schools\DataTransfer\Mappings\" />
+      <Folder Include="Schools\DataTransfer\Requests\" />
+      <Folder Include="Schools\DataTransfer\Responses\" />
+      <Folder Include="Schools\Services\Interfaces\" />
+      <Folder Include="Users\Services\Interfaces\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
     </ItemGroup>
 
 </Project>

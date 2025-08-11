@@ -1,11 +1,11 @@
-using Matemagicas.Api.DataTransfer.Mappings;
-using Matemagicas.Api.DataTransfer.Requests;
-using Matemagicas.Api.DataTransfer.Responses;
-using Matemagicas.Api.DataTransfer.Utils.Mappings;
-using Matemagicas.Api.Domain.Entities;
-using Matemagicas.Api.Domain.Services.Interfaces;
-using Matemagicas.Api.Domain.Utils.Entities;
-using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Application.Users.DataTransfer.Mappings;
+using Matemagicas.Application.Users.DataTransfer.Requests;
+using Matemagicas.Application.Users.DataTransfer.Responses;
+using Matemagicas.Application.Utils.Mappings;
+using Matemagicas.Application.Utils.ValueObjects;
+using Matemagicas.Domain.Users.Entities;
+using Matemagicas.Domain.Users.Services.Interfaces;
+using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -60,23 +60,23 @@ public class UsersController : Controller
       return Ok(response);
    }
    
-   /// <summary>
-   /// List all games
-   /// </summary>
-   /// <param name="request"></param>
-   /// <param name="pageNumber"></param>
-   /// <param name="pageSize"></param>
-   /// <returns>PagedResult</returns>
-   [HttpGet]
-   public ActionResult<PagedResult<UserResponse>> Get([FromQuery] UserPagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
-   {
-      var filter = request.MapToUserPagedFilter();
-        
-      IQueryable<User> games = _usersService.Get(filter);
-      var response = games.MapToPagedResult(q => q.MapToUserResponse(), pageNumber, pageSize);
-        
-      return Ok(response);
-   }
+   // /// <summary>
+   // /// List all games
+   // /// </summary>
+   // /// <param name="request"></param>
+   // /// <param name="pageNumber"></param>
+   // /// <param name="pageSize"></param>
+   // /// <returns>PagedResult</returns>
+   // [HttpGet]
+   // public ActionResult<PagedResult<UserResponse>> Get([FromQuery] UserPagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+   // {
+   //    var filter = request.MapToUserPagedFilter();
+   //      
+   //    IQueryable<User> games = _usersService.Get(filter);
+   //    var response = games.MapToPagedResult(q => q.MapToUserResponse(), pageNumber, pageSize);
+   //      
+   //    return Ok(response);
+   // }
    
    /// <summary>
    /// Retrieves a user based on its id

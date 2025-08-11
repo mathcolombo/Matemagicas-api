@@ -16,13 +16,6 @@
 
     <ItemGroup>
       <Compile Remove="Domain\Services\Commands\**" />
-      <Compile Include="Domain\Services\Commands\GamePreloadCommand.cs" />
-      <Compile Include="Domain\Services\Commands\GameSaveCommand.cs" />
-      <Compile Include="Domain\Services\Commands\QuestionCreateCommand.cs" />
-      <Compile Include="Domain\Services\Commands\QuestionUpdateCommand.cs" />
-      <Compile Include="Domain\Services\Commands\UserLoginCommand.cs" />
-      <Compile Include="Domain\Services\Commands\UserRegisterCommand.cs" />
-      <Compile Include="Domain\Services\Commands\UserUpdateCommand.cs" />
       <Compile Remove="DataTransfer\Profiles\**" />
     </ItemGroup>
 
@@ -45,12 +38,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Domain\" />
-      <Folder Include="Infrastructure\Utils\" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\Matemagicas.Application\Matemagicas.Application.csproj" />
       <ProjectReference Include="..\Matemagicas.Infrastructure\Matemagicas.Infrastructure.csproj" />
+      <ProjectReference Include="..\Matemagicas.Ioc\Matemagicas.Ioc.csproj" />
     </ItemGroup>
 
 </Project>

@@ -13,11 +13,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\" />
-      <Folder Include="Games\" />
-      <Folder Include="Questions\" />
-      <Folder Include="Schools\" />
-      <Folder Include="Users\" />
+      <Folder Include="Classes\Repositories\Interfaces\" />
+      <Folder Include="Schools\Repositories\Interfaces\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,12 +1,6 @@
 using System.Reflection;
-using Matemagicas.Api.Domain.Services;
-using Matemagicas.Api.Domain.Services.Interfaces;
-using Matemagicas.Api.Infrastructure.Context;
-using Matemagicas.Api.Infrastructure.Repositories;
-using Matemagicas.Api.Infrastructure.Repositories.Interfaces;
-using Matemagicas.Api.Infrastructure.Utils.Repositories;
-using Matemagicas.Api.Infrastructure.Utils.Repositories.Interfaces;
 using Matemagicas.Infrastructure.Configs.Connections;
+using Matemagicas.Ioc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,20 +18,11 @@ builder.Services.AddSwaggerGen(c =>
     
 builder.Services.AddConnection(builder.Configuration.GetConnectionString("MongoDbConnection"), "matemagicas");
 
-#region Injeção de dependência - Repositories
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IGamesRepository, GamesRepository>();
-builder.Services.AddScoped<IQuestionsRepository, QuestionsRepository>();
-builder.Services.AddScoped<IUsersRepository, UsersRepository>();
-
-#endregion
-#region Injeção de dependência - Services
-
-builder.Services.AddScoped<IGamesService, GamesService>();
-builder.Services.AddScoped<IQuestionsService, QuestionsService>();
-builder.Services.AddScoped<IUsersService, UsersService>();
-
+#region IOC configuration
+builder.Services.AddAbstractions();
+builder.Services.AddInfrastructureRepositories();
+builder.Services.AddDomainServices();
+builder.Services.AddApplicationServices();
 #endregion
 
 const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
