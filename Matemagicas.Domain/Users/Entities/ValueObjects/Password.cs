@@ -4,24 +4,20 @@ namespace Matemagicas.Domain.Users.Entities.ValueObjects;
 
 public partial class Password
 {
-    public string Value { get; protected set; }
+    public string Hash { get; protected set; }
     private static readonly Regex PasswordRegex = MyRegex();
-
-    public Password()
-    {
-    }
     
     public Password(string password)
     {
-        SetPassword(password);
+        SetPasswordHash(password);
     }
 
-    public void SetPassword(string password)
+    public void SetPasswordHash(string password)
     {
         if(!IsValid(password))
             throw new FormatException("Password invalid");
         
-        Value = password;
+        Hash = password;
     }
 
     private bool IsValid(string password)

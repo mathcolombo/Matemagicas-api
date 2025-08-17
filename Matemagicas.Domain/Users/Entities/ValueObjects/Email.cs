@@ -5,13 +5,16 @@ namespace Matemagicas.Domain.Users.Entities.ValueObjects;
 
 public partial class Email
 {
-    public string Address { get; }
+    public string Address { get; private set; }
 
     private static readonly Regex EmailRegex = MyRegex();
 
-    public Email() {}
-    
     public Email(string emailAddress)
+    {
+        SetAddress(emailAddress);
+    }
+
+    private void SetAddress(string emailAddress)
     {
         Validate(emailAddress);
         Address = emailAddress.ToLower();

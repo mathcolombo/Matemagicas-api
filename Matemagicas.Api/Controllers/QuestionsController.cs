@@ -5,7 +5,7 @@ using Matemagicas.Application.Utils.Mappings;
 using Matemagicas.Application.Utils.ValueObjects;
 using Matemagicas.Domain.Questions.Entities;
 using Matemagicas.Domain.Questions.Services.Interfaces;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -36,7 +36,7 @@ public class QuestionsController : Controller
         var command = request.MapToQuestionCreateCommand();
         
         Question question = _questionsService.Create(command);
-        _unitOfWork.SaveChanges();
+        _unitOfWork.SaveChangesAsync();
         
         var response = question.MapToQuestionResponse();
         return Ok(response);
@@ -89,7 +89,7 @@ public class QuestionsController : Controller
         var command = request.MapToQuestionUpdateCommand();
         
         Question question = _questionsService.Update(objectId, command);
-        _unitOfWork.SaveChanges();
+        _unitOfWork.SaveChangesAsync();
         
         var response = question.MapToQuestionResponse();
         return Ok(response);
@@ -106,7 +106,7 @@ public class QuestionsController : Controller
         var objectId = ObjectId.Parse(id);
         
         Question question = _questionsService.Inactive(objectId);
-        _unitOfWork.SaveChanges();
+        _unitOfWork.SaveChangesAsync();
         
         var response = question.MapToQuestionResponse();
         return Ok(response);

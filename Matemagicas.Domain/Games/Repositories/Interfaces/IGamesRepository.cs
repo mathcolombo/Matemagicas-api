@@ -1,6 +1,6 @@
 using Matemagicas.Domain.Games.Entities;
 using Matemagicas.Domain.Games.Repositories.Filters;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 
 namespace Matemagicas.Domain.Games.Repositories.Interfaces;
 

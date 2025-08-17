@@ -5,7 +5,7 @@ using Matemagicas.Application.Utils.Mappings;
 using Matemagicas.Application.Utils.ValueObjects;
 using Matemagicas.Domain.Games.Entities;
 using Matemagicas.Domain.Games.Services.Interfaces;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -36,7 +36,7 @@ public class GamesController : Controller
         var command = request.MapToGamePreloadCommand();
         
         Game game = _gamesService.Preload(command);
-        _unitOfWork.SaveChanges();
+        _unitOfWork.SaveChangesAsync();
 
         var response = game.MapToGameResponse();
         return Ok(response);
@@ -89,7 +89,7 @@ public class GamesController : Controller
         var command = request.MapToGameSaveCommand();
         
         Game game = _gamesService.Save(objectId, command);
-        _unitOfWork.SaveChanges();
+        _unitOfWork.SaveChangesAsync();
         
         var response = game.MapToGameResponse();
         return Ok(response);

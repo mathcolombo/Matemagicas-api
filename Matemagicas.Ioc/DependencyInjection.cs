@@ -7,11 +7,11 @@ using Matemagicas.Domain.Questions.Services.Interfaces;
 using Matemagicas.Domain.Users.Repositories.Interfaces;
 using Matemagicas.Domain.Users.Services;
 using Matemagicas.Domain.Users.Services.Interfaces;
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 using Matemagicas.Infrastructure.Games.Repositories;
 using Matemagicas.Infrastructure.Questions.Repositories;
 using Matemagicas.Infrastructure.Users.Repositories;
 using Matemagicas.Infrastructure.Utils.Repositories;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Matemagicas.Ioc;

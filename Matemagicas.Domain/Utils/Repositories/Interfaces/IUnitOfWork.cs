@@ -1,9 +1,9 @@
-namespace Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
+namespace Matemagicas.Domain.Utils.Repositories.Interfaces;
 
 public interface IUnitOfWork
 {
-    void BeginTransaction();
-    void Commit();
-    void Rollback();
-    void SaveChanges();
+    Task BeginTransactionAsync();
+    Task CommitAsync();
+    Task RollbackAsync();
+    Task<int> SaveChangesAsync();
 }

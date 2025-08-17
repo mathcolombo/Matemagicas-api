@@ -1,5 +1,5 @@
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 using Matemagicas.Infrastructure.Configs.Contexts;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Matemagicas.Infrastructure.Utils.Repositories;
@@ -7,38 +7,29 @@ namespace Matemagicas.Infrastructure.Utils.Repositories;
 public class UnitOfWork(MatemagicasDbContext context) : IUnitOfWork
 {
     private IDbContextTransaction? _transaction;
-
-    public void BeginTransaction()
-    {
-        _transaction = context.Database.BeginTransaction();
-    }
-
-    public void Commit()
+    
+    public async Task BeginTransactionAsync() => _transaction = await context.Database.BeginTransactionAsync();
+    
+    public async Task CommitAsync()
     {
         try
         {
-            context.SaveChanges();
-            _transaction?.Commit();
+            await context.SaveChangesAsync();
+            await _transaction!.CommitAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            _transaction?.Rollback();
+            await _transaction!.RollbackAsync();
             throw;
         }
         finally
         {
-            _transaction?.Dispose();
+            await _transaction!.DisposeAsync();
         }
     }
-
-    public void Rollback()
-    {
-        _transaction?.Rollback();
-        _transaction?.Dispose();
-    }
-
-    public void SaveChanges()
-    {
-        context.SaveChanges();
-    }
+    
+    public async Task RollbackAsync() => await _transaction?.RollbackAsync()!;
+    
+    public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
+   
 }

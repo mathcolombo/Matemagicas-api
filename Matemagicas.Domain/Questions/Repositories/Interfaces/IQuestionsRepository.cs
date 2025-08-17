@@ -1,7 +1,7 @@
 using Matemagicas.Domain.Questions.Entities;
 using Matemagicas.Domain.Questions.Repositories.Filters;
 using Matemagicas.Domain.Utils.Enums;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 using MongoDB.Bson;
 
 namespace Matemagicas.Domain.Questions.Repositories.Interfaces;

@@ -47,7 +47,7 @@ public class UsersService : IUsersService
         
         if(user is null) throw new Exception("Login inválido, verifique o email informado!");
         
-        if(!user.Password.Value.Equals(command.Password)) throw new Exception("Senha incorreta!");
+        if(!user.Password.Hash.Equals(command.Password)) throw new Exception("Senha incorreta!");
         
         return user;
     }

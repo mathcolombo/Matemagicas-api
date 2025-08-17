@@ -16,7 +16,7 @@ public static class UserMappings
             Name = user.Name,
             DateOfBirth = user.DateOfBirth,
             Email = user.Email.Address,
-            Password = user.Password.Value,
+            Password = user.Password.Hash,
             TotalScore = user.TotalScore,
             Role = (int)user.Role,
             Status = (int)user.Status,

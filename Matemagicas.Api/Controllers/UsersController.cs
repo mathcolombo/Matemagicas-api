@@ -5,7 +5,7 @@ using Matemagicas.Application.Utils.Mappings;
 using Matemagicas.Application.Utils.ValueObjects;
 using Matemagicas.Domain.Users.Entities;
 using Matemagicas.Domain.Users.Services.Interfaces;
-using Matemagicas.Infrastructure.Utils.Repositories.Interfaces;
+using Matemagicas.Domain.Utils.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -36,7 +36,7 @@ public class UsersController : Controller
       var command = request.MapToUserRegisterCommand();
       
       User user = _usersService.Register(command);
-      _unitOfWork.SaveChanges();
+      _unitOfWork.SaveChangesAsync();
       
       UserResponse response = user.MapToUserResponse();
       return Ok(response);
@@ -106,7 +106,7 @@ public class UsersController : Controller
       var command = request.MapToUserUpdateCommand();
       
       User user = _usersService.Update(objectId, command);
-      _unitOfWork.SaveChanges();
+      _unitOfWork.SaveChangesAsync();
       
       var response = user.MapToUserResponse();
       return Ok(response);
@@ -123,7 +123,7 @@ public class UsersController : Controller
       var objectId = ObjectId.Parse(id);
       
       User user = _usersService.Inactivate(objectId);
-      _unitOfWork.SaveChanges();
+      _unitOfWork.SaveChangesAsync();
       
       var response = user.MapToUserResponse();
       return Ok(response);
@@ -140,7 +140,7 @@ public class UsersController : Controller
       var objectId = ObjectId.Parse(id);
       
       User user = _usersService.Delete(objectId);
-      _unitOfWork.SaveChanges();
+      _unitOfWork.SaveChangesAsync();
       
       var response = user.MapToUserResponse();
       return Ok(response);
