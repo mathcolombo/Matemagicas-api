@@ -1,11 +1,16 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Matemagicas.Infrastructure.Configs.Connections;
 using Matemagicas.Ioc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -15,7 +20,7 @@ builder.Services.AddSwaggerGen(c =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
-    
+        
 builder.Services.AddConnection(builder.Configuration.GetConnectionString("MongoDbConnection"), "matemagicas");
 
 #region IOC configuration
@@ -23,6 +28,7 @@ builder.Services.AddAbstractions();
 builder.Services.AddInfrastructureRepositories();
 builder.Services.AddDomainServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddMappingConfigurations();
 #endregion
 
 const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";

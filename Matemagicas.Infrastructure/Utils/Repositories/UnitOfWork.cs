@@ -30,6 +30,6 @@ public class UnitOfWork(MatemagicasDbContext context) : IUnitOfWork
     
     public async Task RollbackAsync() => await _transaction?.RollbackAsync()!;
     
-    public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
+    public async Task SaveChangesAsync() => await context.SaveChangesAsync();
    
 }
