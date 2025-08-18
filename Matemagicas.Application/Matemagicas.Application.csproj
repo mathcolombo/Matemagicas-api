@@ -13,15 +13,15 @@
       <Folder Include="Classes\Services\Interfaces\" />
       <Folder Include="Games\Services\Interfaces\" />
       <Folder Include="Questions\Services\Interfaces\" />
-      <Folder Include="Schools\DataTransfer\Mappings\" />
-      <Folder Include="Schools\DataTransfer\Requests\" />
-      <Folder Include="Schools\DataTransfer\Responses\" />
-      <Folder Include="Schools\Services\Interfaces\" />
       <Folder Include="Users\Services\Interfaces\" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Mapster" Version="7.4.0" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,14 @@
+using Matemagicas.Application.Schools.DataTransfer.Mappings;
+using Matemagicas.Application.Schools.Services;
+using Matemagicas.Application.Schools.Services.Interfaces;
 using Matemagicas.Domain.Games.Repositories.Interfaces;
 using Matemagicas.Domain.Games.Services;
 using Matemagicas.Domain.Games.Services.Interfaces;
 using Matemagicas.Domain.Questions.Repositories.Interfaces;
 using Matemagicas.Domain.Questions.Services;
 using Matemagicas.Domain.Questions.Services.Interfaces;
+using Matemagicas.Domain.Schools.Services;
+using Matemagicas.Domain.Schools.Services.Interfaces;
 using Matemagicas.Domain.Users.Repositories.Interfaces;
 using Matemagicas.Domain.Users.Services;
 using Matemagicas.Domain.Users.Services.Interfaces;
@@ -32,6 +37,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        services.AddScoped<ISchoolsAppService, SchoolsAppService>();
         return services;
     }
 
@@ -40,6 +46,7 @@ public static class DependencyInjection
         services.AddScoped<IGamesService, GamesService>();
         services.AddScoped<IQuestionsService, QuestionsService>();
         services.AddScoped<IUsersService, UsersService>();
+        services.AddScoped<ISchoolsService, SchoolsService>();
         return services;
     }
 
@@ -49,6 +56,12 @@ public static class DependencyInjection
         services.AddScoped<IGamesRepository, GamesRepository>();
         services.AddScoped<IQuestionsRepository, QuestionsRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
+        return services;
+    }
+    
+    public static IServiceCollection AddMappingConfigurations(this IServiceCollection services)
+    {
+        services.RegisterSchoolMaps();
         return services;
     }
 }

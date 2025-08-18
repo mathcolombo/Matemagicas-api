@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Matemagicas.Application\Matemagicas.Application.csproj" />
       <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
       <ProjectReference Include="..\Matemagicas.Infrastructure\Matemagicas.Infrastructure.csproj" />
     </ItemGroup>

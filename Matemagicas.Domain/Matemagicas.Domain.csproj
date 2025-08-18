@@ -11,14 +11,11 @@
       <Folder Include="Classes\Repositories\Interfaces\" />
       <Folder Include="Classes\Services\Commands\" />
       <Folder Include="Classes\Services\Interfaces\" />
-      <Folder Include="Schools\Entities\" />
-      <Folder Include="Schools\Repositories\Interfaces\" />
-      <Folder Include="Schools\Services\Commands\" />
-      <Folder Include="Schools\Services\Interfaces\" />
       <Folder Include="Utils\Repositories\" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
       <PackageReference Include="MongoDB.Bson" Version="3.4.2" />
     </ItemGroup>
 

@@ -9,6 +9,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Infrastructure", "Matemagicas.Infrastructure\Matemagicas.Infrastructure.csproj", "{A6905FF3-E630-445B-BB6D-B85052041AE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagicas.Ioc", "Matemagicas.Ioc\Matemagicas.Ioc.csproj", "{C91D239A-5700-4307-B5FE-9BD443A485EB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{520B407A-6163-4FBC-BD75-8E9CBBB86678} = {520B407A-6163-4FBC-BD75-8E9CBBB86678}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9686C54A-C2EB-4569-80EC-AD63CEBEF198}"
 EndProject
