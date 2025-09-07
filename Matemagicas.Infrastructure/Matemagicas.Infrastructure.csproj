@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\Repositories\Interfaces\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
     </ItemGroup>
 

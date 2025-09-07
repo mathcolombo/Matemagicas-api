@@ -7,6 +7,8 @@ public partial class Password
     public string Hash { get; protected set; }
     private static readonly Regex PasswordRegex = MyRegex();
     
+    protected Password() {}
+    
     public Password(string password)
     {
         SetPasswordHash(password);

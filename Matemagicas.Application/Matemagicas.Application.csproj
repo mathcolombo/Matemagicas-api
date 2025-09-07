@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\DataTransfer\Mappings\" />
-      <Folder Include="Classes\DataTransfer\Requests\" />
-      <Folder Include="Classes\DataTransfer\Responses\" />
-      <Folder Include="Classes\Services\Interfaces\" />
       <Folder Include="Games\Services\Interfaces\" />
       <Folder Include="Questions\Services\Interfaces\" />
       <Folder Include="Users\Services\Interfaces\" />

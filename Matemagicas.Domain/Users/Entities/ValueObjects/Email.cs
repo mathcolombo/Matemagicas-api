@@ -9,6 +9,8 @@ public partial class Email
 
     private static readonly Regex EmailRegex = MyRegex();
 
+    protected Email() {}
+    
     public Email(string emailAddress)
     {
         SetAddress(emailAddress);

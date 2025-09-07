@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\Entities\" />
-      <Folder Include="Classes\Repositories\Interfaces\" />
-      <Folder Include="Classes\Services\Commands\" />
-      <Folder Include="Classes\Services\Interfaces\" />
       <Folder Include="Utils\Repositories\" />
     </ItemGroup>
 
