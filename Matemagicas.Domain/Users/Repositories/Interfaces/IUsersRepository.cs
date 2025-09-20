@@ -6,6 +6,6 @@ namespace Matemagicas.Domain.Users.Repositories.Interfaces;
 
 public interface IUsersRepository : IRepository<User>
 {
-    bool EmailExists(string email);
+    Task<User?> GetByEmailAsync(string email);
     IQueryable<User> Get(UserPagedFilter filter);
 }

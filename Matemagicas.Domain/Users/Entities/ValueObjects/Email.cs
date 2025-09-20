@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.RegularExpressions;
+using DnsClient;
 
 namespace Matemagicas.Domain.Users.Entities.ValueObjects;
 
@@ -27,7 +28,7 @@ public partial class Email
         if(!EmailRegex.IsMatch(emailAddress))
             throw new FormatException("Email address is not valid");
         
-        var domain = GetDomain();
+        var domain = emailAddress[(emailAddress.IndexOf('@') + 1)..];
 
         try
         {
@@ -38,11 +39,11 @@ public partial class Email
             throw new FormatException("Email address is not valid");
         }
 
-        // var client = new LookupClient();
-        // var result = client.Query(domain, QueryType.MX);
-        //
-        // if(result.Answers.Count == 0)
-        //     throw new FormatException("Email address is not valid");
+        var client = new LookupClient();
+        var result = client.Query(domain, QueryType.MX);
+        
+        if(result.Answers.Count == 0)
+            throw new FormatException("Email address is not valid");
     }
     
     public string GetDomain() => Address[(Address.IndexOf('@') + 1)..];

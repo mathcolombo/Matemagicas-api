@@ -23,7 +23,7 @@ public class QuestionsService : IQuestionsService
 
     public Question Instantiate(QuestionCreateCommand command)
     {
-        User user = _usersService.GetById(command.UserId);
+        User user = _usersService.ValidateAsync(command.UserId).Result;
 
         return new Question(command.UserId,
                     command.QuestionText,

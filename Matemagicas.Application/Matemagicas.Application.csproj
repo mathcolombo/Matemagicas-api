@@ -9,7 +9,6 @@
     <ItemGroup>
       <Folder Include="Games\Services\Interfaces\" />
       <Folder Include="Questions\Services\Interfaces\" />
-      <Folder Include="Users\Services\Interfaces\" />
     </ItemGroup>
 
     <ItemGroup>

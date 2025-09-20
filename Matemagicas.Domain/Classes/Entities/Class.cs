@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Matemagicas.Domain.Classes.Enums;
 using Matemagicas.Domain.Schools.Entities;
 using Matemagicas.Domain.Users.Entities;
@@ -24,8 +25,11 @@ public class Class
 
     #region Navigations
 
+    [NotMapped]
     public School School { get; protected set; }
+    [NotMapped]
     public User? Professor { get; protected set; }
+    [NotMapped]
     public IEnumerable<User>? Students { get; protected set; }
 
     #endregion

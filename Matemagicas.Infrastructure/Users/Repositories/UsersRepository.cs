@@ -3,6 +3,7 @@ using Matemagicas.Domain.Users.Repositories.Filters;
 using Matemagicas.Domain.Users.Repositories.Interfaces;
 using Matemagicas.Infrastructure.Configs.Contexts;
 using Matemagicas.Infrastructure.Utils.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Matemagicas.Infrastructure.Users.Repositories;
 
@@ -12,7 +13,8 @@ public class UsersRepository : Repository<User>, IUsersRepository
     {
     }
     
-    public bool EmailExists(string email) => Query().Any(u => u.Email.Address.Equals(email));
+    public async Task<User?> GetByEmailAsync(string email) => 
+        await Query().FirstOrDefaultAsync(u => u.Email.Address.Equals(email));
     
     public IQueryable<User> Get(UserPagedFilter filter)
     {
@@ -20,9 +22,6 @@ public class UsersRepository : Repository<User>, IUsersRepository
 
         if(!string.IsNullOrWhiteSpace(filter.Name))
             query = query.Where(u => u.Name.Contains(filter.Name));
-        
-        if(filter.DateOfBirth.HasValue)
-            query = query.Where(u => u.DateOfBirth == filter.DateOfBirth);
         
         if(filter.TotalScore.HasValue)
             query = query.Where(u => u.TotalScore == filter.TotalScore);

@@ -2,6 +2,7 @@ namespace Matemagicas.Domain.Utils.Enums;
 
 public enum RoleEnum
 {
-    Player = 1,
-    Administrator = 2
+    Administrator = 1,
+    Student = 2,
+    Professor = 3
 }

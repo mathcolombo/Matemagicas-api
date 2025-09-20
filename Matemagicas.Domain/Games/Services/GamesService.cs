@@ -25,7 +25,7 @@ public class GamesService : IGamesService
 
     public Game Instantiate(GamePreloadCommand command, IEnumerable<ObjectId> questionsIds)
     {
-        _usersService.GetById(command.UserId);
+        _usersService.ValidateAsync(command.UserId);
         
         return new Game(command.UserId, questionsIds, command.Topics);
     }
@@ -46,7 +46,7 @@ public class GamesService : IGamesService
         game.SetCorrectAnswers(command.CorrectAnswers);
         game.SetIncorrectAnswers(command.IncorrectAnswers);
         
-        _usersService.UpdatePlayerScore(game.UserId, command.Score);
+        _usersService.UpdatePlayerScoreAsync(game.UserId, command.Score);
         
         return _gamesRepository.Update(game);
     }

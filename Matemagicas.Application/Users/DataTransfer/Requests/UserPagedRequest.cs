@@ -5,7 +5,6 @@ namespace Matemagicas.Application.Users.DataTransfer.Requests;
 public class UserPagedRequest
 {
     public string? Name { get; set; }
-    public DateOnly? DateOfBirth { get; set; }
     public Email? Email { get; set; }
     public Password? Password { get; set; }
     public decimal? TotalScore { get; set; }

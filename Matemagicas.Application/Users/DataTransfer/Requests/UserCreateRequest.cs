@@ -2,7 +2,7 @@ using Matemagicas.Domain.Utils.Enums;
 
 namespace Matemagicas.Application.Users.DataTransfer.Requests;
 
-public record UserUpdateRequest(
+public record UserCreateRequest(
     string Name,
     string Email,
     string Password,

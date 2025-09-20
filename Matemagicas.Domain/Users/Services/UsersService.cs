@@ -10,83 +10,73 @@ namespace Matemagicas.Domain.Users.Services;
 
 public class UsersService : IUsersService
 {
-    private readonly IUsersRepository _usersRepository;
+    private readonly IUsersRepository _repository;
 
     public UsersService(IUsersRepository usersRepository)
     {
-        _usersRepository = usersRepository;
+        _repository = usersRepository;
     }
     
-    private User Instantiate(UserRegisterCommand command)
+    public async Task<User> InstantiateAsync(UserCreateCommand command)
     {
-        ValidateEmailExists(command.Email);
+        await ValidateEmailExistsAsync(command.Email);
         
         var email = new Email(command.Email);
         var password = new Password(command.Password);
 
         return new User(command.Name,
-                        command.DateOfBirth,
                         email,
-                        password);
+                        password,
+                        command.Role);
     }
 
-    private void ValidateEmailExists(string email)
+    private async Task ValidateEmailExistsAsync(string email)
     {
-        if (_usersRepository.EmailExists(email)) throw new Exception($"Email {email} já está sendo usado!");
-    }
-    
-    public User Register(UserRegisterCommand command)
-    {
-        User user = Instantiate(command);
-        return _usersRepository.Create(user);
-    }
-
-    public User Login(UserLoginCommand command)
-    {
-        User? user = _usersRepository.Query().FirstOrDefault(u => u.Email.Address.Equals(command.Email));
+        User? user = await _repository.GetByEmailAsync(email);
         
-        if(user is null) throw new Exception("Login inválido, verifique o email informado!");
+        if (user is not null)
+            throw new Exception($"Email {email} já está sendo usado!");
+    }
+
+    public async Task<User> LoginAsync(UserLoginCommand command)
+    {
+        User? user = await _repository.GetByEmailAsync(command.Email);
+        
+        if(user is null)
+            throw new Exception("Login inválido, verifique o email informado!");
         
         if(!user.Password.Hash.Equals(command.Password)) throw new Exception("Senha incorreta!");
         
         return user;
     }
     
-    // public IQueryable<User> Get(UserPagedFilter filter) => _usersRepository.Get(filter);
+    public async Task<User> ValidateAsync(ObjectId id) => 
+        await _repository.GetByIdAsync(id) ?? throw new NullReferenceException("Usuário não encontrado!");
 
-    public User GetById(ObjectId id) => _usersRepository.GetById(id) ?? throw new NullReferenceException("Usuário não encontrado!");
-
-    public User Update(ObjectId id, UserUpdateCommand command)
+    public async Task<User> UpdateAsync(ObjectId id, UserUpdateCommand command)
     {
-        User user = GetById(id);
+        User user = await ValidateAsync(id);
         var email = new Email(command.Email);
         var password = new Password(command.Password);
         
         user.SetName(command.Name);
-        user.SetDateOfBirth(command.DateOfBirth);
         user.SetEmail(email);
         user.SetPassword(password);
+        user.SetRole(command.Role);
         
-        return _usersRepository.Update(user);
+        return _repository.Update(user);
     }
 
-    public User Inactivate(ObjectId id)
+    public async Task<User> InactivateAsync(ObjectId id)
     {
-        User user = GetById(id);
+        User user = await ValidateAsync(id);
         user.SetStatus(StatusEnum.Inactive);
-        return _usersRepository.Update(user);
-    }
-    
-    public User Delete(ObjectId id)
-    {
-        User user = GetById(id);
-        _usersRepository.Delete(user);
-        return user;
+        return _repository.Update(user);
     }
 
-    public void UpdatePlayerScore(ObjectId id, decimal score)
+    public async Task UpdatePlayerScoreAsync(ObjectId id, decimal score)
     {
-        User user = GetById(id);
+        User user = await ValidateAsync(id);
         user.SetTotalScore(user.TotalScore + score ?? score);
     }
 }
