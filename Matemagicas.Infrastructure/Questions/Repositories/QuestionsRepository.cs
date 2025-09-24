@@ -15,13 +15,13 @@ public class QuestionsRepository : Repository<Question>, IQuestionsRepository
     }
     
     public IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount) => Query()
-        .Where(q => topics.Contains(q.Topic) && q.Difficulty.Equals(difficulty) && q.Status == StatusEnum.Active)
+        .Where(q => topics.Contains(q.Topic) && q.Difficulty.Equals(difficulty))
         .Take(amount)
         .Select(q => q.Id);
 
     public IQueryable<Question> Get(QuestionPagedFilter filter)
     {
-        IQueryable<Question> query = Query();
+        var query = Query();
         
         if(filter.UserId.HasValue)
             query = query.Where(q => q.UserId == filter.UserId);
@@ -37,9 +37,6 @@ public class QuestionsRepository : Repository<Question>, IQuestionsRepository
         
         if(filter.Difficulty.HasValue)
             query = query.Where(q => q.Difficulty == filter.Difficulty);
-        
-        if(filter.Status.HasValue)
-            query = query.Where(q => q.Status == filter.Status);
 
         return query;
     }

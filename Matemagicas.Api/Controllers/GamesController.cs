@@ -1,8 +1,6 @@
-using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Application.Games.DataTransfer.Mappings;
 using Matemagicas.Application.Games.DataTransfer.Requests;
-using Matemagicas.Application.Utils.Mappings;
-using Matemagicas.Application.Utils.ValueObjects;
+using Matemagicas.Application.Games.DataTransfer.Responses;
 using Matemagicas.Domain.Games.Entities;
 using Matemagicas.Domain.Games.Services.Interfaces;
 using Matemagicas.Domain.Utils.Repositories.Interfaces;

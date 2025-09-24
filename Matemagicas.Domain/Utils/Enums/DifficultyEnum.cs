@@ -1,8 +1,13 @@
+using System.ComponentModel;
+
 namespace Matemagicas.Domain.Utils.Enums;
 
 public enum DifficultyEnum
 {
-    Easy = 1,
-    Medium = 2,
-    Hard = 3
+    [Description("Easy")]
+    Easy = 0,
+    [Description("Medium")]
+    Medium = 1,
+    [Description("Hard")]
+    Hard = 2
 }

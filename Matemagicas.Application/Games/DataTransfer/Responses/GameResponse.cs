@@ -1,6 +1,4 @@
-using MongoDB.Bson;
-
-namespace Matemagicas.Api.DataTransfer.Responses;
+namespace Matemagicas.Application.Games.DataTransfer.Responses;
 
 public record GameResponse
 {

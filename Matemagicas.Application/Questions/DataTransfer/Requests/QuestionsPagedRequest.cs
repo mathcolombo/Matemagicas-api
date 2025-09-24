@@ -8,5 +8,4 @@ public class QuestionsPagedRequest
     public int? CorrectAnswerIndex { get; set; }
     public int? Difficulty { get; set; }
     public int? Topic { get; set; }
-    public int? Status { get; set; }
 }

@@ -15,7 +15,7 @@ public class ClassesController(IClassesAppService classesAppService) : Controlle
     /// <param name="request"></param>
     /// <returns>ClassResponse</returns>
     [HttpPost]
-    public async Task<ActionResult<ClassResponse>> CreateAsync(ClassCreateRequest request) =>
+    public async Task<ActionResult<ClassResponse>> CreateAsync([FromBody] ClassCreateRequest request) =>
         Ok(await classesAppService.CreateAsync(request));
 
     /// <summary>

@@ -10,4 +10,5 @@ public class QuestionUpdateCommand
     public int CorrectAnswerIndex { get; set; }
     public DifficultyEnum Difficulty { get; set; }
     public TopicEnum Topic { get; set; }
+    public SeriesEnum Series { get; set; }
 }

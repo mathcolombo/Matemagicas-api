@@ -1,6 +1,9 @@
 using Matemagicas.Application.Classes.DataTransfer.Mappings;
 using Matemagicas.Application.Classes.Services;
 using Matemagicas.Application.Classes.Services.Interfaces;
+using Matemagicas.Application.Questions.DataTransfer.Mappings;
+using Matemagicas.Application.Questions.Services;
+using Matemagicas.Application.Questions.Services.Interfaces;
 using Matemagicas.Application.Schools.DataTransfer.Mappings;
 using Matemagicas.Application.Schools.Services;
 using Matemagicas.Application.Schools.Services.Interfaces;
@@ -52,28 +55,29 @@ public static class DependencyInjection
         services.AddScoped<ISchoolsAppService, SchoolsAppService>();
         services.AddScoped<IClassesAppService, ClassesAppService>();
         services.AddScoped<IUsersAppService, UsersAppService>();
+        services.AddScoped<IQuestionsAppService, QuestionsAppService>();
         return services;
     }
 
     public static IServiceCollection AddDomainServices(this IServiceCollection services)
     {
         services.AddScoped<IGamesService, GamesService>();
-        services.AddScoped<IQuestionsService, QuestionsService>();
         
         services.AddScoped<ISchoolsService, SchoolsService>();
         services.AddScoped<IClassesService, ClassesService>();
         services.AddScoped<IUsersService, UsersService>();
+        services.AddScoped<IQuestionsService, QuestionsService>();
         return services;
     }
 
     public static IServiceCollection AddInfrastructureRepositories(this IServiceCollection services)
     {
         services.AddScoped<IGamesRepository, GamesRepository>();
-        services.AddScoped<IQuestionsRepository, QuestionsRepository>();
         
         services.AddScoped<ISchoolsRepository, SchoolsRepository>();
         services.AddScoped<IClassesRepository, ClassesRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
+        services.AddScoped<IQuestionsRepository, QuestionsRepository>();
         return services;
     }
     
@@ -82,6 +86,7 @@ public static class DependencyInjection
         services.RegisterSchoolMaps();
         services.RegisterClassMaps();
         services.RegisterUserMaps();
+        services.RegisterQuestionMaps();
         return services;
     }
 }

@@ -15,7 +15,7 @@ public class SchoolsController(ISchoolsAppService schoolsAppService) : Controlle
     /// <param name="request"></param>
     /// <returns>GameResponse</returns>
     [HttpPost]
-    public async Task<ActionResult<SchoolResponse>> CreateAsync(SchoolCreateRequest request) =>
+    public async Task<ActionResult<SchoolResponse>> CreateAsync([FromBody] SchoolCreateRequest request) =>
         await schoolsAppService.CreateAsync(request);
 
     /// <summary>

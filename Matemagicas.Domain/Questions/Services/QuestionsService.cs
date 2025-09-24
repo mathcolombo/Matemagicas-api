@@ -21,31 +21,30 @@ public class QuestionsService : IQuestionsService
         _usersService = usersService;
     }
 
-    public Question Instantiate(QuestionCreateCommand command)
+    public async Task<Question> InstantiateAsync(QuestionCreateCommand command)
     {
-        User user = _usersService.ValidateAsync(command.UserId).Result;
+        await _usersService.ValidateAsync(command.UserId);
 
         return new Question(command.UserId,
                     command.QuestionText,
                     command.AnswersOptions,
                     command.CorrectAnswerIndex,
                     command.Difficulty,
-                    command.Topic);
+                    command.Topic,
+                    command.Series);
     }
     
-    public Question Create(QuestionCreateCommand command)
+    public async Task<Question> CreateAsync(QuestionCreateCommand command)
     {
-        Question question = Instantiate(command);
-        return _questionsRepository.Create(question);
+        Question question = await InstantiateAsync(command);
+        return await _questionsRepository.CreateAsync(question);
     }
     
-    // public IQueryable<Question> Get(QuestionPagedFilter filter) => _questionsRepository.Get(filter);
+    public async Task<Question> ValidateAsync(ObjectId id) => await _questionsRepository.GetByIdAsync(id) ?? throw new NullReferenceException("Questão não encontrada!");
 
-    public Question GetById(ObjectId id) => _questionsRepository.GetById(id) ?? throw new NullReferenceException("Questão não encontrada!");
-
-    public Question Update(ObjectId id, QuestionUpdateCommand command)
+    public async Task<Question> UpdateAsync(ObjectId id, QuestionUpdateCommand command)
     {
-        Question question = GetById(id);
+        Question question = await ValidateAsync(id);
         
         question.SetQuestionText(command.QuestionText);
         question.SetAnswerOptions(command.AnswersOptions);
@@ -53,13 +52,6 @@ public class QuestionsService : IQuestionsService
         question.SetDifficulty(command.Difficulty);
         question.SetTopic(command.Topic);
         
-        return _questionsRepository.Update(question);
-    }
-
-    public Question Inactive(ObjectId id)
-    {
-        Question question = GetById(id);
-        question.SetStatus(StatusEnum.Inactive);
         return _questionsRepository.Update(question);
     }
 

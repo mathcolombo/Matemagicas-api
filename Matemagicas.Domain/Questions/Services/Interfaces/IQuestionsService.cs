@@ -7,10 +7,9 @@ namespace Matemagicas.Domain.Questions.Services.Interfaces;
 
 public interface IQuestionsService
 {
-    Question Create(QuestionCreateCommand command);
-    // IQueryable<Question> Get(QuestionPagedFilter filter);
-    Question GetById(ObjectId id);
-    Question Update(ObjectId id, QuestionUpdateCommand command);
-    Question Inactive(ObjectId id);
+    Task<Question> InstantiateAsync(QuestionCreateCommand command);
+    Task<Question> CreateAsync(QuestionCreateCommand command);
+    Task<Question> ValidateAsync(ObjectId id);
+    Task<Question> UpdateAsync(ObjectId id, QuestionUpdateCommand command);
     IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount);
 }

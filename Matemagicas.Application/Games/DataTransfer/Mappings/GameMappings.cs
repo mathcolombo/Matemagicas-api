@@ -1,5 +1,5 @@
-using Matemagicas.Api.DataTransfer.Responses;
 using Matemagicas.Application.Games.DataTransfer.Requests;
+using Matemagicas.Application.Games.DataTransfer.Responses;
 using Matemagicas.Domain.Games.Entities;
 using Matemagicas.Domain.Games.Repositories.Filters;
 using Matemagicas.Domain.Games.Services.Commands;
