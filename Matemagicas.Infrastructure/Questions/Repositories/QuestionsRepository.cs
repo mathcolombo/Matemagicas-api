@@ -4,20 +4,21 @@ using Matemagicas.Domain.Questions.Repositories.Interfaces;
 using Matemagicas.Domain.Utils.Enums;
 using Matemagicas.Infrastructure.Configs.Contexts;
 using Matemagicas.Infrastructure.Utils.Repositories;
-using MongoDB.Bson;
 
 namespace Matemagicas.Infrastructure.Questions.Repositories;
 
 public class QuestionsRepository : Repository<Question>, IQuestionsRepository
 {
+    private readonly Random _random = new();
+    
     public QuestionsRepository(MatemagicasDbContext context) : base(context)
     {
     }
-    
-    public IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount) => Query()
-        .Where(q => topics.Contains(q.Topic) && q.Difficulty.Equals(difficulty))
-        .Take(amount)
-        .Select(q => q.Id);
+
+    public IEnumerable<Question> GetByTopics(IEnumerable<TopicEnum> topics, int amount) => Query()
+        .Where(q => topics.Contains(q.Topic))
+        .OrderBy(q => _random.Next())
+        .Take(amount);
 
     public IQueryable<Question> Get(QuestionPagedFilter filter)
     {

@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Games\Services\Interfaces\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
     </ItemGroup>
 

@@ -6,9 +6,9 @@ namespace Matemagicas.Domain.Games.Services.Interfaces;
 
 public interface IGamesService
 {
-    Game Preload(GamePreloadCommand command);
-    Game Save(ObjectId id, GameSaveCommand command);
+    Task<Game> InstantiateAsync(GameCreateCommand command);
+    Task<Game> SaveAsync(ObjectId id, GameSaveCommand command);
     // IQueryable<Game> Get(GamePagedFilter filter);
-    Game GetById(ObjectId id);
-    Game Delete(ObjectId id);
+    Task<Game> ValidateAsync(ObjectId id);
+    Task DeleteAsync(ObjectId id);
 }

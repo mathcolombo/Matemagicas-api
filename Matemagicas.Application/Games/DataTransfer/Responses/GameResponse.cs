@@ -1,3 +1,5 @@
+using Matemagicas.Domain.Utils.Enums;
+
 namespace Matemagicas.Application.Games.DataTransfer.Responses;
 
 public record GameResponse
@@ -9,5 +11,6 @@ public record GameResponse
     public int? CorrectAnswers { get; init; }
     public int? IncorrectAnswers { get; init; }
     public IEnumerable<string> QuestionsIds { get; init; }
-    public IEnumerable<int> Topics { get; init; }
+    public IEnumerable<TopicEnum> Topics { get; init; }
+    public DifficultyEnum Difficulty { get; init; }
 }

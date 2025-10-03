@@ -6,8 +6,8 @@ namespace Matemagicas.Domain.Classes.Services.Interfaces;
 
 public interface IClassesService
 {
-    Class Instantiate(ClassCreateCommand command);
-    Task<Class> Validate(ObjectId id);
+    Task<Class> InstantiateAsync(ClassCreateCommand command);
+    Task<Class> ValidateAsync(ObjectId id);
     Task<Class> UpdateAsync(ObjectId id, ClassUpdateCommand command);
     Task<Class> InactivateAsync(ObjectId id);
 }

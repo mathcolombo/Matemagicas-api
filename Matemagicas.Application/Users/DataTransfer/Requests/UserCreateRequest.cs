@@ -6,5 +6,7 @@ public record UserCreateRequest(
     string Name,
     string Email,
     string Password,
-    RoleEnum Role
+    RoleEnum Role,
+    string SchoolId,
+    string? ClassId
 );

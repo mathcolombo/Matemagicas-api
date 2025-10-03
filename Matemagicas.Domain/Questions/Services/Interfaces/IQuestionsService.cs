@@ -11,5 +11,5 @@ public interface IQuestionsService
     Task<Question> CreateAsync(QuestionCreateCommand command);
     Task<Question> ValidateAsync(ObjectId id);
     Task<Question> UpdateAsync(ObjectId id, QuestionUpdateCommand command);
-    IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount);
+    IEnumerable<Question> GetByTopics(IEnumerable<TopicEnum> topics, int amount);
 }

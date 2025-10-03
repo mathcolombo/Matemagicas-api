@@ -1,6 +1,9 @@
 using Matemagicas.Application.Classes.DataTransfer.Mappings;
 using Matemagicas.Application.Classes.Services;
 using Matemagicas.Application.Classes.Services.Interfaces;
+using Matemagicas.Application.Games.DataTransfer.Mappings;
+using Matemagicas.Application.Games.Services;
+using Matemagicas.Application.Games.Services.Interfaces;
 using Matemagicas.Application.Questions.DataTransfer.Mappings;
 using Matemagicas.Application.Questions.Services;
 using Matemagicas.Application.Questions.Services.Interfaces;
@@ -56,28 +59,27 @@ public static class DependencyInjection
         services.AddScoped<IClassesAppService, ClassesAppService>();
         services.AddScoped<IUsersAppService, UsersAppService>();
         services.AddScoped<IQuestionsAppService, QuestionsAppService>();
+        services.AddScoped<IGamesAppService, GamesAppService>();
         return services;
     }
 
     public static IServiceCollection AddDomainServices(this IServiceCollection services)
     {
-        services.AddScoped<IGamesService, GamesService>();
-        
         services.AddScoped<ISchoolsService, SchoolsService>();
         services.AddScoped<IClassesService, ClassesService>();
         services.AddScoped<IUsersService, UsersService>();
         services.AddScoped<IQuestionsService, QuestionsService>();
+        services.AddScoped<IGamesService, GamesService>();
         return services;
     }
 
     public static IServiceCollection AddInfrastructureRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IGamesRepository, GamesRepository>();
-        
         services.AddScoped<ISchoolsRepository, SchoolsRepository>();
         services.AddScoped<IClassesRepository, ClassesRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+        services.AddScoped<IGamesRepository, GamesRepository>();
         return services;
     }
     
@@ -87,6 +89,7 @@ public static class DependencyInjection
         services.RegisterClassMaps();
         services.RegisterUserMaps();
         services.RegisterQuestionMaps();
+        services.RegisterGameMaps();
         return services;
     }
 }

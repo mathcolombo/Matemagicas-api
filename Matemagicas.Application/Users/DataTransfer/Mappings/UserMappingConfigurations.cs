@@ -18,12 +18,16 @@ public static class UserMappingConfigurations
             .Map(dest => dest.SchoolId, src => src.SchoolId.ToString());
 
         TypeAdapterConfig<UserCreateRequest, UserCreateCommand>
-            .NewConfig();
+            .NewConfig()
+            .Map(dest => dest.SchoolId, src => ObjectId.Parse(src.SchoolId))
+            .Map(dest => dest.ClassId, src => ObjectId.Parse(src.ClassId));
 
         TypeAdapterConfig<UserLoginRequest, UserLoginCommand>
             .NewConfig();
         
         TypeAdapterConfig<UserUpdateRequest, UserUpdateCommand>
-            .NewConfig();
+            .NewConfig()
+            .Map(dest => dest.SchoolId, src => ObjectId.Parse(src.SchoolId))
+            .Map(dest => dest.ClassId, src => ObjectId.Parse(src.ClassId));
     }
 }

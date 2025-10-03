@@ -27,7 +27,9 @@ public class UsersService : IUsersService
         return new User(command.Name,
                         email,
                         password,
-                        command.Role);
+                        command.Role,
+                        command.SchoolId,
+                        command.ClassId);
     }
 
     private async Task ValidateEmailExistsAsync(string email)

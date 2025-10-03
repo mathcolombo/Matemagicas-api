@@ -29,7 +29,7 @@ public class ClassesAppService : IClassesAppService
         try
         {
             var command = request.Adapt<ClassCreateCommand>();
-            Class classRoom = _service.Instantiate(command);
+            Class classRoom = await _service.InstantiateAsync(command);
             
             await _repository.CreateAsync(classRoom);
             await _unitOfWork.SaveChangesAsync();
@@ -45,7 +45,7 @@ public class ClassesAppService : IClassesAppService
 
     public async Task<ClassResponse> GetByIdAsync(string id)
     {
-        Class classRoom = await _service.Validate(ObjectId.Parse(id));
+        Class classRoom = await _service.ValidateAsync(ObjectId.Parse(id));
         return classRoom.Adapt<ClassResponse>();
     }
 
@@ -90,7 +90,7 @@ public class ClassesAppService : IClassesAppService
     {
         try
         {
-            Class classRoom = await _service.Validate(ObjectId.Parse(id));
+            Class classRoom = await _service.ValidateAsync(ObjectId.Parse(id));
             _repository.Delete(classRoom);
             await _unitOfWork.SaveChangesAsync();
         }

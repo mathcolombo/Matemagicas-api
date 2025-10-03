@@ -26,9 +26,9 @@ public class ClassesService : IClassesService
     // Falta validar se o professor e alunos existem
     // Falta validar se o professor pertence a escola
     // Falta validar se os alunos pertencem a escola
-    public Class Instantiate(ClassCreateCommand command)
+    public async Task<Class> InstantiateAsync(ClassCreateCommand command)
     {
-        _ = _schoolsService.Validate(command.SchoolId);
+        await _schoolsService.Validate(command.SchoolId);
         
         return new Class(command.Name,
             command.Series,
@@ -38,14 +38,13 @@ public class ClassesService : IClassesService
             command.StudentsIds,
             command.AllowedTopics);
     }
-
-
-    public async Task<Class> Validate(ObjectId id) =>
+    
+    public async Task<Class> ValidateAsync(ObjectId id) =>
         await _repository.GetByIdAsync(id) ?? throw new Exception("Class not found");
 
     public async Task<Class> UpdateAsync(ObjectId id, ClassUpdateCommand command)
     {
-        Class classRoom = await Validate(id);
+        Class classRoom = await ValidateAsync(id);
         
         classRoom.SetName(command.Name);
         classRoom.SetSeries(command.Series);
@@ -59,7 +58,7 @@ public class ClassesService : IClassesService
 
     public async Task<Class> InactivateAsync(ObjectId id)
     {
-        Class classRoom = await Validate(id);
+        Class classRoom = await ValidateAsync(id);
         classRoom.SetStatus(StatusEnum.Inactive);
         return classRoom;
     }

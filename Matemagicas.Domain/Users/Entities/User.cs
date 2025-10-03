@@ -40,13 +40,17 @@ public class User
     public User(string name,
                 Email email,
                 Password password,
-                RoleEnum role)
+                RoleEnum role,
+                ObjectId schoolId,
+                ObjectId? classId)
     {
         SetName(name);
         SetEmail(email);
         SetPassword(password);
         SetRole(role);
         SetStatus(StatusEnum.Active);
+        SetSchool(schoolId);
+        SetClass(classId);
     }
 
     public void SetName(string name)
@@ -66,4 +70,6 @@ public class User
 
     public void SetRole(RoleEnum role) => Role = role;
     public void SetStatus(StatusEnum status) => Status = status;
+    public void SetSchool(ObjectId schoolId) => SchoolId = schoolId;
+    public void SetClass(ObjectId? classId) => ClassId = classId;
 }

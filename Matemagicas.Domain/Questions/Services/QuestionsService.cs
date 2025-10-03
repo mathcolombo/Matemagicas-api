@@ -2,7 +2,6 @@ using Matemagicas.Domain.Questions.Entities;
 using Matemagicas.Domain.Questions.Repositories.Interfaces;
 using Matemagicas.Domain.Questions.Services.Commands;
 using Matemagicas.Domain.Questions.Services.Interfaces;
-using Matemagicas.Domain.Users.Entities;
 using Matemagicas.Domain.Users.Services.Interfaces;
 using Matemagicas.Domain.Utils.Enums;
 using MongoDB.Bson;
@@ -55,5 +54,6 @@ public class QuestionsService : IQuestionsService
         return _questionsRepository.Update(question);
     }
 
-    public IEnumerable<ObjectId> GetByTopicsAndDifficulty(IEnumerable<TopicEnum> topics, DifficultyEnum difficulty, int amount) => _questionsRepository.GetByTopicsAndDifficulty(topics, difficulty, amount);
+    public IEnumerable<Question> GetByTopics(IEnumerable<TopicEnum> topics, int amount) => 
+        _questionsRepository.GetByTopics(topics, amount);
 }

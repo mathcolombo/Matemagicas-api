@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Matemagicas.Domain.Questions.Entities;
 using Matemagicas.Domain.Users.Entities;
 using Matemagicas.Domain.Utils.Enums;
+using Matemagicas.Domain.Utils.Extensions;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -16,73 +18,63 @@ public class Game
     public decimal? Score { get; protected set; }
     public int? CorrectAnswers { get; protected set; }
     public int? IncorrectAnswers { get; protected set; }
-    public IEnumerable<ObjectId> QuestionsIds { get; protected set; }
-    public IEnumerable<TopicEnum> Topics { get; protected set; }
+    public IList<ObjectId> QuestionsIds { get; protected set; }
+    public IList<TopicEnum> Topics { get; protected set; }
+    public DifficultyEnum Difficulty { get; protected set; }
 
     #region Navigations
-
+    
+    [NotMapped]
     public User User { get; protected set; }
+    [NotMapped]
     public IEnumerable<Question> Questions { get; protected set; }
 
     #endregion
 
-    public Game()
+    protected Game()
     {
     }
     
     public Game(ObjectId userId,
                 IEnumerable<ObjectId> questionsIds,
-                IEnumerable<TopicEnum> topics)
+                IEnumerable<TopicEnum> topics,
+                DifficultyEnum difficulty)
     {
         SetUser(userId);
         SetQuestions(questionsIds);
         SetTopics(topics);
+        SetDifficulty(difficulty);
     }
 
-    public void SetUser(ObjectId userId)
-    {
-        UserId = userId;
-    }
+    public void SetUser(ObjectId userId) => UserId = userId;
 
     public void SetDate(DateTime date)
     {
-        if(date == DateTime.MinValue)
-            throw new FormatException("Date invalid");
-        
+        date.ValidateProperty(DateTime.MinValue);
         Date = date;
     }
 
     public void SetScore(decimal score)
     {
-        if(score < 0)
-            throw new FormatException("Score invalid");
-        
+        score.ValidateProperty(0);
         Score = score;
     }
 
     public void SetCorrectAnswers(int correctAnswers)
     {
-        if(correctAnswers < 0)
-            throw new FormatException("CorrectAnswers invalid");
-        
+        correctAnswers.ValidateProperty(0);
         CorrectAnswers = correctAnswers;
     }
 
     public void SetIncorrectAnswers(int incorrectAnswers)
     {
-        if(incorrectAnswers < 0)
-            throw new FormatException("IncorrectAnswers invalid");
-        
+        incorrectAnswers.ValidateProperty(0);
         IncorrectAnswers = incorrectAnswers;
     }
 
-    public void SetQuestions(IEnumerable<ObjectId> questionsIds)
-    {
-        QuestionsIds = new List<ObjectId>(questionsIds);
-    }
+    public void SetQuestions(IEnumerable<ObjectId> questionsIds) => QuestionsIds = questionsIds.ToList();
     
-    public void SetTopics(IEnumerable<TopicEnum> topics)
-    {
-        Topics = new List<TopicEnum>(topics);
-    }
+    public void SetTopics(IEnumerable<TopicEnum> topics) => Topics = topics.ToList();
+    
+    public void SetDifficulty(DifficultyEnum difficulty) => Difficulty = difficulty;
 }
