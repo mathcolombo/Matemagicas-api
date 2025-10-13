@@ -41,7 +41,7 @@ namespace Matemagicas.Ioc;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddAbstractions(this IServiceCollection services)
+    public static void AddAbstractions(this IServiceCollection services)
     {
         services.Scan(scan => scan
             .FromAssemblies(typeof(Repository<>).Assembly)
@@ -49,47 +49,32 @@ public static class DependencyInjection
             .AsImplementedInterfaces()
             .WithScopedLifetime());
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        
-        return services;
     }
 
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<ISchoolsAppService, SchoolsAppService>();
         services.AddScoped<IClassesAppService, ClassesAppService>();
         services.AddScoped<IUsersAppService, UsersAppService>();
         services.AddScoped<IQuestionsAppService, QuestionsAppService>();
         services.AddScoped<IGamesAppService, GamesAppService>();
-        return services;
     }
 
-    public static IServiceCollection AddDomainServices(this IServiceCollection services)
+    public static void AddDomainServices(this IServiceCollection services)
     {
         services.AddScoped<ISchoolsService, SchoolsService>();
         services.AddScoped<IClassesService, ClassesService>();
         services.AddScoped<IUsersService, UsersService>();
         services.AddScoped<IQuestionsService, QuestionsService>();
         services.AddScoped<IGamesService, GamesService>();
-        return services;
     }
 
-    public static IServiceCollection AddInfrastructureRepositories(this IServiceCollection services)
+    public static void AddInfrastructureRepositories(this IServiceCollection services)
     {
         services.AddScoped<ISchoolsRepository, SchoolsRepository>();
         services.AddScoped<IClassesRepository, ClassesRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IQuestionsRepository, QuestionsRepository>();
         services.AddScoped<IGamesRepository, GamesRepository>();
-        return services;
-    }
-    
-    public static IServiceCollection AddMappingConfigurations(this IServiceCollection services)
-    {
-        services.RegisterSchoolMaps();
-        services.RegisterClassMaps();
-        services.RegisterUserMaps();
-        services.RegisterQuestionMaps();
-        services.RegisterGameMaps();
-        return services;
     }
 }

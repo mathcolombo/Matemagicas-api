@@ -20,11 +20,22 @@ public static class SchoolMappingConfigurations
         TypeAdapterConfig<SchoolCreateRequest, SchoolCreateCommand>
             .NewConfig(); 
         
+        TypeAdapterConfig<SchoolCreateRequest, SchoolCreateCommand>
+            .NewConfig();
         
+        TypeAdapterConfig<PagedResult<School>, PagedResult<SchoolResponse>>
+            .NewConfig();
+
+        #region Value Object Address
+
         TypeAdapterConfig<Address, AddressResponse>
             .NewConfig();
         
         TypeAdapterConfig<AddressRequest, AddressCommand>
             .NewConfig();
+        
+        #endregion  
     }
+
+
 }

@@ -7,6 +7,8 @@ public class PagedResult<T>
     public int TotalItems { get; set; }
     public int TotalPages { get; set; }
     public IEnumerable<T> Items { get; set; }
+    
+    public PagedResult() { }
 
     public PagedResult(IEnumerable<T> items, int totalItems, int pageNumber, int pageSize)
     {

@@ -2,7 +2,10 @@ using Mapster;
 using Matemagicas.Application.Games.DataTransfer.Requests;
 using Matemagicas.Application.Games.DataTransfer.Responses;
 using Matemagicas.Application.Games.Services.Interfaces;
+using Matemagicas.Application.Utils.Mappings;
+using Matemagicas.Application.Utils.ValueObjects;
 using Matemagicas.Domain.Games.Entities;
+using Matemagicas.Domain.Games.Repositories.Filters;
 using Matemagicas.Domain.Games.Repositories.Interfaces;
 using Matemagicas.Domain.Games.Services.Commands;
 using Matemagicas.Domain.Games.Services.Interfaces;
@@ -41,6 +44,15 @@ public class GamesAppService : IGamesAppService
             Console.WriteLine(e);
             throw;
         }
+    }
+    
+    public async Task<PagedResult<GameResponse>> GetAsync(GamePagedRequest request)
+    {
+        var filter = request.Adapt<GamePagedFilter>();
+        var query = _repository.Get(filter);
+        
+        var pagedGames = await query.MapToPagedResult(request.PageNumber, request.PageSize);
+        return pagedGames.Adapt<PagedResult<GameResponse>>();
     }
 
     public async Task<GameResponse> GetByIdAsync(string id)

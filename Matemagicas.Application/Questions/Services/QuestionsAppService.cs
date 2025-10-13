@@ -2,7 +2,10 @@ using Mapster;
 using Matemagicas.Application.Questions.DataTransfer.Requests;
 using Matemagicas.Application.Questions.DataTransfer.Responses;
 using Matemagicas.Application.Questions.Services.Interfaces;
+using Matemagicas.Application.Utils.Mappings;
+using Matemagicas.Application.Utils.ValueObjects;
 using Matemagicas.Domain.Questions.Entities;
+using Matemagicas.Domain.Questions.Repositories.Filters;
 using Matemagicas.Domain.Questions.Repositories.Interfaces;
 using Matemagicas.Domain.Questions.Services.Commands;
 using Matemagicas.Domain.Questions.Services.Interfaces;
@@ -41,6 +44,15 @@ public class QuestionsAppService : IQuestionsAppService
             Console.WriteLine(e);
             throw;
         }
+    }
+    
+    public async Task<PagedResult<QuestionResponse>> GetAsync(QuestionPagedRequest request)
+    {
+        var filter = request.Adapt<QuestionPagedFilter>();
+        var query = _repository.Get(filter);
+        
+        var pagedQuestions = await query.MapToPagedResult(request.PageNumber, request.PageSize);
+        return pagedQuestions.Adapt<PagedResult<QuestionResponse>>();
     }
 
     public async Task<QuestionResponse> GetByIdAsync(string id)

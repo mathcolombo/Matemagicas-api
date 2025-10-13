@@ -1,4 +1,5 @@
 using Matemagicas.Domain.Utils.Enums;
+using MongoDB.Bson;
 
 namespace Matemagicas.Domain.Users.Repositories.Filters;
 
@@ -8,5 +9,7 @@ public class UserPagedFilter
     public DateOnly? DateOfBirth { get; set; }
     public decimal? TotalScore { get; set; }
     public RoleEnum? Role { get; set; }
+    public ObjectId? SchoolId { get; set; }
+    public ObjectId? ClassId { get; set; }
     public StatusEnum? Status { get; set; }
 }

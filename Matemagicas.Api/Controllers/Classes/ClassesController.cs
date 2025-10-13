@@ -1,6 +1,7 @@
 using Matemagicas.Application.Classes.DataTransfer.Requests;
 using Matemagicas.Application.Classes.DataTransfer.Responses;
 using Matemagicas.Application.Classes.Services.Interfaces;
+using Matemagicas.Application.Utils.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers.Classes;
@@ -17,6 +18,15 @@ public class ClassesController(IClassesAppService classesAppService) : Controlle
     [HttpPost]
     public async Task<ActionResult<ClassResponse>> CreateAsync([FromBody] ClassCreateRequest request) =>
         Ok(await classesAppService.CreateAsync(request));
+    
+    /// <summary>
+    /// List all classes
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns>PagedResult ClassResponse</returns>
+    [HttpGet]
+    public async Task<ActionResult<PagedResult<ClassResponse>>> GetAsync([FromQuery] ClassPagedRequest request) =>
+        Ok(await classesAppService.GetAsync(request));
 
     /// <summary>
     /// Retrieves a Class based on its id

@@ -1,6 +1,7 @@
 using Matemagicas.Application.Users.DataTransfer.Requests;
 using Matemagicas.Application.Users.DataTransfer.Responses;
 using Matemagicas.Application.Users.Services.Interfaces;
+using Matemagicas.Application.Utils.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers.Users;
@@ -28,23 +29,14 @@ public class UsersController(IUsersAppService usersAppService) : ControllerBase
    public async Task<ActionResult<UserResponse>> LoginAsync([FromBody] UserLoginRequest request) =>
       Ok(await usersAppService.LoginAsync(request));
    
-   // /// <summary>
-   // /// List all games
-   // /// </summary>
-   // /// <param name="request"></param>
-   // /// <param name="pageNumber"></param>
-   // /// <param name="pageSize"></param>
-   // /// <returns>PagedResult</returns>
-   // [HttpGet]
-   // public ActionResult<PagedResult<UserResponse>> Get([FromQuery] UserPagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
-   // {
-   //    var filter = request.MapToUserPagedFilter();
-   //      
-   //    IQueryable<User> games = _usersService.Get(filter);
-   //    var response = games.MapToPagedResult(q => q.MapToUserResponse(), pageNumber, pageSize);
-   //      
-   //    return Ok(response);
-   // }
+   /// <summary>
+   /// List all users
+   /// </summary>
+   /// <param name="request"></param>
+   /// <returns>PagedResult UserResponse</returns>
+   [HttpGet]
+   public async Task<ActionResult<PagedResult<UserResponse>>> GetAsync([FromQuery] UserPagedRequest request) =>
+      Ok(await usersAppService.GetAsync(request));
    
    /// <summary>
    /// Retrieves a user based on its id

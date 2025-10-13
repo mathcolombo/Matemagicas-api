@@ -2,12 +2,15 @@ using Matemagicas.Domain.Users.Entities.ValueObjects;
 
 namespace Matemagicas.Application.Users.DataTransfer.Requests;
 
-public class UserPagedRequest
-{
-    public string? Name { get; set; }
-    public Email? Email { get; set; }
-    public Password? Password { get; set; }
-    public decimal? TotalScore { get; set; }
-    public int? Role { get; set; }
-    public int? Status { get; set; }
-}
+public record UserPagedRequest(
+    string? Name,
+    Email? Email,
+    Password? Password,
+    decimal? TotalScore,
+    int? Role,
+    string? SchoolId,
+    string? ClassId,
+    int? Status,
+    int PageNumber,
+    int PageSize
+);

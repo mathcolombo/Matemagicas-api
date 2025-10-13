@@ -1,3 +1,5 @@
+using MongoDB.Bson;
+
 namespace Matemagicas.Domain.Utils.Extensions;
 
 public static class StringExtensions
@@ -10,4 +12,7 @@ public static class StringExtensions
         if(property.Length < minLength || property.Length > maxLength)
             throw new Exception("");
     }
+    
+    public static ObjectId? ToObjectIdOrNullable(this string? objectId) =>
+        string.IsNullOrWhiteSpace(objectId) ? null : ObjectId.Parse(objectId);
 }

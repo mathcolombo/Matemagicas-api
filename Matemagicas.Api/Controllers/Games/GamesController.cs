@@ -1,6 +1,7 @@
 using Matemagicas.Application.Games.DataTransfer.Requests;
 using Matemagicas.Application.Games.DataTransfer.Responses;
 using Matemagicas.Application.Games.Services.Interfaces;
+using Matemagicas.Application.Utils.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Matemagicas.Api.Controllers.Games;
@@ -18,23 +19,14 @@ public class GamesController(IGamesAppService gamesAppService) : ControllerBase
     public async Task<ActionResult<GameResponse>> CreateAsync([FromBody] GameCreateRequest request) =>
     Ok(await gamesAppService.CreateAsync(request));
     
-    // /// <summary>
-    // /// List all games
-    // /// </summary>
-    // /// <param name="request"></param>
-    // /// <param name="pageNumber"></param>
-    // /// <param name="pageSize"></param>
-    // /// <returns>PagedResult</returns>
-    // [HttpGet]
-    // public ActionResult<PagedResult<GameResponse>> Get([FromQuery] GamePagedRequest request, [FromQuery] int pageNumber, [FromQuery] int pageSize)
-    // {
-    //     var filter = request.MapToGamePagedFilter();
-    //     
-    //     IQueryable<Game> games = gamesAppService.Get(filter);
-    //     var response = games.MapToPagedResult(q => q.MapToGameResponse(), pageNumber, pageSize);
-    //     
-    //     return Ok(response);
-    // }
+    /// <summary>
+    /// List all games
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns>PagedResult GameResponse</returns>
+    [HttpGet]
+    public async Task<ActionResult<PagedResult<GameResponse>>> GetAsync([FromQuery] GamePagedRequest request) =>
+        Ok(await gamesAppService.GetAsync(request));
     
     /// <summary>
     /// Retrieves a game based on its id

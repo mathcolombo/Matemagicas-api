@@ -31,7 +31,7 @@ public class Game
 
     #endregion
 
-    protected Game()
+    public Game()
     {
     }
     

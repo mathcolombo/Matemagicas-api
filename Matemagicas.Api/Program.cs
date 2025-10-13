@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using Matemagicas.Infrastructure.Configs.Connections;
 using Matemagicas.Ioc;
+using Matemagicas.Ioc.Configurations;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -2,7 +2,10 @@ using Mapster;
 using Matemagicas.Application.Schools.DataTransfer.Requests;
 using Matemagicas.Application.Schools.DataTransfer.Responses;
 using Matemagicas.Application.Schools.Services.Interfaces;
+using Matemagicas.Application.Utils.Mappings;
+using Matemagicas.Application.Utils.ValueObjects;
 using Matemagicas.Domain.Schools.Entities;
+using Matemagicas.Domain.Schools.Repositories.Filters;
 using Matemagicas.Domain.Schools.Repositories.Interfaces;
 using Matemagicas.Domain.Schools.Services.Commands;
 using Matemagicas.Domain.Schools.Services.Interfaces;
@@ -43,10 +46,14 @@ public class SchoolsAppService : ISchoolsAppService
         }
     }
 
-    // public Task<PagedResult<School>> Get()
-    // {
-    //        
-    // }
+    public async Task<PagedResult<SchoolResponse>> GetAsync(SchoolPagedRequest request)
+    {
+        var filter = request.Adapt<SchoolPagedFilter>();
+        var query = _repository.Get(filter);
+        
+        var pagedSchools = await query.MapToPagedResult(request.PageNumber, request.PageSize);
+        return pagedSchools.Adapt<PagedResult<SchoolResponse>>();
+    }
 
     public async Task<SchoolResponse> GetByIdAsync(string id)
     {

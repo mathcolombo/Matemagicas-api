@@ -29,6 +29,12 @@ public class UsersRepository : Repository<User>, IUsersRepository
         if(filter.Role.HasValue)
             query = query.Where(u => u.Role == filter.Role);
         
+        if(filter.SchoolId.HasValue)
+            query = query.Where(u => u.SchoolId == filter.SchoolId);
+        
+        if(filter.ClassId.HasValue)
+            query = query.Where(u => u.ClassId == filter.ClassId);
+        
         if(filter.Status.HasValue)
             query = query.Where(u => u.Status == filter.Status);
         

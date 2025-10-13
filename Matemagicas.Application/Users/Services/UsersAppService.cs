@@ -2,6 +2,9 @@ using Mapster;
 using Matemagicas.Application.Users.DataTransfer.Requests;
 using Matemagicas.Application.Users.DataTransfer.Responses;
 using Matemagicas.Application.Users.Services.Interfaces;
+using Matemagicas.Application.Utils.Mappings;
+using Matemagicas.Application.Utils.ValueObjects;
+using Matemagicas.Domain.Users.Repositories.Filters;
 using Matemagicas.Domain.Users.Repositories.Interfaces;
 using Matemagicas.Domain.Users.Services.Commands;
 using Matemagicas.Domain.Users.Services.Interfaces;
@@ -57,6 +60,15 @@ public class UsersAppService : IUsersAppService
             Console.WriteLine(e);
             throw;
         }
+    }
+    
+    public async Task<PagedResult<UserResponse>> GetAsync(UserPagedRequest request)
+    {
+        var filter = request.Adapt<UserPagedFilter>();
+        var query = _repository.Get(filter);
+        
+        var pagedUsers = await query.MapToPagedResult(request.PageNumber, request.PageSize);
+        return pagedUsers.Adapt<PagedResult<UserResponse>>();
     }
 
     public async Task<UserResponse> GetByIdAsync(string id)
