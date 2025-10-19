@@ -33,8 +33,8 @@ public class ClassesRepository : Repository<Class>, IClassesRepository
         if(filter.StudentsIds != null && filter.StudentsIds.Any())
             query = query.Where(c => c.StudentsIds != null && c.StudentsIds.Any(studentId => filter.StudentsIds.Contains(studentId)));
         
-        if(filter.AllowedTopics != null && filter.AllowedTopics.Any())
-            query = query.Where(c => c.AllowedTopics.Any(allowedTopic => filter.AllowedTopics.Contains(allowedTopic)));
+        if(filter.AllowedTopicsIds != null && filter.AllowedTopicsIds.Any())
+            query = query.Where(c => c.AllowedTopicsIds.Any(allowedTopicId => filter.AllowedTopicsIds.Contains(allowedTopicId)));
         
         return query;
     }

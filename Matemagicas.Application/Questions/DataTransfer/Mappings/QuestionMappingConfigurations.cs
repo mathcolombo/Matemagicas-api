@@ -18,18 +18,22 @@ public static class QuestionMappingConfigurations
         TypeAdapterConfig<Question, QuestionResponse>
             .NewConfig()
             .Map(dest => dest.Id, src => src.Id.ToString())
-            .Map(dest => dest.UserId, src => src.UserId.ToString());
+            .Map(dest => dest.UserId, src => src.UserId.ToString())
+            .Map(dest => dest.TopicId, src => src.TopicId.ToString());
 
         TypeAdapterConfig<QuestionCreateRequest, QuestionCreateCommand>
             .NewConfig()
-            .Map(dest => dest.UserId, src => ObjectId.Parse(src.UserId));
+            .Map(dest => dest.UserId, src => ObjectId.Parse(src.UserId))
+            .Map(dest => dest.TopicId, src => ObjectId.Parse(src.TopicId));
         
         TypeAdapterConfig<QuestionUpdateRequest, QuestionUpdateCommand>
-            .NewConfig();
-        
+            .NewConfig()
+            .Map(dest => dest.TopicId, src => ObjectId.Parse(src.TopicId));
+
         TypeAdapterConfig<QuestionPagedRequest, QuestionPagedFilter>
             .NewConfig()
-            .Map(dest => dest.UserId, src => src.UserId.ToObjectIdOrNullable());
+            .Map(dest => dest.UserId, src => src.UserId.ToObjectIdOrNullable())
+            .Map(dest => dest.TopicId, src => src.TopicId.ToObjectIdOrNullable());
         
         TypeAdapterConfig<PagedResult<Question>, PagedResult<QuestionResponse>>
             .NewConfig();

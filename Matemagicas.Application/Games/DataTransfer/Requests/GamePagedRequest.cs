@@ -7,7 +7,7 @@ public record GamePagedRequest(
     int? CorrectAnswers,
     int? IncorrectAnswers,
     IEnumerable<string>? QuestionsIds,
-    IEnumerable<int>? Topics,
+    IEnumerable<string>? TopicsIds,
     int PageNumber,
     int PageSize
 );

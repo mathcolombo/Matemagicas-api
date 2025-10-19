@@ -11,5 +11,5 @@ public class ClassUpdateCommand
     public SchoolShiftEnum SchoolShift { get; set; }
     public ObjectId? ProfessorId { get; protected set; }
     public IEnumerable<ObjectId>? StudentsIds { get; protected set; }
-    public IEnumerable<TopicEnum> AllowedTopics { get; protected set; }
+    public IEnumerable<ObjectId> AllowedTopicsIds { get; set; }
 }

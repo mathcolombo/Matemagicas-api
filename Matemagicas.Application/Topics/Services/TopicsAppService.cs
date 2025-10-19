@@ -58,7 +58,10 @@ public class TopicsAppService(
         {
             var command = request.Adapt<TopicUpdateCommand>();
             var topic = await service.UpdateAsync(ObjectId.Parse(id), command);
+            
             repository.Update(topic);
+            await unitOfWork.SaveChangesAsync();
+            
             return topic.Adapt<TopicResponse>();
         }
         catch (Exception e)

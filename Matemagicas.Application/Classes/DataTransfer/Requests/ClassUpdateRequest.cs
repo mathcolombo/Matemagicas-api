@@ -1,5 +1,5 @@
 using Matemagicas.Domain.Classes.Enums;
-using Matemagicas.Domain.Utils.Enums;
+using MongoDB.Bson;
 
 namespace Matemagicas.Application.Classes.DataTransfer.Requests;
 
@@ -9,5 +9,5 @@ public record ClassUpdateRequest(
     SchoolShiftEnum SchoolShift,
     string? ProfessorId,
     IEnumerable<string>? StudentsIds,
-    IEnumerable<TopicEnum> AllowedTopics
+    IEnumerable<string> AllowedTopicsIds
 );

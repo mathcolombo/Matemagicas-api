@@ -1,5 +1,6 @@
 using Matemagicas.Domain.Classes.Enums;
 using Matemagicas.Domain.Utils.Enums;
+using MongoDB.Bson;
 
 namespace Matemagicas.Application.Classes.DataTransfer.Responses;
 
@@ -11,5 +12,5 @@ public record ClassResponse(
     string SchoolId,
     string? ProfessorId,
     IEnumerable<string>? StudentsIds,
-    IEnumerable<TopicEnum> AllowedTopics
+    IEnumerable<ObjectId> AllowedTopicsIds
 );

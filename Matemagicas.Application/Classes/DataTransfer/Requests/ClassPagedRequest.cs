@@ -10,7 +10,7 @@ public record ClassPagedRequest(
     string? SchoolId,
     string? ProfessorId,
     IEnumerable<string>? StudentsIds,
-    IList<TopicEnum>? AllowedTopics,
+    IEnumerable<string>? AllowedTopicsIds,
     StatusEnum? Status,
     int PageNumber,
     int PageSize

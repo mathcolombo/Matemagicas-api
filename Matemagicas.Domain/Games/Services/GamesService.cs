@@ -36,23 +36,23 @@ public class GamesService : IGamesService
         User user = await _usersService.ValidateAsync(command.UserId);
         Class classRoom = await _classesService.ValidateAsync(user.ClassId.Value);
         
-        List<Question> questions = _questionsService.GetByTopics(classRoom.AllowedTopics, 10).ToList();
+        List<Question> questions = _questionsService.GetByTopics(classRoom.AllowedTopicsIds, 10).ToList();
         
         var gameQuestionsData = GetGameQuestionsData(questions);
         
         return new Game(command.UserId,
             gameQuestionsData.questionIds,
-            gameQuestionsData.topics,
+            gameQuestionsData.topicsIds,
             gameQuestionsData.averageDifficulty);
     }
 
-    private static (IEnumerable<TopicEnum> topics, IEnumerable<ObjectId> questionIds, DifficultyEnum averageDifficulty) GetGameQuestionsData(IEnumerable<Question> questions)
+    private static (IEnumerable<ObjectId> topicsIds, IEnumerable<ObjectId> questionIds, DifficultyEnum averageDifficulty) GetGameQuestionsData(IEnumerable<Question> questions)
     {
         List<Question> loadedQuestions = questions.ToList();
         
         IEnumerable<ObjectId> questionIds = loadedQuestions.Select(q => q.Id);
         
-        IEnumerable<TopicEnum> topics = loadedQuestions.Select(q => q.Topic).Distinct();
+        IEnumerable<ObjectId> topics = loadedQuestions.Select(q => q.TopicId).Distinct();
         
         DifficultyEnum averageDifficulty = loadedQuestions.GroupBy(q => q.Difficulty)
             .OrderByDescending(g => g.Count())

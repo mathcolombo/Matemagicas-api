@@ -11,6 +11,6 @@ public record GameResponse
     public int? CorrectAnswers { get; init; }
     public int? IncorrectAnswers { get; init; }
     public IEnumerable<string> QuestionsIds { get; init; }
-    public IEnumerable<TopicEnum> Topics { get; init; }
+    public IEnumerable<string> TopicsIds { get; init; }
     public DifficultyEnum Difficulty { get; init; }
 }

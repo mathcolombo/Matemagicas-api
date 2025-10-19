@@ -8,8 +8,8 @@ namespace Matemagicas.Domain.Topics.Services;
 
 public class TopicsService(ITopicsRepository repository) : ITopicsService
 {
-    public async Task<Topic> InstantiateAsync(TopicCreateCommand command) => 
-        await Task.FromResult(new Topic(command.Title, command.Description, command.Series));
+    public Task<Topic> InstantiateAsync(TopicCreateCommand command) => 
+        Task.FromResult(new Topic(command.Title, command.Description, command.Series));
     
     public async Task<Topic> ValidateAsync(ObjectId id) =>
         await repository.GetByIdAsync(id) ?? throw new Exception("Topic not found!");

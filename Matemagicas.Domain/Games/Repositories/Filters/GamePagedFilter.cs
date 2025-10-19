@@ -11,5 +11,5 @@ public class GamePagedFilter
     public int? CorrectAnswers { get; set; }
     public int? IncorrectAnswers { get; set; }
     public IEnumerable<ObjectId>? QuestionsIds { get; set; }
-    public IEnumerable<TopicEnum>? Topics { get; set; }
+    public IEnumerable<ObjectId>? TopicsIds { get; set; }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Matemagicas.Domain.Topics.Entities;
 using Matemagicas.Domain.Users.Entities;
 using Matemagicas.Domain.Utils.Enums;
 using Matemagicas.Domain.Utils.Extensions;
@@ -17,13 +18,15 @@ public class Question
     public IEnumerable<string> AnswerOptions { get; protected set; }
     public int CorrectAnswerIndex { get; protected set; }
     public DifficultyEnum Difficulty { get; protected set; }
-    public TopicEnum Topic { get; protected set; }
+    public ObjectId TopicId { get; protected set; }
     public SeriesEnum Series { get; protected set; }
 
     #region Navigations
 
     [NotMapped]
     public User User { get; protected set; }
+    [NotMapped]
+    public Topic Topic { get; protected set; }
 
     #endregion
     
@@ -36,7 +39,7 @@ public class Question
                     IEnumerable<string> answerOptions,
                     int correctAnswerIndex,
                     DifficultyEnum difficulty,
-                    TopicEnum topic,
+                    ObjectId topicId,
                     SeriesEnum series)
     {
         UserId = userId;
@@ -44,7 +47,7 @@ public class Question
         SetAnswerOptions(answerOptions);
         SetCorrectAnswerIndex(correctAnswerIndex);
         SetDifficulty(difficulty);
-        SetTopic(topic);
+        SetTopic(topicId);
         SetSeries(series);
     }
     
@@ -64,7 +67,7 @@ public class Question
 
     public void SetDifficulty(DifficultyEnum difficulty) => Difficulty = difficulty;
 
-    public void SetTopic(TopicEnum topic) => Topic = topic;
+    public void SetTopic(ObjectId topicId) => TopicId = topicId;
     
     public void SetSeries(SeriesEnum series) => Series = series;
 }

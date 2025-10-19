@@ -1,5 +1,6 @@
 using Matemagicas.Domain.Questions.Entities;
 using Matemagicas.Domain.Questions.Services.Commands;
+using Matemagicas.Domain.Topics.Entities;
 using Matemagicas.Domain.Utils.Enums;
 using MongoDB.Bson;
 
@@ -10,5 +11,5 @@ public interface IQuestionsService
     Task<Question> InstantiateAsync(QuestionCreateCommand command);
     Task<Question> ValidateAsync(ObjectId id);
     Task<Question> UpdateAsync(ObjectId id, QuestionUpdateCommand command);
-    IEnumerable<Question> GetByTopics(IEnumerable<TopicEnum> topics, int amount);
+    IEnumerable<Question> GetByTopics(IEnumerable<ObjectId> topicsIds, int amount);
 }

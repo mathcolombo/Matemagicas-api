@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Matemagicas.Domain.Classes.Enums;
 using Matemagicas.Domain.Schools.Entities;
+using Matemagicas.Domain.Topics.Entities;
 using Matemagicas.Domain.Users.Entities;
 using Matemagicas.Domain.Utils.Enums;
 using Matemagicas.Domain.Utils.Extensions;
@@ -19,8 +20,8 @@ public class Class
     public SchoolShiftEnum SchoolShift { get; protected set; }
     public ObjectId SchoolId { get; protected set; }
     public ObjectId? ProfessorId { get; protected set; }
-    public IEnumerable<ObjectId>? StudentsIds { get; protected set; }
-    public IList<TopicEnum> AllowedTopics { get; protected set; }
+    public IList<ObjectId>? StudentsIds { get; protected set; }
+    public IList<ObjectId> AllowedTopicsIds { get; protected set; }
     public StatusEnum Status { get; protected set; }
 
     #region Navigations
@@ -31,6 +32,8 @@ public class Class
     public User? Professor { get; protected set; }
     [NotMapped]
     public IEnumerable<User>? Students { get; protected set; }
+    [NotMapped]
+    public IEnumerable<Topic> AllowedTopics { get; protected set; }
 
     #endregion
 
@@ -42,7 +45,7 @@ public class Class
         ObjectId schoolId,
         ObjectId? professorId,
         IEnumerable<ObjectId>? studentsIds,
-        IEnumerable<TopicEnum> allowedTopics)
+        IEnumerable<ObjectId> allowedTopicsIds)
     {
         SetName(name);
         SetSeries(series);
@@ -50,7 +53,7 @@ public class Class
         SchoolId = schoolId;
         SetProfessorId(professorId);
         SetStudentsIds(studentsIds);
-        SetAllowedTopics(allowedTopics);
+        SetAllowedTopics(allowedTopicsIds);
         SetStatus(StatusEnum.Active);
     }
 
@@ -74,9 +77,9 @@ public class Class
     
     public void SetProfessorId(ObjectId? professorId) => ProfessorId = professorId;
     
-    public void SetStudentsIds(IEnumerable<ObjectId>? studentsIds) => StudentsIds = studentsIds;
+    public void SetStudentsIds(IEnumerable<ObjectId>? studentsIds) => StudentsIds = studentsIds?.ToList();
     
-    public void SetAllowedTopics(IEnumerable<TopicEnum> allowedTopics) => AllowedTopics = allowedTopics.ToList();
+    public void SetAllowedTopics(IEnumerable<ObjectId> allowedTopicsIds) => AllowedTopicsIds = allowedTopicsIds.ToList();
     
     public void SetStatus(StatusEnum status) => Status = status;
 }

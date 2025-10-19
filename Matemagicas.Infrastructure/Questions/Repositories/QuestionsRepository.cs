@@ -4,6 +4,7 @@ using Matemagicas.Domain.Questions.Repositories.Interfaces;
 using Matemagicas.Domain.Utils.Enums;
 using Matemagicas.Infrastructure.Configs.Contexts;
 using Matemagicas.Infrastructure.Utils.Repositories;
+using MongoDB.Bson;
 
 namespace Matemagicas.Infrastructure.Questions.Repositories;
 
@@ -15,8 +16,8 @@ public class QuestionsRepository : Repository<Question>, IQuestionsRepository
     {
     }
 
-    public IEnumerable<Question> GetByTopics(IEnumerable<TopicEnum> topics, int amount) => Query()
-        .Where(q => topics.Contains(q.Topic))
+    public IEnumerable<Question> GetByTopics(IEnumerable<ObjectId> topicsIds, int amount) => Query()
+        .Where(q => topicsIds.Contains(q.TopicId))
         .OrderBy(q => _random.Next())
         .Take(amount);
 
@@ -33,8 +34,8 @@ public class QuestionsRepository : Repository<Question>, IQuestionsRepository
         if(filter.Difficulty.HasValue)
             query = query.Where(q => q.Difficulty == filter.Difficulty);
         
-        if(filter.Topic.HasValue)
-            query = query.Where(q => q.Topic == filter.Topic);
+        if(filter.TopicId.HasValue)
+            query = query.Where(q => q.TopicId == filter.TopicId);
 
         return query;
     }

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Matemagicas.Domain.Questions.Entities;
+using Matemagicas.Domain.Topics.Entities;
 using Matemagicas.Domain.Users.Entities;
 using Matemagicas.Domain.Utils.Enums;
 using Matemagicas.Domain.Utils.Extensions;
@@ -19,7 +20,7 @@ public class Game
     public int? CorrectAnswers { get; protected set; }
     public int? IncorrectAnswers { get; protected set; }
     public IList<ObjectId> QuestionsIds { get; protected set; }
-    public IList<TopicEnum> Topics { get; protected set; }
+    public IList<ObjectId> TopicsIds { get; protected set; }
     public DifficultyEnum Difficulty { get; protected set; }
 
     #region Navigations
@@ -28,6 +29,8 @@ public class Game
     public User User { get; protected set; }
     [NotMapped]
     public IEnumerable<Question> Questions { get; protected set; }
+    [NotMapped]
+    public IEnumerable<Topic> Topics { get; protected set; }
 
     #endregion
 
@@ -37,12 +40,12 @@ public class Game
     
     public Game(ObjectId userId,
                 IEnumerable<ObjectId> questionsIds,
-                IEnumerable<TopicEnum> topics,
+                IEnumerable<ObjectId> topicsIds,
                 DifficultyEnum difficulty)
     {
         SetUser(userId);
         SetQuestions(questionsIds);
-        SetTopics(topics);
+        SetTopics(topicsIds);
         SetDifficulty(difficulty);
     }
 
@@ -74,7 +77,7 @@ public class Game
 
     public void SetQuestions(IEnumerable<ObjectId> questionsIds) => QuestionsIds = questionsIds.ToList();
     
-    public void SetTopics(IEnumerable<TopicEnum> topics) => Topics = topics.ToList();
+    public void SetTopics(IEnumerable<ObjectId> topicsIds) => TopicsIds = topicsIds.ToList();
     
     public void SetDifficulty(DifficultyEnum difficulty) => Difficulty = difficulty;
 }

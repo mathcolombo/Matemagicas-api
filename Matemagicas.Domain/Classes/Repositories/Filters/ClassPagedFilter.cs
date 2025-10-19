@@ -12,6 +12,6 @@ public class ClassPagedFilter
     public ObjectId? SchoolId { get; protected set; }
     public ObjectId? ProfessorId { get; protected set; }
     public IEnumerable<ObjectId>? StudentsIds { get; protected set; }
-    public IList<TopicEnum>? AllowedTopics { get; protected set; }
+    public IEnumerable<ObjectId>? AllowedTopicsIds { get; protected set; }
     public StatusEnum? Status { get; protected set; }
 }

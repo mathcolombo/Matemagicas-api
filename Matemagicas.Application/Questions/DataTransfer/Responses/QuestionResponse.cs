@@ -8,5 +8,5 @@ public record QuestionResponse
     public IEnumerable<string> AnswerOptions { get; init; }
     public int CorrectAnswerIndex { get; init; }
     public int Difficulty { get; init; }
-    public int Topic { get; init; }
+    public string TopicId { get; init; }
 }

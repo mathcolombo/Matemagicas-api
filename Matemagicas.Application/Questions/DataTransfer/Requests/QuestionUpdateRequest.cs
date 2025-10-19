@@ -1,4 +1,5 @@
 using Matemagicas.Domain.Utils.Enums;
+using MongoDB.Bson;
 
 namespace Matemagicas.Application.Questions.DataTransfer.Requests;
 
@@ -7,6 +8,6 @@ public record QuestionUpdateRequest(
     IEnumerable<string> AnswersOptions,
     int CorrectAnswerIndex,
     DifficultyEnum Difficulty,
-    TopicEnum Topic,
+    string TopicId,
     SeriesEnum Series
 );

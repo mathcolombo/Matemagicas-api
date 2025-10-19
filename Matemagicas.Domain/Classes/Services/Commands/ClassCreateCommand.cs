@@ -12,5 +12,5 @@ public class ClassCreateCommand
     public ObjectId SchoolId { get; set; }
     public ObjectId? ProfessorId { get; set; }
     public IEnumerable<ObjectId>? StudentsIds { get; set; }
-    public IEnumerable<TopicEnum> AllowedTopics { get; set; }
+    public IEnumerable<ObjectId> AllowedTopicsIds { get; set; }
 }

@@ -34,8 +34,8 @@ public class GamesRepository : Repository<Game>, IGamesRepository
         if(filter.QuestionsIds != null && filter.QuestionsIds.Any())
             query = query.Where(g => g.QuestionsIds.Any(gameQuestionId => filter.QuestionsIds.Contains(gameQuestionId)));
         
-        if(filter.Topics != null && filter.Topics.Any())
-            query = query.Where(g => g.Topics.Any(topic => filter.Topics.Contains(topic)));
+        if(filter.TopicsIds != null && filter.TopicsIds.Any())
+            query = query.Where(g => g.TopicsIds.Any(topic => filter.TopicsIds.Contains(topic)));
         
         return query;
     }

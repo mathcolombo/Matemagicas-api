@@ -6,7 +6,7 @@ public record QuestionPagedRequest(
     IEnumerable<string>? AnswerOptions,
     int? CorrectAnswerIndex,
     int? Difficulty,
-    int? Topic,
+    string? TopicId,
     int PageNumber,
     int PageSize
 );

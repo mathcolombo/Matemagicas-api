@@ -1,3 +1,4 @@
+using Matemagicas.Domain.Topics.Entities;
 using Matemagicas.Domain.Utils.Enums;
 using MongoDB.Bson;
 
@@ -10,6 +11,6 @@ public class QuestionCreateCommand
     public IEnumerable<string> AnswersOptions { get; set; }
     public int CorrectAnswerIndex { get; set; }
     public DifficultyEnum Difficulty { get; set; }
-    public TopicEnum Topic { get; set; }
+    public ObjectId TopicId { get; set; }
     public SeriesEnum Series { get; set; }
 }

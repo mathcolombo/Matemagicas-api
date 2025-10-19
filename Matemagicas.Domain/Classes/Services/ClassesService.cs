@@ -36,7 +36,7 @@ public class ClassesService : IClassesService
             command.SchoolId,
             command.ProfessorId,
             command.StudentsIds,
-            command.AllowedTopics);
+            command.AllowedTopicsIds);
     }
     
     public async Task<Class> ValidateAsync(ObjectId id) =>
@@ -51,7 +51,7 @@ public class ClassesService : IClassesService
         classRoom.SetSchoolShift(command.SchoolShift);
         classRoom.SetProfessorId(command.ProfessorId);
         classRoom.SetStudentsIds(command.StudentsIds);
-        classRoom.SetAllowedTopics(command.AllowedTopics);
+        classRoom.SetAllowedTopics(command.AllowedTopicsIds);
 
         return classRoom;
     }

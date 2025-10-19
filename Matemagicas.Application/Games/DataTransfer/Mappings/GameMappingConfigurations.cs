@@ -18,7 +18,8 @@ public static class GameMappingConfigurations
         TypeAdapterConfig<Game, GameResponse>
             .NewConfig()
             .Map(dest => dest.Id, src => src.Id.ToString())
-            .Map(dest => dest.QuestionsIds, src => src.QuestionsIds.Select(s => s.ToString()));
+            .Map(dest => dest.QuestionsIds, src => src.QuestionsIds.Select(s => s.ToString()))
+            .Map(dest => dest.TopicsIds, src => src.TopicsIds.Select(t => t.ToString()));
 
         TypeAdapterConfig<GameCreateRequest, GameCreateCommand>
             .NewConfig()
