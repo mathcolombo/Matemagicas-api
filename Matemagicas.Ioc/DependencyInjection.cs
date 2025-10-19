@@ -10,6 +10,8 @@ using Matemagicas.Application.Questions.Services.Interfaces;
 using Matemagicas.Application.Schools.DataTransfer.Mappings;
 using Matemagicas.Application.Schools.Services;
 using Matemagicas.Application.Schools.Services.Interfaces;
+using Matemagicas.Application.Topics.Services;
+using Matemagicas.Application.Topics.Services.Interfaces;
 using Matemagicas.Application.Users.DataTransfer.Mappings;
 using Matemagicas.Application.Users.Services;
 using Matemagicas.Application.Users.Services.Interfaces;
@@ -25,6 +27,9 @@ using Matemagicas.Domain.Questions.Services.Interfaces;
 using Matemagicas.Domain.Schools.Repositories.Interfaces;
 using Matemagicas.Domain.Schools.Services;
 using Matemagicas.Domain.Schools.Services.Interfaces;
+using Matemagicas.Domain.Topics.Repositories.Interfaces;
+using Matemagicas.Domain.Topics.Services;
+using Matemagicas.Domain.Topics.Services.Interfaces;
 using Matemagicas.Domain.Users.Repositories.Interfaces;
 using Matemagicas.Domain.Users.Services;
 using Matemagicas.Domain.Users.Services.Interfaces;
@@ -33,6 +38,7 @@ using Matemagicas.Infrastructure.Classes.Repositories;
 using Matemagicas.Infrastructure.Games.Repositories;
 using Matemagicas.Infrastructure.Questions.Repositories;
 using Matemagicas.Infrastructure.Schools.Repositories;
+using Matemagicas.Infrastructure.Topics.Repositories;
 using Matemagicas.Infrastructure.Users.Repositories;
 using Matemagicas.Infrastructure.Utils.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +64,7 @@ public static class DependencyInjection
         services.AddScoped<IUsersAppService, UsersAppService>();
         services.AddScoped<IQuestionsAppService, QuestionsAppService>();
         services.AddScoped<IGamesAppService, GamesAppService>();
+        services.AddScoped<ITopicsAppService, TopicsAppService>();
     }
 
     public static void AddDomainServices(this IServiceCollection services)
@@ -67,6 +74,7 @@ public static class DependencyInjection
         services.AddScoped<IUsersService, UsersService>();
         services.AddScoped<IQuestionsService, QuestionsService>();
         services.AddScoped<IGamesService, GamesService>();
+        services.AddScoped<ITopicsService, TopicsService>();
     }
 
     public static void AddInfrastructureRepositories(this IServiceCollection services)
@@ -76,5 +84,6 @@ public static class DependencyInjection
         services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IQuestionsRepository, QuestionsRepository>();
         services.AddScoped<IGamesRepository, GamesRepository>();
+        services.AddScoped<ITopicsRepository, TopicsRepository>();
     }
 }

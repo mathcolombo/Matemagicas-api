@@ -2,6 +2,7 @@ using Matemagicas.Domain.Classes.Entities;
 using Matemagicas.Domain.Games.Entities;
 using Matemagicas.Domain.Questions.Entities;
 using Matemagicas.Domain.Schools.Entities;
+using Matemagicas.Domain.Topics.Entities;
 using Matemagicas.Domain.Users.Entities;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.EntityFrameworkCore.Extensions;
@@ -15,6 +16,7 @@ public class MatemagicasDbContext(DbContextOptions<MatemagicasDbContext> options
    public DbSet<User> Users { get; set; }
    public DbSet<Question> Questions { get; set; } 
    public DbSet<Game> Games { get; set; } 
+   public DbSet<Topic> Topics { get; set; } 
 
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
@@ -24,5 +26,6 @@ public class MatemagicasDbContext(DbContextOptions<MatemagicasDbContext> options
       modelBuilder.Entity<User>().ToCollection("users");
       modelBuilder.Entity<Question>().ToCollection("questions");
       modelBuilder.Entity<Game>().ToCollection("games");
+      modelBuilder.Entity<Topic>().ToCollection("topics");
    }
 }

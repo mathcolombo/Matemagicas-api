@@ -2,6 +2,7 @@ using Matemagicas.Application.Classes.DataTransfer.Mappings;
 using Matemagicas.Application.Games.DataTransfer.Mappings;
 using Matemagicas.Application.Questions.DataTransfer.Mappings;
 using Matemagicas.Application.Schools.DataTransfer.Mappings;
+using Matemagicas.Application.Topics.DataTransfer.Mappings;
 using Matemagicas.Application.Users.DataTransfer.Mappings;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,5 +17,6 @@ public static class MapsterConfigurations
         services.RegisterUserMaps();
         services.RegisterQuestionMaps();
         services.RegisterGameMaps();
+        services.RegisterTopicsMaps();
     }
 }

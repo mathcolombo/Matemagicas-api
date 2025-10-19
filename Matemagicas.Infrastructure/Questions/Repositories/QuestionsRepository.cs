@@ -33,11 +33,8 @@ public class QuestionsRepository : Repository<Question>, IQuestionsRepository
         if(filter.Difficulty.HasValue)
             query = query.Where(q => q.Difficulty == filter.Difficulty);
         
-        if(filter.Difficulty.HasValue)
-            query = query.Where(q => q.Difficulty == filter.Difficulty);
-        
-        if(filter.Difficulty.HasValue)
-            query = query.Where(q => q.Difficulty == filter.Difficulty);
+        if(filter.Topic.HasValue)
+            query = query.Where(q => q.Topic == filter.Topic);
 
         return query;
     }

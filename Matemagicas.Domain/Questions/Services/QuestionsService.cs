@@ -33,12 +33,6 @@ public class QuestionsService : IQuestionsService
                     command.Series);
     }
     
-    public async Task<Question> CreateAsync(QuestionCreateCommand command)
-    {
-        Question question = await InstantiateAsync(command);
-        return await _questionsRepository.CreateAsync(question);
-    }
-    
     public async Task<Question> ValidateAsync(ObjectId id) => await _questionsRepository.GetByIdAsync(id) ?? throw new NullReferenceException("Questão não encontrada!");
 
     public async Task<Question> UpdateAsync(ObjectId id, QuestionUpdateCommand command)

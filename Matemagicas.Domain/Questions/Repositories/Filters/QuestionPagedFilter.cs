@@ -9,5 +9,4 @@ public class QuestionPagedFilter
     public string? QuestionText { get; set; }
     public DifficultyEnum? Difficulty { get; set; }
     public TopicEnum? Topic { get; set; }
-    public StatusEnum? Status { get; set; }
 }
