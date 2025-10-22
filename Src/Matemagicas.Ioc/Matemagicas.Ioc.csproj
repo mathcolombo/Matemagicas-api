@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.4" />
+      <PackageReference Include="Scrutor" Version="6.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Matemagicas.Application\Matemagicas.Application.csproj" />
+      <ProjectReference Include="..\Matemagicas.Domain\Matemagicas.Domain.csproj" />
+      <ProjectReference Include="..\Matemagicas.Infrastructure\Matemagicas.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
