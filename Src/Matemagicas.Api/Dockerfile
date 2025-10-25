@@ -14,7 +14,7 @@ COPY ../ .
 
 RUN dotnet restore "Matemagicas-api.sln" --force-evaluate
 
-WORKDIR /src/src/Matemagicas.Api 
+WORKDIR /src/Src/Matemagicas.Api 
 
 RUN dotnet build "Matemagicas.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
