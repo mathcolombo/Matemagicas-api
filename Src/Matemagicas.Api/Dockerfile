@@ -7,15 +7,20 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY . .
 
-RUN dotnet restore "Matemagicas-api.sln"
-WORKDIR "Matemagicas.Api"
+COPY ../../Matemagicas-api.sln . 
+
+COPY ../ .
+
+RUN dotnet restore "Matemagicas-api.sln" --force-evaluate
+
+WORKDIR /src/Matemagicas.Api 
 
 RUN dotnet build "Matemagicas.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
+
 RUN dotnet publish "Matemagicas.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final

@@ -42,7 +42,9 @@ public class TopicsAppService(
     {
         var filter = request.Adapt<TopicPagedFilter>();
         IQueryable<Topic> query = repository.Get(filter);
+        
         var pagedTopics = await query.MapToPagedResult(request.PageNumber, request.PageSize);
+        
         return pagedTopics.Adapt<PagedResult<TopicResponse>>();
     }
 
